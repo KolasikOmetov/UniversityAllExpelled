@@ -13,10 +13,10 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White" Height="20">
             <MenuItem Header="Дисциплины"/>
+            <MenuItem Header="Преподаватели" />
             <MenuItem Header="Ведомости" />
             <MenuItem Header="Получение списка" />
             <MenuItem Header="Отчёт" />
-            <MenuItem Header="Рекомендации" Foreground="Red" />
         </Menu>
         <DockPanel Grid.Row="1">
             <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">

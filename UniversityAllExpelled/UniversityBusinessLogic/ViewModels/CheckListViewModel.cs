@@ -8,6 +8,7 @@ namespace UniversityBusinessLogic.ViewModels
 		public int Id { get; set; }
 		[DisplayName("Дата экзамена")]
 		public DateTime DateOfExam { get; set; }
-		public int LectorId { get; set; }
+		[DisplayName("Преподаватель")]
+		public string LectorName { get; set; }
 	}
 }
