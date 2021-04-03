@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace  UniversityDatabaseImplement
 {
-    class UniversityWarehouserDatabase : DbContext
+    class UniversityDatabase : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
