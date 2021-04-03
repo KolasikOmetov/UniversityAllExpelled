@@ -12,7 +12,7 @@ namespace TypographyShopDatabaseImplement.Implements
     {
         public List<PrintedViewModel> GetFullList()
         {
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 return context.Printeds
                 .Include(rec => rec.PrintedComponents)
@@ -35,7 +35,7 @@ namespace TypographyShopDatabaseImplement.Implements
             {
                 return null;
             }
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 return context.Printeds
                 .Include(rec => rec.PrintedComponents)
@@ -60,7 +60,7 @@ namespace TypographyShopDatabaseImplement.Implements
             {
                 return null;
             }
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 var printed = context.Printeds
                 .Include(rec => rec.PrintedComponents)
@@ -80,7 +80,7 @@ namespace TypographyShopDatabaseImplement.Implements
         }
         public void Insert(PrintedBindingModel model)
         {
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 using (var transaction = context.Database.BeginTransaction())
                 {
@@ -107,7 +107,7 @@ namespace TypographyShopDatabaseImplement.Implements
         }
         public void Update(PrintedBindingModel model)
         {
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 using (var transaction = context.Database.BeginTransaction())
                 {
@@ -134,7 +134,7 @@ namespace TypographyShopDatabaseImplement.Implements
         }
         public void Delete(PrintedBindingModel model)
         {
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 Printed element = context.Printeds.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element != null)
@@ -148,7 +148,7 @@ namespace TypographyShopDatabaseImplement.Implements
                 }
             }
         }
-        private Printed CreateModel(PrintedBindingModel model, Printed printed, UniversityWarehouserDatabase context)
+        private Printed CreateModel(PrintedBindingModel model, Printed printed, UniversityAllExpelledWarehouserViewDatabase context)
         {
             // код изменён из-за ошибки вставки в бд, поэтому нужно передавать↑ уже с заполнеными полями и добавленным таблицу Printeds  
             if (model.Id.HasValue)

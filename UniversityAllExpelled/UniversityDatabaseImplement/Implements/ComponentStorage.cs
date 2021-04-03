@@ -11,7 +11,7 @@ namespace TypographyShopDatabaseImplement.Implements
     {
         public List<ComponentViewModel> GetFullList()
         {
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 return context.Components
                 .Select(rec => new ComponentViewModel
@@ -27,7 +27,7 @@ namespace TypographyShopDatabaseImplement.Implements
             {
                 return null;
             }
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 return context.Components
                 .Where(rec => rec.ComponentName.Contains(model.ComponentName))
@@ -45,7 +45,7 @@ namespace TypographyShopDatabaseImplement.Implements
             {
                 return null;
             }
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 var component = context.Components
                 .FirstOrDefault(rec => rec.ComponentName == model.ComponentName || rec.Id == model.Id);
@@ -60,7 +60,7 @@ namespace TypographyShopDatabaseImplement.Implements
         }
         public void Insert(ComponentBindingModel model)
         {
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 context.Components.Add(CreateModel(model, new Component()));
                 context.SaveChanges();
@@ -68,7 +68,7 @@ namespace TypographyShopDatabaseImplement.Implements
         }
         public void Update(ComponentBindingModel model)
         {
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 var element = context.Components.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element == null)
@@ -81,7 +81,7 @@ namespace TypographyShopDatabaseImplement.Implements
         }
         public void Delete(ComponentBindingModel model)
         {
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 Component element = context.Components.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element != null)

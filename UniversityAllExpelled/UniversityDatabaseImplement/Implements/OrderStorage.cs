@@ -12,7 +12,7 @@ namespace TypographyShopDatabaseImplement.Implements
     {
         public List<OrderViewModel> GetFullList()
         {
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 return context.Orders
                 .Select(rec => new OrderViewModel
@@ -35,7 +35,7 @@ namespace TypographyShopDatabaseImplement.Implements
             {
                 return null;
             }
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 return context.Orders
                 .Where(rec => rec.PrintedId == model.PrintedId)
@@ -59,7 +59,7 @@ namespace TypographyShopDatabaseImplement.Implements
             {
                 return null;
             }
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 var order = context.Orders
                 .FirstOrDefault(rec => rec.Id == model.Id);
@@ -80,7 +80,7 @@ namespace TypographyShopDatabaseImplement.Implements
         }
         public void Insert(OrderBindingModel model)
         {
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 Order order = new Order
                 {
@@ -99,7 +99,7 @@ namespace TypographyShopDatabaseImplement.Implements
         }
         public void Update(OrderBindingModel model)
         {
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 var element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element == null)
@@ -118,7 +118,7 @@ namespace TypographyShopDatabaseImplement.Implements
         }
         public void Delete(OrderBindingModel model)
         {
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 Order element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element != null)
@@ -139,7 +139,7 @@ namespace TypographyShopDatabaseImplement.Implements
                 return null;
             }
 
-            using (var context = new UniversityWarehouserDatabase())
+            using (var context = new UniversityAllExpelledWarehouserViewDatabase())
             {
                 Printed element = context.Printeds.FirstOrDefault(rec => rec.Id == model.PrintedId);
                 if (element != null)
