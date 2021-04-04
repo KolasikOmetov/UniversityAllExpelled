@@ -12,6 +12,6 @@ namespace UniversityDatabaseImplement.Models
 		[Required]
 		public int SubjectId { get; set; }
 		[ForeignKey("LectorId")]
-		public virtual List<EducationPlanStudent> EducationPlanStudents { get; set; }
+		public virtual List<EducationPlanLector> EducationPlanLectors { get; set; }
 	}
 }
