@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UniversityDatabaseImplement.Models
 {
@@ -9,5 +11,7 @@ namespace UniversityDatabaseImplement.Models
 		public string Name { get; set; }
 		[Required]
 		public int SubjectId { get; set; }
+		[ForeignKey("LectorId")]
+		public virtual List<EducationPlanLector> EducationPlanLectors { get; set; }
 	}
 }
