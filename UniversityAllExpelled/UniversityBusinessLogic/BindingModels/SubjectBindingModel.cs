@@ -6,6 +6,6 @@ namespace UniversityBusinessLogic.BindingModels
 	{
 		public int? Id { get; set; }
 		public string Name { get; set; }
-		public string DepartmentUserLogin{ get; set; }
+		public string DepartmentLogin{ get; set; }
 	}
 }

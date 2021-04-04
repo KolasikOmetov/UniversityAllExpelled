@@ -17,8 +17,4 @@
     <ProjectReference Include="..\UniversityBusinessLogic\UniversityBusinessLogic.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Implements\" />
-  </ItemGroup>
-
 </Project>

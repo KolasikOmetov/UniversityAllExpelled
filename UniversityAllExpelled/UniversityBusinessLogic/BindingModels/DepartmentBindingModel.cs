@@ -2,7 +2,7 @@
 {
 	public class DepartmentBindingModel
 	{
-		public string Login { get; set; }
+		public string DepartmentLogin { get; set; }
 		public string Name { get; set; }
 		public string Password { get; set; }
 	}

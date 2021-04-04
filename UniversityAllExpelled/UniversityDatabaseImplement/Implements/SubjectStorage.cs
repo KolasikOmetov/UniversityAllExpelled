@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UniversityBusinessLogic.BindingModels;
 using UniversityBusinessLogic.Interfaces;
@@ -18,7 +20,8 @@ namespace UniversityDatabaseImplement.Implements
                 .Select(rec => new SubjectViewModel
                 {
                     Id = rec.Id,
-                    SubjectName = rec.SubjectName
+                    Name = rec.Name,
+                    DepartmentName = context.Departments.FirstOrDefault(x => x.DepartmentLogin == rec.DepartmentLogin).DepartmentLogin,
                 }).ToList();
             }
         }
@@ -31,11 +34,12 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 return context.Subjects
-                .Where(rec => rec.SubjectName.Contains(model.SubjectName))
+                .Where(rec => rec.DepartmentLogin == model.DepartmentLogin)
                 .Select(rec => new SubjectViewModel
                 {
                     Id = rec.Id,
-                    SubjectName = rec.SubjectName
+                    Name = rec.Name,
+                    DepartmentName = context.Departments.FirstOrDefault(x => x.DepartmentLogin == model.DepartmentLogin).DepartmentLogin,
                 })
                 .ToList();
             }
@@ -49,13 +53,13 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 var subject = context.Subjects
-                .FirstOrDefault(rec => rec.SubjectName == model.SubjectName || rec.Id == model.Id);
+                .FirstOrDefault(rec => rec.Name == model.Name || rec.Id == model.Id);
                 return subject != null ?
                 new SubjectViewModel
                 {
                     Id = subject.Id,
                     Name = subject.Name,
-                    DepartmentUserLogin = subject.DepartmentUserLogin
+                    DepartmentName = context.Departments.FirstOrDefault(x => x.DepartmentLogin == subject.DepartmentLogin).Name
                 } :
                 null;
             }
@@ -100,6 +104,7 @@ namespace UniversityDatabaseImplement.Implements
         private Subject CreateModel(SubjectBindingModel model, Subject subject)
         {
             subject.Name = model.Name;
+            subject.DepartmentLogin = model.DepartmentLogin;
             return subject;
         }
     }

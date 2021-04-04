@@ -19,7 +19,7 @@ namespace UniversityBusinessLogic.BusinessLogics
             {
                 return _departmentStorage.GetFullList();
             }
-            if (!string.IsNullOrEmpty(model.Login))
+            if (!string.IsNullOrEmpty(model.DepartmentLogin))
             {
                 return new List<DepartmentViewModel> { _departmentStorage.GetElement(model) };
             }
@@ -30,11 +30,11 @@ namespace UniversityBusinessLogic.BusinessLogics
             var element = _departmentStorage.GetElement(new DepartmentBindingModel { 
                 Name = model.Name,
             });
-            if (element != null && element.Login != model.Login)
+            if (element != null && element.Login != model.DepartmentLogin)
             {
                 throw new Exception("Уже есть кафедра с таким названием");
             }
-            if (!string.IsNullOrEmpty(model.Login))
+            if (!string.IsNullOrEmpty(model.DepartmentLogin))
             {
                 _departmentStorage.Update(model);
             }
@@ -45,7 +45,7 @@ namespace UniversityBusinessLogic.BusinessLogics
         }
         public void Delete(DepartmentBindingModel model)
         {
-            var element = _departmentStorage.GetElement(new DepartmentBindingModel { Login = model.Login });
+            var element = _departmentStorage.GetElement(new DepartmentBindingModel { DepartmentLogin = model.DepartmentLogin });
             if (element == null)
             {
                 throw new Exception("Элемент не найден");
