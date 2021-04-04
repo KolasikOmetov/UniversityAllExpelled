@@ -1,0 +1,29 @@
+﻿<Window x:Class="UniversityAllExpelledWarehouserView.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UniversityAllExpelledWarehouserView"
+        mc:Ignorable="d"
+       Title="Главная форма" MinHeight="450" MinWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White" Height="20">
+            <MenuItem Header="Планы"/>
+            <MenuItem Header="Студенты" />
+            <MenuItem Header="Аттестации" />
+            <MenuItem Header="Получение списка" />
+            <MenuItem Header="Отчёт" />
+        </Menu>
+        <DockPanel Grid.Row="1">
+            <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
+                <Button Padding="5">Зарегистироваться</Button>
+                <Button Padding="5">Войти</Button>
+            </StackPanel>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Логотип</TextBlock>
+        </DockPanel>
+    </Grid>
+</Window>
