@@ -6,11 +6,11 @@ namespace UniversityDatabaseImplement.Models
 {
 	public class Subject
 	{
-		public int? Id { get; set; }
+		public int Id { get; set; }
 		[Required]
 		public string Name { get; set; }
-		[Required]
-		public string DepartmentUserLogin { get; set; }
+		[ForeignKey("Login")]
+		public virtual Department DepartmentLogin { get; set; }
 		[ForeignKey("SubjectId")]
 		public virtual List<StudentSubject> StudentSubjects { get; set; }
 	}
