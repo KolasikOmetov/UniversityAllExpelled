@@ -8,7 +8,6 @@ namespace UniversityDatabaseImplement.Models
 {
     public class EducationPlan
     {
-		[Key]
 		public int Id { get; set; }
 		[Required]
 		public string StreamName { get; set; }
@@ -16,5 +15,7 @@ namespace UniversityDatabaseImplement.Models
 		public int Hours { get; set; }
 		[ForeignKey("EducationPlanId")]
 		public virtual List<EducationPlanStudent> EducationPlanStudents { get; set; }
+		[ForeignKey("EducationPlanId")]
+		public virtual List<EducationPlanLector> EducationPlanLectors { get; set; }
 	}
 }

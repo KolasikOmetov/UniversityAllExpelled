@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace UniversityDatabaseImplement.Models
 {
     public class Certification
     {
-        public int Id { get; set; }
         [Required]
         public DateTime Date { get; set; }
-        [Required]
-        public List<string> StudentGradebookNumbers { get; set; }
-        [Required]
-        public List<string> DenearyLogins { get; set; }
+        [ForeignKey("GradebookNumber")]
+        public virtual Student Student { get; set; }
+        [ForeignKey("Login")]
+        public virtual Deneary Deneary { get; set; }
     }
 }
