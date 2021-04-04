@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace UniversityDatabaseImplement.Models
 {
     public class Certification
     {
+        public int Id { get; set; }
         [Required]
         public DateTime Date { get; set; }
         [ForeignKey("GradebookNumber")]
-        public virtual Student Student { get; set; }
+        public string StudentGradebookNumber { get; set; }
         [ForeignKey("Login")]
-        public virtual Deneary Deneary { get; set; }
+        public string DenearyLogin { get; set; }
     }
 }

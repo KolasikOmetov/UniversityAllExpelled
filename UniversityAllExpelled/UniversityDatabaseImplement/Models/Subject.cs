@@ -10,7 +10,7 @@ namespace UniversityDatabaseImplement.Models
 		[Required]
 		public string Name { get; set; }
 		[ForeignKey("Login")]
-		public virtual Department DepartmentLogin { get; set; }
+		public virtual Department Department { get; set; }
 		[ForeignKey("SubjectId")]
 		public virtual List<StudentSubject> StudentSubjects { get; set; }
 	}
