@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UniversityBusinessLogic.BindingModels;
 using UniversityBusinessLogic.Interfaces;
 using UniversityBusinessLogic.ViewModels;
@@ -10,22 +8,22 @@ using UniversityDatabaseImplement.Models;
 
 namespace UniversityDatabaseImplement.Implements
 {
-    public class SubjectStorage : ISubjectStorage
+    public class LectorStorage : ILectorStorage
     {
-        public List<SubjectViewModel> GetFullList()
+        public List<LectorViewModel> GetFullList()
         {
             using (var context = new UniversityDatabase())
             {
-                return context.Subjects
-                .Select(rec => new SubjectViewModel
+                return context.Lectors
+                .Select(rec => new LectorViewModel
                 {
                     Id = rec.Id,
                     Name = rec.Name,
-                    DepartmentName = context.Departments.FirstOrDefault(x => x.DepartmentLogin == rec.DepartmentLogin).Name,
+                    SubjectName = context.Subjects.FirstOrDefault(recSubject => rec.SubjectId == recSubject.Id).Name,
                 }).ToList();
             }
         }
-        public List<SubjectViewModel> GetFilteredList(SubjectBindingModel model)
+        public List<LectorViewModel> GetFilteredList(LectorBindingModel model)
         {
             if (model == null)
             {
@@ -33,18 +31,18 @@ namespace UniversityDatabaseImplement.Implements
             }
             using (var context = new UniversityDatabase())
             {
-                return context.Subjects
-                .Where(rec => rec.DepartmentLogin == model.DepartmentLogin)
-                .Select(rec => new SubjectViewModel
+                return context.Lectors
+                .Where(rec => rec.SubjectId == model.SubjectId)
+                .Select(rec => new LectorViewModel
                 {
                     Id = rec.Id,
                     Name = rec.Name,
-                    DepartmentName = context.Departments.FirstOrDefault(x => x.DepartmentLogin == model.DepartmentLogin).Name,
+                    SubjectName = context.Subjects.FirstOrDefault(recSubject => rec.SubjectId == recSubject.Id).Name,
                 })
                 .ToList();
             }
         }
-        public SubjectViewModel GetElement(SubjectBindingModel model)
+        public LectorViewModel GetElement(LectorBindingModel model)
         {
             if (model == null)
             {
@@ -52,31 +50,31 @@ namespace UniversityDatabaseImplement.Implements
             }
             using (var context = new UniversityDatabase())
             {
-                var subject = context.Subjects
+                var lector = context.Lectors
                 .FirstOrDefault(rec => rec.Id == model.Id);
-                return subject != null ?
-                new SubjectViewModel
+                return lector != null ?
+                new LectorViewModel
                 {
-                    Id = subject.Id,
-                    Name = subject.Name,
-                    DepartmentName = context.Departments.FirstOrDefault(x => x.DepartmentLogin == subject.DepartmentLogin).Name
+                    Id = lector.Id,
+                    Name = lector.Name,
+                    SubjectName = context.Subjects.FirstOrDefault(recSubject => lector.SubjectId == recSubject.Id).Name,
                 } :
                 null;
             }
         }
-        public void Insert(SubjectBindingModel model)
+        public void Insert(LectorBindingModel model)
         {
             using (var context = new UniversityDatabase())
             {
-                context.Subjects.Add(CreateModel(model, new Subject()));
+                context.Lectors.Add(CreateModel(model, new Lector()));
                 context.SaveChanges();
             }
         }
-        public void Update(SubjectBindingModel model)
+        public void Update(LectorBindingModel model)
         {
             using (var context = new UniversityDatabase())
             {
-                var element = context.Subjects.FirstOrDefault(rec => rec.Id == model.Id);
+                var element = context.Lectors.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element == null)
                 {
                     throw new Exception("Элемент не найден");
@@ -85,14 +83,14 @@ namespace UniversityDatabaseImplement.Implements
                 context.SaveChanges();
             }
         }
-        public void Delete(SubjectBindingModel model)
+        public void Delete(LectorBindingModel model)
         {
             using (var context = new UniversityDatabase())
             {
-                Subject element = context.Subjects.FirstOrDefault(rec => rec.Id == model.Id);
+                Lector element = context.Lectors.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element != null)
                 {
-                    context.Subjects.Remove(element);
+                    context.Lectors.Remove(element);
                     context.SaveChanges();
                 }
                 else
@@ -101,11 +99,11 @@ namespace UniversityDatabaseImplement.Implements
                 }
             }
         }
-        private Subject CreateModel(SubjectBindingModel model, Subject subject)
+        private Lector CreateModel(LectorBindingModel model, Lector lector)
         {
-            subject.Name = model.Name;
-            subject.DepartmentLogin = model.DepartmentLogin;
-            return subject;
+            lector.Name = model.Name;
+            lector.SubjectId = model.SubjectId;
+            return lector;
         }
     }
 }

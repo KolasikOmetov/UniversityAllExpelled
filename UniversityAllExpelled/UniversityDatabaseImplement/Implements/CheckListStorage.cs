@@ -1,8 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UniversityBusinessLogic.BindingModels;
 using UniversityBusinessLogic.Interfaces;
 using UniversityBusinessLogic.ViewModels;
@@ -10,22 +8,22 @@ using UniversityDatabaseImplement.Models;
 
 namespace UniversityDatabaseImplement.Implements
 {
-    public class SubjectStorage : ISubjectStorage
+    public class CheckListStorage : ICheckListStorage
     {
-        public List<SubjectViewModel> GetFullList()
+        public List<CheckListViewModel> GetFullList()
         {
             using (var context = new UniversityDatabase())
             {
-                return context.Subjects
-                .Select(rec => new SubjectViewModel
+                return context.CheckLists
+                .Select(rec => new CheckListViewModel
                 {
                     Id = rec.Id,
-                    Name = rec.Name,
-                    DepartmentName = context.Departments.FirstOrDefault(x => x.DepartmentLogin == rec.DepartmentLogin).Name,
+                    DateOfExam = rec.DateOfExam,
+                    LectorName = context.Lectors.FirstOrDefault(recLector => recLector.Id == rec.LectorId).Name
                 }).ToList();
             }
         }
-        public List<SubjectViewModel> GetFilteredList(SubjectBindingModel model)
+        public List<CheckListViewModel> GetFilteredList(CheckListBindingModel model)
         {
             if (model == null)
             {
@@ -33,18 +31,18 @@ namespace UniversityDatabaseImplement.Implements
             }
             using (var context = new UniversityDatabase())
             {
-                return context.Subjects
-                .Where(rec => rec.DepartmentLogin == model.DepartmentLogin)
-                .Select(rec => new SubjectViewModel
+                return context.CheckLists
+                .Where(rec => rec.LectorId == model.LectorId)
+                .Select(rec => new CheckListViewModel
                 {
                     Id = rec.Id,
-                    Name = rec.Name,
-                    DepartmentName = context.Departments.FirstOrDefault(x => x.DepartmentLogin == model.DepartmentLogin).Name,
+                    DateOfExam = rec.DateOfExam,
+                    LectorName = context.Lectors.FirstOrDefault(recLector => recLector.Id == rec.LectorId).Name
                 })
                 .ToList();
             }
         }
-        public SubjectViewModel GetElement(SubjectBindingModel model)
+        public CheckListViewModel GetElement(CheckListBindingModel model)
         {
             if (model == null)
             {
@@ -52,31 +50,31 @@ namespace UniversityDatabaseImplement.Implements
             }
             using (var context = new UniversityDatabase())
             {
-                var subject = context.Subjects
+                var checkList = context.CheckLists
                 .FirstOrDefault(rec => rec.Id == model.Id);
-                return subject != null ?
-                new SubjectViewModel
+                return checkList != null ?
+                new CheckListViewModel
                 {
-                    Id = subject.Id,
-                    Name = subject.Name,
-                    DepartmentName = context.Departments.FirstOrDefault(x => x.DepartmentLogin == subject.DepartmentLogin).Name
+                    Id = checkList.Id,
+                    DateOfExam = checkList.DateOfExam,
+                    LectorName = context.Lectors.FirstOrDefault(recLector => recLector.Id == checkList.LectorId).Name
                 } :
                 null;
             }
         }
-        public void Insert(SubjectBindingModel model)
+        public void Insert(CheckListBindingModel model)
         {
             using (var context = new UniversityDatabase())
             {
-                context.Subjects.Add(CreateModel(model, new Subject()));
+                context.CheckLists.Add(CreateModel(model, new CheckList()));
                 context.SaveChanges();
             }
         }
-        public void Update(SubjectBindingModel model)
+        public void Update(CheckListBindingModel model)
         {
             using (var context = new UniversityDatabase())
             {
-                var element = context.Subjects.FirstOrDefault(rec => rec.Id == model.Id);
+                var element = context.CheckLists.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element == null)
                 {
                     throw new Exception("Элемент не найден");
@@ -85,14 +83,14 @@ namespace UniversityDatabaseImplement.Implements
                 context.SaveChanges();
             }
         }
-        public void Delete(SubjectBindingModel model)
+        public void Delete(CheckListBindingModel model)
         {
             using (var context = new UniversityDatabase())
             {
-                Subject element = context.Subjects.FirstOrDefault(rec => rec.Id == model.Id);
+                CheckList element = context.CheckLists.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element != null)
                 {
-                    context.Subjects.Remove(element);
+                    context.CheckLists.Remove(element);
                     context.SaveChanges();
                 }
                 else
@@ -101,11 +99,11 @@ namespace UniversityDatabaseImplement.Implements
                 }
             }
         }
-        private Subject CreateModel(SubjectBindingModel model, Subject subject)
+        private CheckList CreateModel(CheckListBindingModel model, CheckList checkList)
         {
-            subject.Name = model.Name;
-            subject.DepartmentLogin = model.DepartmentLogin;
-            return subject;
+            checkList.DateOfExam = model.DateOfExam;
+            checkList.LectorId = model.LectorId;
+            return checkList;
         }
     }
 }
