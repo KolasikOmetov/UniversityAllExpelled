@@ -19,7 +19,7 @@ namespace UniversityBusinessLogic.BusinessLogics
             {
                 return _studentStorage.GetFullList();
             }
-            if (string.IsNullOrEmpty(model.GradebookNumber))
+            if (!string.IsNullOrEmpty(model.GradebookNumber))
             {
                 return new List<StudentViewModel> { _studentStorage.GetElement(model) };
             }
@@ -29,13 +29,12 @@ namespace UniversityBusinessLogic.BusinessLogics
         {
             var element = _studentStorage.GetElement(new StudentBindingModel { 
                 Name = model.Name,
-                Subjects = model.Subjects,
             });
             if (element != null && element.GradebookNumber != model.GradebookNumber)
             {
                 throw new Exception("Уже есть студент с таким именем");
             }
-            if (string.IsNullOrEmpty(model.GradebookNumber))
+            if (!string.IsNullOrEmpty(model.GradebookNumber))
             {
                 _studentStorage.Update(model);
             }

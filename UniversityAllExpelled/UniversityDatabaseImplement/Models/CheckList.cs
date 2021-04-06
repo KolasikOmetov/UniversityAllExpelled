@@ -10,6 +10,6 @@ namespace UniversityDatabaseImplement.Models
 		[Required]
 		public DateTime DateOfExam { get; set; }
 		[Required]
-		public List<int> LectorIds { get; set; }
+		public int LectorId { get; set; }
 	}
 }

@@ -14,10 +14,15 @@ namespace  UniversityDatabaseImplement
             base.OnConfiguring(optionsBuilder);
         }
         public virtual DbSet<Student> Students { set; get; }
-        public virtual DbSet<Subject> Subject { set; get; }
+        public virtual DbSet<Subject> Subjects { set; get; }
         public virtual DbSet<Lector> Lectors { set; get; }
         public virtual DbSet<StudentSubject> StudentSubjects { set; get; }
         public virtual DbSet<CheckList> CheckLists { set; get; }
-        public virtual DbSet<Department> Department { set; get; }
+        public virtual DbSet<Department> Departments { set; get; }
+        public virtual DbSet<Certification> Certifications { set; get; }
+        public virtual DbSet<Deneary> Denearies { set; get; }
+        public virtual DbSet<EducationPlan> EducationPlans { set; get; }
+        public virtual DbSet<EducationPlanLector> EducationPlanLectors { set; get; }
+        public virtual DbSet<EducationPlanStudent> EducationPlanStudents { set; get; }
     }
 }

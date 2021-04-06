@@ -8,6 +8,6 @@ namespace UniversityBusinessLogic.ViewModels
 		[DisplayName("Имя")]
 		public string Name { get; set; }
 		[DisplayName("Предмет")]
-		public int SubjectName { get; set; }
+		public string SubjectName { get; set; }
 	}
 }

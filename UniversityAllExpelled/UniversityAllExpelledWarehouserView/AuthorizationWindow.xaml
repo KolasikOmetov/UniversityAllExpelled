@@ -27,7 +27,7 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Margin="10" Padding="5" Click="Button_Click">Войти</Button>
+            <Button Margin="10" Padding="5">Войти</Button>
             <Button Margin="10" Padding="5">Отмена</Button>
         </StackPanel>
     </StackPanel>

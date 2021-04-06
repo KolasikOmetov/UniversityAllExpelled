@@ -9,8 +9,8 @@ namespace UniversityDatabaseImplement.Models
 		public int Id { get; set; }
 		[Required]
 		public string Name { get; set; }
-		[ForeignKey("Login")]
-		public virtual Department DepartmentLogin { get; set; }
+		[ForeignKey("DepartmentLogin")]
+		public string DepartmentLogin { get; set; }
 		[ForeignKey("SubjectId")]
 		public virtual List<StudentSubject> StudentSubjects { get; set; }
 	}

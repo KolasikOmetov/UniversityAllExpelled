@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace UniversityAllExpelledWarehouserView
 {
     /// <summary>
-    /// Логика взаимодействия для CheckListWindow.xaml
+    /// Логика взаимодействия для CheckListsWindow.xaml
     /// </summary>
-    public partial class CheckListWindow : Window
+    public partial class CheckListsWindow : Window
     {
-        public CheckListWindow()
+        public CheckListsWindow()
         {
             InitializeComponent();
         }
