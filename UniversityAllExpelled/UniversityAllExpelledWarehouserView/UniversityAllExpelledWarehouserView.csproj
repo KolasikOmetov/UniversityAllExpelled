@@ -164,6 +164,12 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -179,8 +185,8 @@
     <Compile Include="BindingSubjectWindow.xaml.cs">
       <DependentUpon>BindingSubjectWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CheckListWindow.xaml.cs">
-      <DependentUpon>CheckListWindow.xaml</DependentUpon>
+    <Compile Include="CheckListsWindow.xaml.cs">
+      <DependentUpon>CheckListsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditingCheckListWindow.xaml.cs">
       <DependentUpon>EditingCheckListWindow.xaml</DependentUpon>
@@ -205,7 +211,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CheckListWindow.xaml">
+    <Page Include="CheckListsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -270,6 +276,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UniversityBusinessLogic\UniversityBusinessLogic.csproj">
+      <Project>{83b0d490-8b92-4704-8cb8-3b523135416a}</Project>
+      <Name>UniversityBusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UniversityDatabaseImplement\UniversityDatabaseImplement.csproj">
       <Project>{0b9fae82-d772-407c-b15a-4c0dc7352ccc}</Project>
       <Name>UniversityDatabaseImplement</Name>
