@@ -71,7 +71,7 @@ namespace UniversityDatabaseImplement.Implements
                   .ThenInclude(rec => rec.Subject)
                   .Include(rec => rec.EducationPlanStudents)
                   .ThenInclude(rec => rec.EducationPlan)
-                  .FirstOrDefault(rec => rec.GradebookNumber == model.GradebookNumber);
+                  .FirstOrDefault(rec => rec.Name == model.Name || rec.GradebookNumber == model.GradebookNumber);
                 return student != null ?
                   new StudentViewModel
                   {
@@ -167,10 +167,19 @@ namespace UniversityDatabaseImplement.Implements
                 context.StudentSubjects.RemoveRange(studentSubjects.Where(rec => !model.Subjects.ContainsKey(rec.SubjectId)).ToList());
                 var educationPlanStudents = context.EducationPlanStudents.Where(rec => rec.GradebookNumber == model.GradebookNumber).ToList();
                
-                context.StudentSubjects.RemoveRange(educationPlanStudents.Where(rec => !model.EducationPlans.ContainsKey(rec.EducationPlanId)).ToList());
+                context.EducationPlanStudents.RemoveRange(educationPlanStudents.Where(rec => !model.EducationPlans.ContainsKey(rec.EducationPlanId)).ToList());
                 context.SaveChanges();
             }
             // добавили новые
+            foreach (var ss in model.Subjects)
+            {
+                context.StudentSubjects.Add(new StudentSubject
+                {
+                    GradebookNumber = student.GradebookNumber,
+                    SubjectId = ss.Key,
+                });
+                context.SaveChanges();
+            }
             foreach (var ss in model.Subjects)
             {
                 context.StudentSubjects.Add(new StudentSubject

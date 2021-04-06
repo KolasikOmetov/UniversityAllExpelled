@@ -51,7 +51,7 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 var lector = context.Lectors
-                .FirstOrDefault(rec => rec.Id == model.Id);
+                .FirstOrDefault(rec => rec.Name == model.Name || rec.Id == model.Id);
                 return lector != null ?
                 new LectorViewModel
                 {

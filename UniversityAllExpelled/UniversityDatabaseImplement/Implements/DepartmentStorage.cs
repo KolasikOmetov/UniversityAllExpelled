@@ -53,7 +53,7 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 var department = context.Departments
-                .FirstOrDefault(rec => rec.DepartmentLogin == model.DepartmentLogin);
+                .FirstOrDefault(rec => rec.Name == model.Name || rec.DepartmentLogin == model.DepartmentLogin);
                 return department != null ?
                 new DepartmentViewModel
                 {

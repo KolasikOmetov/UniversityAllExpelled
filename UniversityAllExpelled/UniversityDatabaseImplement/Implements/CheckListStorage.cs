@@ -51,7 +51,7 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 var checkList = context.CheckLists
-                .FirstOrDefault(rec => rec.Id == model.Id);
+                .FirstOrDefault(rec => (rec.LectorId == model.LectorId && rec.DateOfExam == model.DateOfExam) || rec.Id == model.Id);
                 return checkList != null ?
                 new CheckListViewModel
                 {
