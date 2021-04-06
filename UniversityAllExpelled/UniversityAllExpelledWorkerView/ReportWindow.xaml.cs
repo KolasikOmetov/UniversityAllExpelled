@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace UniversityAllExpelledWarehouserView
+namespace UniversityAllExpelledWorkerView
 {
     /// <summary>
     /// Логика взаимодействия для Report.xaml
     /// </summary>
-    public partial class Report : Window
+    public partial class ReportWindow : Window
     {
-        public Report()
+        public ReportWindow()
         {
             InitializeComponent();
         }

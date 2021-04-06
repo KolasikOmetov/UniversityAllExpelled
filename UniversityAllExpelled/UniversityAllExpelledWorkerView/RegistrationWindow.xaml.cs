@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace UniversityAllExpelledWarehouserView
+namespace UniversityAllExpelledWorkerView
 {
     /// <summary>
     /// Логика взаимодействия для Registration.xaml
     /// </summary>
-    public partial class Registration : Window
+    public partial class RegistrationWindow : Window
     {
-        public Registration()
+        public RegistrationWindow()
         {
             InitializeComponent();
         }

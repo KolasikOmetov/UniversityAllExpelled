@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace UniversityAllExpelledWarehouserView
+namespace UniversityAllExpelledWorkerView
 {
     /// <summary>
-    /// Логика взаимодействия для BindingSubjectWindow.xaml
+    /// Логика взаимодействия для BindingStudentPlanWindow.xaml
     /// </summary>
-    public partial class BindingSubjectWindow : Window
+    public partial class BindingStudentPlanWindow : Window
     {
-        public BindingSubjectWindow()
+        public BindingStudentPlanWindow()
         {
             InitializeComponent();
         }
