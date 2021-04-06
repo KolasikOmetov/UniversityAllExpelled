@@ -30,7 +30,7 @@ namespace UniversityBusinessLogic.BusinessLogics
         {
             var element = _denearyStorage.GetElement(new DenearyBindingModel
             {
-                Login = model.Login
+                Name = model.Name
             });
             if (element != null && element.Login != model.Login)
             {

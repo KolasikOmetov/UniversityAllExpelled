@@ -28,10 +28,14 @@ namespace UniversityBusinessLogic.BusinessLogics
 		}
 		public void CreateOrUpdate(EducationPlanBindingModel model)
 		{
-			var element = _educationPlanStorage.GetElement(new EducationPlanBindingModel { Id = model.Id });
+			var element = _educationPlanStorage.GetElement(new EducationPlanBindingModel
+			{
+				StreamName = model.StreamName,
+				Hours = model.Hours
+			});
 			if (element != null && element.Id != model.Id)
 			{
-				throw new Exception("Уже есть план с таким названием");
+				throw new Exception("Уже есть план с такими данными");
 			}
 			if (model.Id.HasValue)
 			{
