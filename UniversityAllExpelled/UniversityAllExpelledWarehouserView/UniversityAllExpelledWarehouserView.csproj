@@ -191,6 +191,9 @@
     <Compile Include="EditingCheckListWindow.xaml.cs">
       <DependentUpon>EditingCheckListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EnterWindow.xaml.cs">
+      <DependentUpon>EnterWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GetListWindow.xaml.cs">
       <DependentUpon>GetListWindow.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,9 @@
     </Compile>
     <Compile Include="SubjectsWindow.xaml.cs">
       <DependentUpon>SubjectsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectWindow.xaml.cs">
+      <DependentUpon>SubjectWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AuthorizationWindow.xaml">
       <SubType>Designer</SubType>
@@ -216,6 +222,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditingCheckListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EnterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,6 +254,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SubjectsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubjectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

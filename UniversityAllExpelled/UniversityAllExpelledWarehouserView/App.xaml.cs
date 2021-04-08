@@ -18,8 +18,8 @@ namespace UniversityAllExpelledWarehouserView
 
 			IUnityContainer currentContainer = BuildUnityContainer();
 
-			var mainWindow = currentContainer.Resolve<MainWindow>();
-			mainWindow.Show();
+			var enterWindow = currentContainer.Resolve<EnterWindow>();
+			enterWindow.Show();
 		}
 
 		private static IUnityContainer BuildUnityContainer()

@@ -25,7 +25,7 @@ namespace UniversityBusinessLogic.BusinessLogics
             }
             return _departmentStorage.GetFilteredList(model);
         }
-        public void CreateOrUpdate(DepartmentBindingModel model)
+        public void CreateOrUpdate(DepartmentBindingModel model, bool update = false)
         {
             var element = _departmentStorage.GetElement(new DepartmentBindingModel { 
                 Name = model.Name,
@@ -34,7 +34,7 @@ namespace UniversityBusinessLogic.BusinessLogics
             {
                 throw new Exception("Уже есть кафедра с таким названием");
             }
-            if (!string.IsNullOrEmpty(model.DepartmentLogin))
+            if (update)
             {
                 _departmentStorage.Update(model);
             }

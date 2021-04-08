@@ -14,97 +14,55 @@ namespace UniversityAllExpelledWarehouserView
         [Dependency]
         public IUnityContainer Container { get; set; }
 
-        public string Id { set { id = value; } }
+        public string Login { set { login = value; } }
 
-        private string id;
+        private string login;
 
-        private DepartmentLogic _logic;
-        private DepartmentViewModel _currentUser;
+        private readonly DepartmentLogic _logicDepartment;
         public MainWindow(DepartmentLogic logic)
         {
             InitializeComponent();
-            this._logic = logic;
+            this._logicDepartment = logic;
         }
 
         private void MenuItemSubjects_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentUser != null)
-            {
-                var window = Container.Resolve<SubjectsWindow>();
-                // window.Id = id;
-                window.ShowDialog();
-            }
-            else
-            {
-                // call ErrorWindow
-            }
+            var window = Container.Resolve<SubjectsWindow>();
+            window.Login = login;
+            window.ShowDialog();
         }
 
         private void MenuItemLectors_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentUser != null)
-            {
-                //var window = Container.Resolve<LectorsWindow>();
-                //window.Id = id;
-                //window.ShowDialog();
-            }
-            else
-            {
-                // call ErrorWindow
-            }
+            //var window = Container.Resolve<LectorsWindow>();
+            //window.Id = departmentLogin;
+            //window.ShowDialog();
         }
 
 
         private void MenuItemCheckLists_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentUser != null)
-            {
-                //var window = Container.Resolve<CheckListsWindow>();
-                //window.Id = id;
+           //var window = Container.Resolve<CheckListsWindow>();
+                //window.Id = departmentLogin;
                 //window.ShowDialog();
-            }
-            else
-            {
-                // call ErrorWindow
-            }
         }
 
         private void MenuItemGetList_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentUser != null)
-            {
+           
                 var window = Container.Resolve<GetListWindow>();
                 window.ShowDialog();
-            }
-            else
-            {
-                // call ErrorWindow
-            }
         }
 
         private void MenuItemReport_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentUser != null)
-            {
-
-            }
-            else
-            {
-                // call ErrorWindow
-            }
+            
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            var currentUser = _logic.Read(new DepartmentBindingModel { DepartmentLogin = id })?[0];
-            if (currentUser == null)
-            {
-                labelUser.Content = "Войдите или Зарегистрируйтесь";
-            }
-            else
-            {
-                labelUser.Content = $"Кафедра {currentUser.Name}";
-            }
+            var currentUser = _logicDepartment.Read(new DepartmentBindingModel { DepartmentLogin = login })?[0];
+            labelUser.Content = $"Кафедра \"{currentUser.Name}\"";
         }
     }
 }

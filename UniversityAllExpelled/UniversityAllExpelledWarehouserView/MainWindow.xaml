@@ -18,13 +18,9 @@
             <MenuItem Header="Отчёт" Click="MenuItemReport_Click" />
         </Menu>
         <StackPanel Grid.Row="1">
-            <Label Margin="10" Height="20" Name="labelUser"></Label>
+            <Label Margin="10" Height="30" Name="labelUser"></Label>
             <DockPanel>
-            <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
-                <Button Padding="5">Зарегистироваться</Button>
-                <Button Padding="5">Войти</Button>
-            </StackPanel>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Логотип</TextBlock>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Логотип</TextBlock>
         </DockPanel>
         </StackPanel>
     </Grid>
