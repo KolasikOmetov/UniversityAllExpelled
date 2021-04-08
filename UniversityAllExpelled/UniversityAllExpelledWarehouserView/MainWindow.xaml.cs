@@ -34,29 +34,29 @@ namespace UniversityAllExpelledWarehouserView
 
         private void MenuItemLectors_Click(object sender, RoutedEventArgs e)
         {
-            //var window = Container.Resolve<LectorsWindow>();
-            //window.Id = departmentLogin;
-            //window.ShowDialog();
+            var window = Container.Resolve<LectorsWindow>();
+            window.Login = login;
+            window.ShowDialog();
         }
 
 
         private void MenuItemCheckLists_Click(object sender, RoutedEventArgs e)
         {
-           //var window = Container.Resolve<CheckListsWindow>();
-                //window.Id = departmentLogin;
-                //window.ShowDialog();
+            var window = Container.Resolve<CheckListsWindow>();
+            window.ShowDialog();
         }
 
         private void MenuItemGetList_Click(object sender, RoutedEventArgs e)
         {
-           
-                var window = Container.Resolve<GetListWindow>();
-                window.ShowDialog();
+           var window = Container.Resolve<GetListWindow>();
+           window.ShowDialog();
         }
 
         private void MenuItemReport_Click(object sender, RoutedEventArgs e)
         {
-            
+            var window = Container.Resolve<ReportWindow>();
+            // window.Login = login;
+            window.ShowDialog();
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

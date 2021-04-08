@@ -26,7 +26,9 @@ namespace UniversityBusinessLogic.BusinessLogics
 		}
 		public void CreateOrUpdate(SubjectBindingModel model)
 		{
-			var element = _subjectStorage.GetElement(new SubjectBindingModel { Name = model.Name });
+			var element = _subjectStorage.GetElement(new SubjectBindingModel {
+				Name = model.Name
+			});
 			if (element != null && element.Id != model.Id)
 			{
 				throw new Exception("Уже есть предмет с таким названием");

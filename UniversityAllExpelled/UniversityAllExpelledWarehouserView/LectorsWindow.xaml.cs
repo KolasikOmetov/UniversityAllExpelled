@@ -10,24 +10,24 @@ using UniversityBusinessLogic.ViewModels;
 
 namespace UniversityAllExpelledWarehouserView
 {
-    /// <summary>
-    /// Логика взаимодействия для SubjectsWindow.xaml
-    /// </summary>
-    public partial class SubjectsWindow : Window
-    {
+	/// <summary>
+	/// Логика взаимодействия для LectorsWindow.xaml
+	/// </summary>
+	public partial class LectorsWindow : Window
+	{
 		[Dependency]
 		public IUnityContainer Container { get; set; }
 		public string Login { set { login = value; } }
 
 		private string login;
 
-		private readonly SubjectLogic logic;
-		public SubjectsWindow(SubjectLogic logic)
+		private readonly LectorLogic logic;
+		public LectorsWindow(LectorLogic logic)
 		{
 			InitializeComponent();
 			this.logic = logic;
 		}
-		private void SubjectsWindow_Loaded(object sender, RoutedEventArgs e)
+		private void LectorsWindow_Loaded(object sender, RoutedEventArgs e)
 		{
 			LoadData();
 		}
@@ -35,12 +35,11 @@ namespace UniversityAllExpelledWarehouserView
 		{
 			try
 			{
-				var list = logic.Read(new SubjectBindingModel { DepartmentLogin = login });
+				var list = logic.Read(null);
 				if (list != null)
 				{
 					DataGridView.ItemsSource = list;
 					DataGridView.Columns[0].Visibility = Visibility.Hidden;
-					DataGridView.Columns[2].Visibility = Visibility.Hidden;
 				}
 			}
 			catch (Exception ex)
@@ -50,10 +49,10 @@ namespace UniversityAllExpelledWarehouserView
 		}
 		private void ButtonAdd_Click(object sender, RoutedEventArgs e)
 		{
-			var window = Container.Resolve<SubjectWindow>();
-			window.Login = login;
+			var window = Container.Resolve<LectorWindow>();
 			if (window.ShowDialog().Value)
 			{
+				window.Login = login;
 				LoadData();
 			}
 		}
@@ -61,9 +60,8 @@ namespace UniversityAllExpelledWarehouserView
 		{
 			if (DataGridView.SelectedCells.Count != 0)
 			{
-				var window = Container.Resolve<SubjectWindow>();
-				window.Id = ((SubjectViewModel)DataGridView.SelectedCells[0].Item).Id;
-				window.Login = login;
+				var window = Container.Resolve<LectorWindow>();
+				window.Id = ((LectorViewModel)DataGridView.SelectedCells[0].Item).Id;
 				if (window.ShowDialog().Value)
 				{
 					LoadData();
@@ -76,10 +74,10 @@ namespace UniversityAllExpelledWarehouserView
 			{
 				if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
 				{
-					int id = ((SubjectViewModel)DataGridView.SelectedCells[0].Item).Id;
+					int id = ((LectorViewModel)DataGridView.SelectedCells[0].Item).Id;
 					try
 					{
-						logic.Delete(new SubjectBindingModel { Id = id });
+						logic.Delete(new LectorBindingModel { Id = id });
 					}
 					catch (Exception ex)
 					{
@@ -112,31 +110,31 @@ namespace UniversityAllExpelledWarehouserView
 		/// </summary>
 		public static string GetPropertyDisplayName(object descriptor)
 		{
-            if (descriptor is PropertyDescriptor pd)
-            {
-                // Check for DisplayName attribute and set the column header accordingly
-                if (pd.Attributes[typeof(DisplayNameAttribute)] is DisplayNameAttribute displayName && displayName != DisplayNameAttribute.Default)
-                {
-                    return displayName.DisplayName;
-                }
-            }
-            else
-            {
-                PropertyInfo pi = descriptor as PropertyInfo;
-                if (pi != null)
-                {
-                    // Check for DisplayName attribute and set the column header accordingly
-                    Object[] attributes = pi.GetCustomAttributes(typeof(DisplayNameAttribute), true);
-                    for (int i = 0; i < attributes.Length; ++i)
-                    {
-                        if (attributes[i] is DisplayNameAttribute displayName && displayName != DisplayNameAttribute.Default)
-                        {
-                            return displayName.DisplayName;
-                        }
-                    }
-                }
-            }
-            return null;
+			if (descriptor is PropertyDescriptor pd)
+			{
+				// Check for DisplayName attribute and set the column header accordingly
+				if (pd.Attributes[typeof(DisplayNameAttribute)] is DisplayNameAttribute displayName && displayName != DisplayNameAttribute.Default)
+				{
+					return displayName.DisplayName;
+				}
+			}
+			else
+			{
+				PropertyInfo pi = descriptor as PropertyInfo;
+				if (pi != null)
+				{
+					// Check for DisplayName attribute and set the column header accordingly
+					Object[] attributes = pi.GetCustomAttributes(typeof(DisplayNameAttribute), true);
+					for (int i = 0; i < attributes.Length; ++i)
+					{
+						if (attributes[i] is DisplayNameAttribute displayName && displayName != DisplayNameAttribute.Default)
+						{
+							return displayName.DisplayName;
+						}
+					}
+				}
+			}
+			return null;
 		}
 	}
 }

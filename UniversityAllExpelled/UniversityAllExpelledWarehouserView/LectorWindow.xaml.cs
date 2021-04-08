@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using Unity;
 using UniversityBusinessLogic.BindingModels;
 using UniversityBusinessLogic.BusinessLogics;
+using UniversityBusinessLogic.ViewModels;
 
 namespace UniversityAllExpelledWarehouserView
 {
     /// <summary>
-    /// Логика взаимодействия для SubjectWindow.xaml
+    /// Логика взаимодействия для LectorWindow.xaml
     /// </summary>
-    public partial class SubjectWindow : Window
+    public partial class LectorWindow : Window
     {
         [Dependency]
         public IUnityContainer Container { get; set; }
@@ -17,29 +19,41 @@ namespace UniversityAllExpelledWarehouserView
         public int Id { set { id = value; } }
 
         private int? id;
-
+        public int SubjectId
+        {
+            get { return Convert.ToInt32((ComboBoxSubject.SelectedItem as SubjectViewModel).Id); }
+            set
+            {
+                ComboBoxSubject.SelectedItem = SetValue(value);
+            }
+        }
+        public string ProcedureName { get { return (ComboBoxSubject.SelectedItem as SubjectViewModel).Name; } }
         public string Login { set { login = value; } }
 
         private string login;
 
+        private readonly LectorLogic _logicLector;
         private readonly SubjectLogic _logicSubject;
 
-        public SubjectWindow(SubjectLogic logic)
+        public LectorWindow(LectorLogic lectorLogic, SubjectLogic subjectLogic)
         {
             InitializeComponent();
-            this._logicSubject = logic;
+            this._logicLector = lectorLogic;
+            this._logicSubject = subjectLogic;
         }
 
-        private void SubjectWindow_Loaded(object sender, RoutedEventArgs e)
+        private void LectorWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            ComboBoxSubject.ItemsSource = _logicSubject.Read(new SubjectBindingModel { DepartmentLogin = login });
             if (id.HasValue)
             {
                 try
                 {
-                    var view = _logicSubject.Read(new SubjectBindingModel { Id = id })?[0];
+                    var view = _logicLector.Read(new LectorBindingModel { Id = id })?[0];
                     if (view != null)
                     {
                         TextBoxName.Text = view.Name;
+                        ComboBoxSubject.SelectedItem = view.SubjectName;
                     }
                 }
                 catch (Exception ex)
@@ -56,13 +70,18 @@ namespace UniversityAllExpelledWarehouserView
                 MessageBox.Show("Заполните название", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (ComboBoxSubject.SelectedIndex == -1)
+            {
+                MessageBox.Show("Выберите дисциплину", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             try
             {
-                _logicSubject.CreateOrUpdate(new SubjectBindingModel
+                _logicLector.CreateOrUpdate(new LectorBindingModel
                 {
                     Id = id,
                     Name = TextBoxName.Text,
-                    DepartmentLogin = login
+                    SubjectId = SubjectId
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
@@ -78,6 +97,18 @@ namespace UniversityAllExpelledWarehouserView
         {
             DialogResult = false;
             Close();
+        }
+
+        private SubjectViewModel SetValue(int value)
+        {
+            foreach (var item in ComboBoxSubject.Items)
+            {
+                if ((item as SubjectViewModel).Id == value)
+                {
+                    return item as SubjectViewModel;
+                }
+            }
+            return null;
         }
     }
 }

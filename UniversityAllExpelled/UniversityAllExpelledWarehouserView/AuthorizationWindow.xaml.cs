@@ -12,7 +12,7 @@ namespace UniversityAllExpelledWarehouserView
     /// </summary>
     public partial class AuthorizationWindow : Window
     {
-        
+
         [Dependency]
         public IUnityContainer Container { get; set; }
 
@@ -41,9 +41,8 @@ namespace UniversityAllExpelledWarehouserView
                 var viewDepartment = _logicDepartment.Read(new DepartmentBindingModel
                 {
                     DepartmentLogin = TextBoxLogin.Text,
-                    Password = TextBoxPassword.Password
                 });
-                if (viewDepartment != null && viewDepartment.Count > 0)
+                if (viewDepartment != null && viewDepartment[0] != null && viewDepartment.Count > 0 && viewDepartment[0].Password == TextBoxPassword.Password)
                 {
                     DialogResult = true;
                     var window = Container.Resolve<MainWindow>();
