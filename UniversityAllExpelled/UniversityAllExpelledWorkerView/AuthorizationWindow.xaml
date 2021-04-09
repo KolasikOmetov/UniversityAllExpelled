@@ -15,19 +15,19 @@
             <StackPanel Margin="10,0,0,0">
 
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBlock HorizontalAlignment="Stretch" MinWidth="100" >
+                    <TextBox x:Name="TextBoxLogin" HorizontalAlignment="Stretch" MinWidth="100" >
 
-                    </TextBlock>
+                    </TextBox>
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBlock HorizontalAlignment="Stretch" MinWidth="100" >
+                    <PasswordBox x:Name="TextBoxPassword" HorizontalAlignment="Stretch" MinWidth="100" >
 
-                    </TextBlock>
+                    </PasswordBox>
                 </Border>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Margin="10" Padding="5" Click="Button_Click">Войти</Button>
+            <Button Margin="10" Padding="5">Войти</Button>
             <Button Margin="10" Padding="5">Отмена</Button>
         </StackPanel>
     </StackPanel>

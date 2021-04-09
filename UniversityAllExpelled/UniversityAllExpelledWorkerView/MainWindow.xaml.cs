@@ -55,16 +55,21 @@ namespace UniversityAllExpelledWorkerView
         {
             var window = Container.Resolve<CertificationsWindow>();
             //window.
+            window.ShowDialog();
         }
 
         private void MenuItemGetList_Click(object sender, RoutedEventArgs e)
         {
-
+            var window = Container.Resolve<GetListWindow>();
+            //window.Login = login;
+            window.ShowDialog();
         }
 
         private void MenuItemReport_Click(object sender, RoutedEventArgs e)
         {
-
+            var window = Container.Resolve<ReportWindow>();
+            //window.Login = login;
+            window.ShowDialog();
         }
     }
 }

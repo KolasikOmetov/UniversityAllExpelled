@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace UniversityBusinessLogic.ViewModels
 {
@@ -6,8 +7,8 @@ namespace UniversityBusinessLogic.ViewModels
     {
         public int Id { get; set; }
 
-        [DisplayName("Название")]
-        public string Name { get; set; }
+        [DisplayName("Дата")]
+        public DateTime Date { get; set; }
 
         [DisplayName("Студент")]
         public string StudentName { get; set; }
