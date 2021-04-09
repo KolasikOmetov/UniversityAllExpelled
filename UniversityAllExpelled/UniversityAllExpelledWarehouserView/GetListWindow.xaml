@@ -8,11 +8,24 @@
         Title="Список студентов" Height="450" Width="300">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <ListBox></ListBox>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+        <StackPanel>
+            <Label>Дисциплина</Label>
+            <ComboBox Margin="10"/>
+        </StackPanel>
+        <ListBox Grid.Row="1" ItemsSource="{Binding StudentViewModel}" Name="ListBoxStudents">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
             <Button Margin="10">Word</Button>
             <Button Margin="10">Excel</Button>
             <Button Margin="10">Отмена</Button>

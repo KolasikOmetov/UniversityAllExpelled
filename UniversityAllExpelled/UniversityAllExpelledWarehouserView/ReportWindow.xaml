@@ -19,8 +19,6 @@
             <DatePicker Margin="10"/>
             <Label Margin="10">Дисциплина</Label>
             <ComboBox Margin="10" MinWidth="100"/>
-            <Label Margin="10">Преподаватель</Label>
-            <ComboBox Margin="10" MinWidth="100"/>
             <Button Margin="10">Показать</Button>
             <Button Margin="10">На почту</Button>
         </StackPanel>

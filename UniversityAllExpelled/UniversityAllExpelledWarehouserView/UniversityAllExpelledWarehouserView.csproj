@@ -203,9 +203,6 @@
     <Compile Include="CheckListWindow.xaml.cs">
       <DependentUpon>CheckListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditingCheckListWindow.xaml.cs">
-      <DependentUpon>EditingCheckListWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="EnterWindow.xaml.cs">
       <DependentUpon>EnterWindow.xaml</DependentUpon>
     </Compile>
@@ -243,10 +240,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CheckListWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditingCheckListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

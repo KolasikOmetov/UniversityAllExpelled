@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UniversityBusinessLogic.BindingModels;
@@ -32,7 +33,11 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 return context.CheckLists
-                .Where(rec => rec.LectorId == model.LectorId)
+                .Include(rec => rec.LectorId)
+                .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.LectorId == model.LectorId || rec.DateOfExam == model.DateOfExam) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && (rec.LectorId == model.LectorId
+                || rec.DateOfExam.Date >= model.DateFrom.Value.Date && rec.DateOfExam.Date <= model.DateTo.Value.Date)))
+                .ToList()
                 .Select(rec => new CheckListViewModel
                 {
                     Id = rec.Id,
