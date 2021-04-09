@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Unity;
+using UniversityAllExpelledWarehouserView;
+using UniversityBusinessLogic.BusinessLogics;
 
 namespace UniversityAllExpelledWorkerView
 {
@@ -20,9 +23,48 @@ namespace UniversityAllExpelledWorkerView
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        [Dependency]
+        public IUnityContainer Container { get; set; }
+
+        public string Login { set { login = value; } }
+
+        private string login;
+
+        private readonly DenearyLogic _logicDeneary;
+        public MainWindow(DenearyLogic logic)
         {
             InitializeComponent();
+            this._logicDeneary = logic;
+        }
+
+        private void MenuItemStudents_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Container.Resolve<StudentsWindow>();
+            //window.Login = login;
+            window.ShowDialog();
+        }
+
+        private void MenuItemPlans_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Container.Resolve<EditingPlansWindow>();
+            //window.Login = login;
+            window.ShowDialog();
+        }
+
+        private void MenuItemCertifications_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Container.Resolve<CertificationsWindow>();
+            //window.
+        }
+
+        private void MenuItemGetList_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItemReport_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

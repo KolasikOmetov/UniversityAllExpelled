@@ -1,39 +1,29 @@
-﻿<Window x:Class="UniversityAllExpelledWorkerView.RegistrationWindow"
+﻿<Window x:Class="UniversityAllExpelledWorkerView.EditingPlanWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniversityAllExpelledWorkerView"
         mc:Ignorable="d"
-        Title="Регистрация" MinHeight="220" MinWidth="230" d:DesignHeight="220" Width="230">
+        Title="План" Height="171.333" Width="310.667" Loaded="EditingPlanWindow_Loaded">
     <StackPanel Margin="20" VerticalAlignment="Top" HorizontalAlignment="Center">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel HorizontalAlignment="Stretch">
-                <Label>Деканат</Label>
-                <Label>Логин</Label>
-                <Label>Пароль</Label>
+                <Label>Поток</Label>
+                <Label>Количество часов</Label>
             </StackPanel>
             <StackPanel Margin="10,0,0,0">
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" />
-                </Border>
-
-                <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" >
-
-                    </TextBox>
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" x:Name="TextBoxStream"/>
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" >
-
-                    </TextBox>
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" x:Name="TextBoxHours"/>
                 </Border>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Margin="10" Padding="5">Создать</Button>
-            <Button Margin="10" Padding="5">Отмена</Button>
+            <Button Margin="10" Padding="5" Name="ButtonEnter" Click="ButtonSave_Click">Сохранить</Button>
+            <Button Margin="10" Padding="5" Name="ButtonCancel" Click="ButtonCancel_Click">Отмена</Button>
         </StackPanel>
     </StackPanel>
 </Window>
-

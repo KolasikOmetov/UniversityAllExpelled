@@ -37,6 +37,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -45,6 +48,12 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.10\lib\net47\Unity.Container.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -58,11 +67,23 @@
     <Compile Include="BindingStudentPlanWindow.xaml.cs">
       <DependentUpon>BindingStudentPlanWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CertificationsWindow.xaml.cs">
+      <DependentUpon>CertificationsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditingPlansWindow.xaml.cs">
       <DependentUpon>EditingPlansWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditingPlanWindow.xaml.cs">
+      <DependentUpon>EditingPlanWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EnterWindow.xaml.cs">
+      <DependentUpon>EnterWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GetDisciplineWindow.xaml.cs">
       <DependentUpon>GetDisciplineWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GetListWindow.xaml.cs">
+      <DependentUpon>GetListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegistrationWindow.xaml.cs">
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
@@ -73,6 +94,9 @@
     <Compile Include="StudentsWindow.xaml.cs">
       <DependentUpon>StudentsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StudentWindow.xaml.cs">
+      <DependentUpon>StudentWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="AuthorizationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -81,11 +105,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="CertificationsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="EditingPlansWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="EditingPlanWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EnterWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="GetDisciplineWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GetListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -116,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="StudentWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -135,6 +179,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -142,6 +187,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UniversityAllExpelledWarehouserView\UniversityAllExpelledWarehouserView.csproj">
+      <Project>{A998C8AB-2C0A-43E0-B719-32CA1056D9CA}</Project>
+      <Name>UniversityAllExpelledWarehouserView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UniversityBusinessLogic\UniversityBusinessLogic.csproj">
+      <Project>{83B0D490-8B92-4704-8CB8-3B523135416A}</Project>
+      <Name>UniversityBusinessLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

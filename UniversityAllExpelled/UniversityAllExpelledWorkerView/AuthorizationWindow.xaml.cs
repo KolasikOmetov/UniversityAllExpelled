@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Unity;
+using UniversityBusinessLogic.BindingModels;
+using UniversityBusinessLogic.BusinessLogics;
 
 namespace UniversityAllExpelledWorkerView
 {
@@ -19,9 +22,58 @@ namespace UniversityAllExpelledWorkerView
     /// </summary>
     public partial class AuthorizationWindow : Window
     {
-        public AuthorizationWindow()
+        [Dependency]
+        public IUnityContainer Container { get; set; }
+
+        private readonly DenearyLogic _logicDeneary;
+
+        public AuthorizationWindow(DenearyLogic logicDeneary)
         {
             InitializeComponent();
+            this._logicDeneary = logicDeneary;
         }
+
+        private void ButtonEnter_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(TextBoxLogin.Text))
+            {
+                MessageBox.Show("Пустое поле 'Логин'", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (string.IsNullOrEmpty(TextBoxPassword.Password))
+            {
+                MessageBox.Show("Пустое поле 'Пароль'", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            try
+            {
+                var viewDeneary = _logicDeneary.Read(new DenearyBindingModel
+                {
+                    Login = TextBoxLogin.Text,
+                });
+                if (viewDeneary != null && viewDeneary[0] != null && viewDeneary.Count > 0 && viewDeneary[0].Password == TextBoxPassword.Password)
+                {
+                    DialogResult = true;
+                    var window = Container.Resolve<MainWindow>();
+                    window.Login = viewDeneary[0].Login;
+                    window.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
+        }
+
     }
 }

@@ -1,0 +1,15 @@
+﻿<Window x:Class="UniversityAllExpelledWorkerView.EnterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UniversityAllExpelledWorkerView"
+        mc:Ignorable="d"
+        Title="Учётная запись" Height="120" Width="150">
+    <Grid>
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10">
+            <Button Padding="5" Click="ButtonRegistration_Click">Зарегистироваться</Button>
+            <Button Padding="5" Click="ButtonAuthorization_Click">Войти</Button>
+        </StackPanel>
+    </Grid>
+</Window>
