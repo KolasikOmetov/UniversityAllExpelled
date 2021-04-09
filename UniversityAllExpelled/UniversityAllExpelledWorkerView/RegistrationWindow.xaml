@@ -15,18 +15,18 @@
             </StackPanel>
             <StackPanel Margin="10,0,0,0">
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBlock HorizontalAlignment="Stretch" MinWidth="100" />
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" />
                 </Border>
 
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBlock HorizontalAlignment="Stretch" MinWidth="100" >
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" >
 
-                    </TextBlock>
+                    </TextBox>
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBlock HorizontalAlignment="Stretch" MinWidth="100" >
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" >
 
-                    </TextBlock>
+                    </TextBox>
                 </Border>
             </StackPanel>
         </StackPanel>

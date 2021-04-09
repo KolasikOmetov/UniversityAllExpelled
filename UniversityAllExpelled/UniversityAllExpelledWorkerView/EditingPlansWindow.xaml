@@ -5,23 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniversityAllExpelledWorkerView"
         mc:Ignorable="d"
-        Title="Формирование планов" MinHeight="180" MinWidth="270" d:DesignHeight="180" d:DesignWidth="270" >
+        Title="Формирование планов" MinHeight="180" MinWidth="270" Height="343" Width="546" >
     <Grid>
-        <StackPanel Margin="20" VerticalAlignment="Top" HorizontalAlignment="Center">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <StackPanel HorizontalAlignment="Stretch">
-                    <Label>Преподаватель</Label>
-                    <Label>Кафедра</Label>
-                </StackPanel>
-                <StackPanel Margin="10,0,0,0">
-                    <ComboBox HorizontalAlignment="Stretch" MinWidth="100" Margin="4"/>
-                    <DatePicker />
-                </StackPanel>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Margin="10" Padding="5">Создать</Button>
-                <Button Margin="10" Padding="5">Отмена</Button>
-            </StackPanel>
-        </StackPanel>
+        <DataGrid x:Name="DataGridPlans" HorizontalAlignment="Left" Height="312" VerticalAlignment="Top" Width="389"/>
+        <Button x:Name="ButtonAdd" Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="428,29,0,0" Click="ButtonAdd_Click"/>
+        <Button x:Name="ButtonUpd" Content="Изменить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="428,67,0,0" Click="ButtonUpd_Click"/>
+        <Button x:Name="ButtonDel" Content="Удалить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="428,106,0,0" Click="ButtonDel_Click"/>
+        <Button x:Name="ButtonRef" Content="Обновить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="428,149,0,0" Click="ButtonRef_Click"/>
     </Grid>
 </Window>

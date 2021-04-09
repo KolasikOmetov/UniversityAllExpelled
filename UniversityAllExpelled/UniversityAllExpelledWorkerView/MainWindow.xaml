@@ -12,11 +12,20 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White" Height="20">
-            <MenuItem Header="Планы"/>
-            <MenuItem Header="Студенты" />
-            <MenuItem Header="Аттестации" />
-            <MenuItem Header="Получение списка" />
-            <MenuItem Header="Отчёт" />
+            <MenuItem x:Name="MenuItemPlans" Header="Планы" Click="MenuItemPlans_Click" RenderTransformOrigin="0.5,0.5">
+                <MenuItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="2.821"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </MenuItem.RenderTransform>
+            </MenuItem>
+            <MenuItem x:Name="MenuItemStudents" Header="Студенты" Click="MenuItemStudents_Click" />
+            <MenuItem x:Name="MenuItemCertifications" Header="Аттестации" Click="MenuItemCertifications_Click" />
+            <MenuItem x:Name="MenuItemGetList" Header="Получение списка" Click="MenuItemGetList_Click" />
+            <MenuItem x:Name="MenuItemReport" Header="Отчёт" Click="MenuItemReport_Click" />
         </Menu>
         <DockPanel Grid.Row="1">
             <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">

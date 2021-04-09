@@ -15,14 +15,13 @@ using System.Windows.Shapes;
 namespace UniversityAllExpelledWorkerView
 {
     /// <summary>
-    /// Логика взаимодействия для Registration.xaml
+    /// Логика взаимодействия для CertificationsWindow.xaml
     /// </summary>
-    public partial class RegistrationWindow : Window
+    public partial class CertificationsWindow : Window
     {
-        public RegistrationWindow()
+        public CertificationsWindow()
         {
             InitializeComponent();
         }
-
     }
 }
