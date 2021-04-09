@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UniversityBusinessLogic.BindingModels;
@@ -32,6 +33,8 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 return context.Lectors
+                .Include(rec => rec.EducationPlanLectors)
+                .ThenInclude(rec => rec.EducationPlan)
                 .Where(rec => rec.SubjectId == model.SubjectId)
                 .Select(rec => new LectorViewModel
                 {
@@ -51,6 +54,8 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 var lector = context.Lectors
+                .Include(rec => rec.EducationPlanLectors)
+                .ThenInclude(rec => rec.EducationPlan)
                 .FirstOrDefault(rec => rec.Name == model.Name || rec.Id == model.Id);
                 return lector != null ?
                 new LectorViewModel
