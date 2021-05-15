@@ -37,6 +37,7 @@ namespace UniversityAllExpelledWarehouserView
 				{
 					DataGridView.ItemsSource = list;
 					DataGridView.Columns[0].Visibility = Visibility.Hidden;
+					DataGridView.Columns[3].Visibility = Visibility.Hidden;
 				}
 			}
 			catch (Exception ex)
@@ -47,6 +48,7 @@ namespace UniversityAllExpelledWarehouserView
 		private void ButtonAdd_Click(object sender, RoutedEventArgs e)
 		{
 			var window = Container.Resolve<CheckListWindow>();
+			
 			if (window.ShowDialog().Value)
 			{
 				LoadData();
@@ -57,13 +59,16 @@ namespace UniversityAllExpelledWarehouserView
 			if (DataGridView.SelectedCells.Count != 0)
 			{
 				var window = Container.Resolve<CheckListWindow>();
-				window.Id = ((CheckListViewModel)DataGridView.SelectedCells[0].Item).Id;
+				CheckListViewModel record = (CheckListViewModel)DataGridView.SelectedCells[0].Item;
+				window.Id = record.Id;
+				window.LectorId = record.LectorId;
 				if (window.ShowDialog().Value)
 				{
 					LoadData();
 				}
 			}
 		}
+
 		private void ButtonDel_Click(object sender, RoutedEventArgs e)
 		{
 			if (DataGridView.SelectedCells.Count != 0)

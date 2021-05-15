@@ -20,7 +20,8 @@ namespace UniversityDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     DateOfExam = rec.DateOfExam,
-                    LectorName = context.Lectors.FirstOrDefault(recLector => recLector.Id == rec.LectorId).Name
+                    LectorName = context.Lectors.FirstOrDefault(recLector => recLector.Id == rec.LectorId).Name,
+                    LectorId = rec.LectorId,
                 }).ToList();
             }
         }
@@ -42,7 +43,8 @@ namespace UniversityDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     DateOfExam = rec.DateOfExam,
-                    LectorName = context.Lectors.FirstOrDefault(recLector => recLector.Id == rec.LectorId).Name
+                    LectorName = context.Lectors.FirstOrDefault(recLector => recLector.Id == rec.LectorId).Name,
+                    LectorId = rec.LectorId,
                 })
                 .ToList();
             }
@@ -62,7 +64,8 @@ namespace UniversityDatabaseImplement.Implements
                 {
                     Id = checkList.Id,
                     DateOfExam = checkList.DateOfExam,
-                    LectorName = context.Lectors.FirstOrDefault(recLector => recLector.Id == checkList.LectorId).Name
+                    LectorName = context.Lectors.FirstOrDefault(recLector => recLector.Id == checkList.LectorId).Name,
+                    LectorId = checkList.LectorId,
                 } :
                 null;
             }

@@ -34,7 +34,7 @@ namespace UniversityAllExpelledWarehouserView
                 MessageBox.Show("Пустое поле 'Кафедра'", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            else if(!(TextBoxDepartmentName.Text.Length <= 255 && TextBoxDepartmentName.Text.Length > 2))
+            else if(!(TextBoxDepartmentName.Text.Length <= 255 && TextBoxDepartmentName.Text.Length >= 2))
             {
                 MessageBox.Show("Название кафедры должно иметь длину не более 255 символов и не менее 2", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -45,7 +45,7 @@ namespace UniversityAllExpelledWarehouserView
                 MessageBox.Show("Пустое поле 'Логин'", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            else if (!(TextBoxLogin.Text.Length <= 50 && TextBoxLogin.Text.Length > 2))
+            else if (!(TextBoxLogin.Text.Length <= 50 && TextBoxLogin.Text.Length >= 2))
             {
                 MessageBox.Show("Логин должен иметь длину не более 50 и не менее 2 символов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

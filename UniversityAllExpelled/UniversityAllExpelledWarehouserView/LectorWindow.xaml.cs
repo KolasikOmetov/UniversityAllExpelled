@@ -24,10 +24,10 @@ namespace UniversityAllExpelledWarehouserView
             get { return Convert.ToInt32((ComboBoxSubject.SelectedItem as SubjectViewModel).Id); }
             set
             {
-                ComboBoxSubject.SelectedItem = SetValue(value);
+                subjectId = value;
             }
         }
-        public string ProcedureName { get { return (ComboBoxSubject.SelectedItem as SubjectViewModel).Name; } }
+        private int? subjectId;
         public string Login { set { login = value; } }
 
         private string login;
@@ -45,6 +45,7 @@ namespace UniversityAllExpelledWarehouserView
         private void LectorWindow_Loaded(object sender, RoutedEventArgs e)
         {
             ComboBoxSubject.ItemsSource = _logicSubject.Read(new SubjectBindingModel { DepartmentLogin = login });
+            ComboBoxSubject.SelectedItem = SetValue(subjectId);
             if (id.HasValue)
             {
                 try
@@ -53,7 +54,6 @@ namespace UniversityAllExpelledWarehouserView
                     if (view != null)
                     {
                         TextBoxName.Text = view.Name;
-                        ComboBoxSubject.SelectedItem = view.SubjectName;
                     }
                 }
                 catch (Exception ex)
@@ -99,7 +99,7 @@ namespace UniversityAllExpelledWarehouserView
             Close();
         }
 
-        private SubjectViewModel SetValue(int value)
+        private SubjectViewModel SetValue(int? value)
         {
             foreach (var item in ComboBoxSubject.Items)
             {

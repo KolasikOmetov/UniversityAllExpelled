@@ -20,8 +20,8 @@
         <StackPanel Grid.Row="1">
             <Label Margin="10" Height="30" Name="labelUser"></Label>
             <DockPanel>
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Логотип</TextBlock>
-        </DockPanel>
+                <Image VerticalAlignment="Center" HorizontalAlignment="Center" Source="img/Logo.png"/>
+            </DockPanel>
         </StackPanel>
     </Grid>
 </Window>

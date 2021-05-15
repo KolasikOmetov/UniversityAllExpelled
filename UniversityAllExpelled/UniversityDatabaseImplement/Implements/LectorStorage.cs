@@ -21,6 +21,7 @@ namespace UniversityDatabaseImplement.Implements
                     Id = rec.Id,
                     Name = rec.Name,
                     SubjectName = context.Subjects.FirstOrDefault(recSubject => rec.SubjectId == recSubject.Id).Name,
+                    SubjectId = rec.SubjectId
                 }).ToList();
             }
         }
@@ -41,6 +42,7 @@ namespace UniversityDatabaseImplement.Implements
                     Id = rec.Id,
                     Name = rec.Name,
                     SubjectName = context.Subjects.FirstOrDefault(recSubject => rec.SubjectId == recSubject.Id).Name,
+                    SubjectId = rec.SubjectId
                 })
                 .ToList();
             }
@@ -63,6 +65,7 @@ namespace UniversityDatabaseImplement.Implements
                     Id = lector.Id,
                     Name = lector.Name,
                     SubjectName = context.Subjects.FirstOrDefault(recSubject => lector.SubjectId == recSubject.Id).Name,
+                    SubjectId = lector.SubjectId
                 } :
                 null;
             }

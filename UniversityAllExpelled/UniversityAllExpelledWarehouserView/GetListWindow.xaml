@@ -13,7 +13,7 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <Label>Дисциплина</Label>
+            <Label>Преподаватель</Label>
             <ComboBox Margin="10"/>
         </StackPanel>
         <ListBox Grid.Row="1" ItemsSource="{Binding StudentViewModel}" Name="ListBoxStudents">

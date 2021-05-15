@@ -104,6 +104,7 @@ namespace UniversityDatabaseImplement.Implements
         private Subject CreateModel(SubjectBindingModel model, Subject subject)
         {
             subject.Name = model.Name;
+            subject.DepartmentLogin = model.DepartmentLogin;
             return subject;
         }
     }
