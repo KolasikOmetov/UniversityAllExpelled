@@ -9,9 +9,10 @@
     <StackPanel Margin="20" VerticalAlignment="Top" HorizontalAlignment="Center">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel HorizontalAlignment="Stretch">
-                <Label>Кафедра</Label>
-                <Label>Логин</Label>
-                <Label>Пароль</Label>
+                <Label Margin="2">Кафедра</Label>
+                <Label Margin="1">Логин</Label>
+                <Label Margin="2">Email</Label>
+                <Label Margin="1">Пароль</Label>
             </StackPanel>
             <StackPanel Margin="10,0,0,0">
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
@@ -19,6 +20,9 @@
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
                     <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxLogin" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Margin="4">
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxEmail" />
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
                     <PasswordBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxPassword"/>

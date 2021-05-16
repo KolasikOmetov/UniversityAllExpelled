@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using Unity;
 using UniversityBusinessLogic.BindingModels;
@@ -62,11 +63,23 @@ namespace UniversityAllExpelledWarehouserView
                 return;
             }
 
+            if (string.IsNullOrEmpty(TextBoxEmail.Text))
+            {
+                MessageBox.Show("Пустое поле 'Email'", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else if (!Regex.IsMatch(TextBoxEmail.Text, @"^[A-Za-z0-9]+(?:[._%+-])?[A-Za-z0-9._-]+[A-Za-z0-9]@[A-Za-z0-9]+(?:[.-])?[A-Za-z0-9._-]+\.[A-Za-z]{2,6}$"))
+            {
+                MessageBox.Show("Email невалидный", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             try
             {
                 _logicDepartment.CreateOrUpdate(new DepartmentBindingModel
                 {
                     Name = TextBoxDepartmentName.Text,
+                    Email = TextBoxEmail.Text,
                     DepartmentLogin = TextBoxLogin.Text,
                     Password = TextBoxPassword.Password,
                 });

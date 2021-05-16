@@ -64,5 +64,12 @@ namespace UniversityAllExpelledWarehouserView
             var currentUser = _logicDepartment.Read(new DepartmentBindingModel { DepartmentLogin = login })?[0];
             labelUser.Content = $"Кафедра \"{currentUser.Name}\"";
         }
+
+        private void MenuItemBinding_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Container.Resolve<BindingSubjectWindow>();
+            window.Login = login;
+            window.ShowDialog();
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace UniversityBusinessLogic.HelperModels
     {
         public string FileName { get; set; }
         public string Title { get; set; }
-        public string SubjectName { get; set; }
+        public string LectorName { get; set; }
         public List<StudentViewModel> Students { get; set; }
     }
 }

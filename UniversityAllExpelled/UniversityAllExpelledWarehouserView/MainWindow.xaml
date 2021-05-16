@@ -14,6 +14,7 @@
             <MenuItem Header="Дисциплины" Click="MenuItemSubjects_Click"/>
             <MenuItem Header="Преподаватели" Click="MenuItemLectors_Click" />
             <MenuItem Header="Ведомости" Click="MenuItemCheckLists_Click" />
+            <MenuItem Header="Привязка дисциплины" Click="MenuItemBinding_Click" />
             <MenuItem Header="Получение списка" Click="MenuItemGetList_Click" />
             <MenuItem Header="Отчёт" Click="MenuItemReport_Click" />
         </Menu>
