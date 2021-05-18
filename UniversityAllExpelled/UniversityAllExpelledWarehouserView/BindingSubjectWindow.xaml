@@ -5,20 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniversityAllExpelledWarehouserView"
         mc:Ignorable="d"
-        Title="Привязка дисциплин" Height="450" Width="300">
+        Title="Привязка дисциплин" Height="200" Width="300" Loaded="BindingSubjectWindow_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <ComboBox Margin="10">
-            Выбранный предмет
-        </ComboBox>
-        <ListBox Grid.Row="1"></ListBox>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="10">
+            <ComboBox HorizontalAlignment="Stretch" MinWidth="100" Name="ComboBoxSubject">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Border>
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="10">
+            <ListBox HorizontalAlignment="Stretch" MinWidth="100" Name="ListBoxStudent">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
-            <Button Margin="10">Привязать</Button>
-            <Button Margin="10">Отмена</Button>
+            <Button Margin="10" Click="ButtonBinding_Click">Привязать</Button>
+            <Button Margin="10" Click="ButtonCancel_Click">Отмена</Button>
         </StackPanel>
     </Grid>
 </Window>

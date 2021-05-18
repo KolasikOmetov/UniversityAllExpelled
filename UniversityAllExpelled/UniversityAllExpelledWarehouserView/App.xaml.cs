@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using Unity;
 using Unity.Lifetime;
 using UniversityBusinessLogic.BusinessLogics;
@@ -18,8 +20,9 @@ namespace UniversityAllExpelledWarehouserView
 
 			IUnityContainer currentContainer = BuildUnityContainer();
 
-			var mainWindow = currentContainer.Resolve<MainWindow>();
-			mainWindow.Show();
+			var enterWindow = currentContainer.Resolve<MainWindow>();
+			enterWindow.Login = "ist";
+			enterWindow.Show();
 		}
 
 		private static IUnityContainer BuildUnityContainer()

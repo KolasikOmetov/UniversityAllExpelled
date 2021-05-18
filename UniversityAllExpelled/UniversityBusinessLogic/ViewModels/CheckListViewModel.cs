@@ -10,5 +10,6 @@ namespace UniversityBusinessLogic.ViewModels
 		public DateTime DateOfExam { get; set; }
 		[DisplayName("Преподаватель")]
 		public string LectorName { get; set; }
+		public int LectorId { get; set; }
 	}
 }

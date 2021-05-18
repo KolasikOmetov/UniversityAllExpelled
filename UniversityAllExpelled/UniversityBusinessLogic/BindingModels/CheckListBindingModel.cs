@@ -7,5 +7,7 @@ namespace UniversityBusinessLogic.BindingModels
 		public int? Id { get; set; }
 		public DateTime DateOfExam { get; set; }
 		public int LectorId { get; set; }
+		public DateTime? DateFrom { get; set; }
+		public DateTime? DateTo { get; set; }
 	}
 }

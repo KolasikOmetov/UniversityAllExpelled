@@ -81,6 +81,10 @@ namespace UniversityDatabaseImplement.Migrations
                     b.Property<string>("DepartmentLogin")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

@@ -9,5 +9,6 @@ namespace UniversityBusinessLogic.ViewModels
 		public string Name { get; set; }
 		[DisplayName("Предмет")]
 		public string SubjectName { get; set; }
+		public int SubjectId { get; set; }
 	}
 }
