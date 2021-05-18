@@ -86,8 +86,9 @@ namespace UniversityAllExpelledWorkerView
             }
             else
             {
-                labelUser.Content = $"Кафедра {currentUser.Name}";
+                    labelUser.Content = $"Деканат {currentUser.Name}";
             }
         }
+
     }
 }
