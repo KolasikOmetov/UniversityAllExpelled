@@ -38,7 +38,7 @@ namespace TypographyShopBusinessLogic.BusinessLogics
                     }
                 }));
                 foreach (var student in info.Students)
-                //{
+                {
                     docBody.AppendChild(CreateParagraph(new WordParagraph
                     {
                         Texts = new List<(string, WordTextProperties)> { (student.Name, new WordTextProperties { Size = "20"})},

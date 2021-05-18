@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:UniversityAllExpelledWorkerView"
-        mc:Ignorable="d"
+        mc:Ignorable="d" Loaded="MainWindow_Loaded"
        Title="Главная форма" MinHeight="450" MinWidth="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -12,18 +11,30 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White" Height="20">
-            <MenuItem Header="Планы"/>
-            <MenuItem Header="Студенты" />
-            <MenuItem Header="Аттестации" />
-            <MenuItem Header="Получение списка" />
-            <MenuItem Header="Отчёт" />
+            <MenuItem x:Name="MenuItemPlans" Header="Планы" Click="MenuItemPlans_Click" RenderTransformOrigin="0.5,0.5">
+                <MenuItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="2.821"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </MenuItem.RenderTransform>
+            </MenuItem>
+            <MenuItem x:Name="MenuItemStudents" Header="Студенты" Click="MenuItemStudents_Click" />
+            <MenuItem x:Name="MenuItemCertifications" Header="Аттестации" Click="MenuItemCertifications_Click" />
+            <MenuItem x:Name="MenuItemGetList" Header="Получение списка" Click="MenuItemGetList_Click" />
+            <MenuItem x:Name="MenuItemReport" Header="Отчёт" Click="MenuItemReport_Click" />
         </Menu>
-        <DockPanel Grid.Row="1">
-            <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
-                <Button Padding="5">Зарегистироваться</Button>
-                <Button Padding="5">Войти</Button>
-            </StackPanel>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Логотип</TextBlock>
-        </DockPanel>
+        <StackPanel Grid.Row="1">
+            <Label Margin="10" Height="20" Name="labelUser"></Label>
+            <DockPanel>
+                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
+                    <Button Padding="5">Зарегистироваться</Button>
+                    <Button Padding="5">Войти</Button>
+                </StackPanel>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Логотип</TextBlock>
+            </DockPanel>
+        </StackPanel>
     </Grid>
 </Window>

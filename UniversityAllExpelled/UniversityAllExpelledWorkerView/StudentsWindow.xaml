@@ -22,9 +22,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-            <Button Margin="10" Padding="5">Добавить</Button>
-            <Button Margin="10" Padding="5">Изменить</Button>
-            <Button Margin="10" Padding="5">Удалить</Button>
+            <Button x:Name="ButtonAdd" Margin="10" Padding="5">Добавить</Button>
+            <Button x:Name="ButtonUpd" Margin="10" Padding="5">Изменить</Button>
+            <Button x:Name="ButtonDel" Margin="10" Padding="5">Удалить</Button>
         </StackPanel>
     </Grid>
 </Window>
