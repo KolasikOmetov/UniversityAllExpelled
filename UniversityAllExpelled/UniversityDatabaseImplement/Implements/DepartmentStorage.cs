@@ -21,6 +21,7 @@ namespace UniversityDatabaseImplement.Implements
                 {
                     Login = rec.DepartmentLogin,
                     Name = rec.Name,
+                    Email = rec.Email,
                     Password = rec.Password
                 }).ToList();
             }
@@ -38,6 +39,7 @@ namespace UniversityDatabaseImplement.Implements
                 .Select(rec => new DepartmentViewModel
                 {
                     Login = rec.DepartmentLogin,
+                    Email = rec.Email,
                     Name = rec.Name,
                     Password = rec.Password
                 })
@@ -58,6 +60,7 @@ namespace UniversityDatabaseImplement.Implements
                 new DepartmentViewModel
                 {
                     Login = department.DepartmentLogin,
+                    Email = department.Email,
                     Name = department.Name,
                     Password = department.Password,
                 } :
@@ -106,6 +109,7 @@ namespace UniversityDatabaseImplement.Implements
             department.Name = model.Name;
             department.Password = model.Password;
             department.DepartmentLogin = model.DepartmentLogin;
+            department.Email = model.Email;
             return department;
         }
     }

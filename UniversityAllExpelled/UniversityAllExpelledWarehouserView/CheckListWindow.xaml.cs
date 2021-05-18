@@ -4,6 +4,7 @@ using System.Windows;
 using Unity;
 using UniversityBusinessLogic.BindingModels;
 using UniversityBusinessLogic.BusinessLogics;
+using UniversityBusinessLogic.ViewModels;
 
 namespace UniversityAllExpelledWarehouserView
 {
@@ -18,6 +19,15 @@ namespace UniversityAllExpelledWarehouserView
         public int Id { set { id = value; } }
 
         private int? id;
+        public int LectorId
+        {
+            get { return Convert.ToInt32((ComboBoxLector.SelectedItem as LectorViewModel).Id); }
+            set
+            {
+                lectorId = value;
+            }
+        }
+        private int? lectorId;
 
         private readonly CheckListLogic _logicCheckList;
         private readonly LectorLogic _logicLector;
@@ -31,14 +41,12 @@ namespace UniversityAllExpelledWarehouserView
 
         private void CheckListWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            ComboBoxLector.ItemsSource = _logicLector.Read(null);
             if (id.HasValue)
             {
                 try
                 {
-                    ComboBoxLector.DisplayMemberPath = "Name";
-                    ComboBoxLector.SelectedValuePath = "Id";
-                    ComboBoxLector.SelectedItem = null;
-                    ComboBoxLector.ItemsSource = _logicLector.Read(null);
+                    ComboBoxLector.SelectedItem = SetValue(lectorId);
                     var view = _logicCheckList.Read(new CheckListBindingModel { Id = id })?[0];
                     if (view != null)
                     {
@@ -71,7 +79,7 @@ namespace UniversityAllExpelledWarehouserView
                 {
                     Id = id,
                     DateOfExam = (DateTime)DatePicker.SelectedDate,
-                    LectorId = Convert.ToInt32(ComboBoxLector.SelectedValue)
+                    LectorId = LectorId
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
@@ -88,5 +96,17 @@ namespace UniversityAllExpelledWarehouserView
             DialogResult = false;
             Close();
         }
+        private LectorViewModel SetValue(int? value)
+        {
+            foreach (var item in ComboBoxLector.Items)
+            {
+                if ((item as LectorViewModel).Id == value)
+                {
+                    return item as LectorViewModel;
+                }
+            }
+            return null;
+        }
+
     }
 }

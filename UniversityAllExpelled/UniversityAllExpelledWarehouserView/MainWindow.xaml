@@ -14,14 +14,15 @@
             <MenuItem Header="Дисциплины" Click="MenuItemSubjects_Click"/>
             <MenuItem Header="Преподаватели" Click="MenuItemLectors_Click" />
             <MenuItem Header="Ведомости" Click="MenuItemCheckLists_Click" />
+            <MenuItem Header="Привязка дисциплины" Click="MenuItemBinding_Click" />
             <MenuItem Header="Получение списка" Click="MenuItemGetList_Click" />
             <MenuItem Header="Отчёт" Click="MenuItemReport_Click" />
         </Menu>
         <StackPanel Grid.Row="1">
             <Label Margin="10" Height="30" Name="labelUser"></Label>
             <DockPanel>
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Логотип</TextBlock>
-        </DockPanel>
+                <Image VerticalAlignment="Center" HorizontalAlignment="Center" Source="img/Logo.png"/>
+            </DockPanel>
         </StackPanel>
     </Grid>
 </Window>

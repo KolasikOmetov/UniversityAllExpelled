@@ -11,14 +11,12 @@ namespace UniversityBusinessLogic.BusinessLogics
 {
     public class ReportLogic
     {
-        private readonly ISubjectStorage _subjectStorage;
         private readonly ILectorStorage _lectorStorage;
         private readonly ICheckListStorage _checkListStorage;
         private readonly IStudentStorage _studentStorage;
-        public ReportLogic(ILectorStorage lectorStorage, ISubjectStorage subjectStorage, ICheckListStorage checkListStorage, IStudentStorage studentStorage)
+        public ReportLogic(ILectorStorage lectorStorage, ICheckListStorage checkListStorage, IStudentStorage studentStorage)
         {
             _lectorStorage = lectorStorage;
-            _subjectStorage = subjectStorage;
             _checkListStorage = checkListStorage;
             _studentStorage = studentStorage;
         }
@@ -44,7 +42,7 @@ namespace UniversityBusinessLogic.BusinessLogics
         public List<ReportCheckListViewModel> GetCheckLists(ReportBindingModel model)
         {
             List<ReportCheckListViewModel> checkLists = new List<ReportCheckListViewModel>();
-            List<LectorViewModel> lectors = _lectorStorage.GetFilteredList(new LectorBindingModel { SubjectId = model.SubjectId });
+            List<LectorViewModel> lectors = _lectorStorage.GetFilteredList(new LectorBindingModel { SubjectId = (int)model.SubjectId });
             foreach (var lector in lectors)
             {
                 checkLists.AddRange(_checkListStorage.GetFilteredList(new CheckListBindingModel { DateFrom = model.DateFrom, DateTo = model.DateTo, LectorId = lector.Id })
@@ -58,27 +56,27 @@ namespace UniversityBusinessLogic.BusinessLogics
 
             return checkLists;
         }
-        public void SaveStudentsToWordFile(ReportBindingModel model, List<StudentViewModel> students)
+        public void SaveLectorStudentsToWordFile(ReportBindingModel model, List<StudentViewModel> students)
         {
             SaveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
-                SubjectName = _subjectStorage.GetElement(new SubjectBindingModel
+                LectorName = _lectorStorage.GetElement(new LectorBindingModel
                 {
-                    Id = model.SubjectId
+                    Id = model.LectorId
                 }).Name,
                 Title = "Список студентов",
                 Students = students
             });
         }
-        public void SaveLectorSubjectToExcelFile(ReportBindingModel model, List<StudentViewModel> students)
+        public void SaveLectorStudentToExcelFile(ReportBindingModel model, List<StudentViewModel> students)
         {
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
-                SubjectName = _subjectStorage.GetElement(new SubjectBindingModel
+                LectorName = _lectorStorage.GetElement(new LectorBindingModel
                 {
-                    Id = model.SubjectId
+                    Id = model.LectorId
                 }).Name,
                 Title = "Список студентов",
                 Students = students

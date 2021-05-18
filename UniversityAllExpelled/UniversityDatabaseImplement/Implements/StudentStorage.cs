@@ -19,7 +19,7 @@ namespace UniversityDatabaseImplement.Implements
                   .Include(rec => rec.StudentSubjects)
                   .ThenInclude(rec => rec.Subject)
                   .Include(rec => rec.EducationPlanStudents)
-                  .ThenInclude(rec => rec.EducationPlan)
+                  .ThenInclude(rec => rec.EducationPlan).ToList()
                   .Select(rec => new StudentViewModel
                   {
                       GradebookNumber = rec.GradebookNumber,
@@ -159,6 +159,7 @@ namespace UniversityDatabaseImplement.Implements
         }
         private Student CreateModel(StudentBindingModel model, Student student, UniversityDatabase context)
         {
+            // нужно передавать student уже с заполнеными полями и добавленным таблицу Students  
             if (string.IsNullOrEmpty(model.GradebookNumber))
             {
                 var studentSubjects = context.StudentSubjects.Where(rec => rec.GradebookNumber == model.GradebookNumber).ToList();
@@ -187,6 +188,42 @@ namespace UniversityDatabaseImplement.Implements
                 context.SaveChanges();
             }
             return student;
+        }
+
+        public void BindingSubject(string gradebookNumber, int subjectId)
+        {
+            using (var context = new UniversityDatabase())
+            {
+                context.StudentSubjects.Add(new StudentSubject
+                {
+                    GradebookNumber = gradebookNumber,
+                    SubjectId = subjectId,
+                });
+                context.SaveChanges();
+            }
+        }
+        public List<StudentViewModel> GetBySubjectId(int subjectId)
+        {
+            using (var context = new UniversityDatabase())
+            {
+                return context.Students
+                  .Include(rec => rec.StudentSubjects)
+                  .ThenInclude(rec => rec.Subject)
+                  .Include(rec => rec.EducationPlanStudents)
+                  .ThenInclude(rec => rec.EducationPlan)
+                  .ToList()
+                  .Where(rec => rec.StudentSubjects.FirstOrDefault(ss => ss.SubjectId == subjectId) != null)
+                  .Select(rec => new StudentViewModel
+                  {
+                      GradebookNumber = rec.GradebookNumber,
+                      Name = rec.Name,
+                      Subjects = rec.StudentSubjects
+                      .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
+                      EducationPlans = rec.EducationPlanStudents
+                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                  })
+                  .ToList();
+            }
         }
     }
 }

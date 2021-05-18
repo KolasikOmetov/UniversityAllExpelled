@@ -9,9 +9,11 @@ namespace UniversityBusinessLogic.BusinessLogics
     public class StudentLogic
     {
         private readonly IStudentStorage _studentStorage;
-        public StudentLogic(IStudentStorage studentStorage)
+        private readonly ILectorStorage _lectorStorage;
+        public StudentLogic(IStudentStorage studentStorage, ILectorStorage lectorStorage)
         {
             _studentStorage = studentStorage;
+            _lectorStorage = lectorStorage;
         }
         public List<StudentViewModel> Read(StudentBindingModel model)
         {
@@ -51,6 +53,21 @@ namespace UniversityBusinessLogic.BusinessLogics
                 throw new Exception("Элемент не найден");
             }
             _studentStorage.Delete(model);
+        }
+
+        public List<StudentViewModel> SelectByLector(LectorBindingModel model)
+        {
+            var lector = _lectorStorage.GetElement(model);
+            if (lector == null)
+            {
+                throw new Exception("Преподаватель не найден");
+            }
+            return _studentStorage.GetBySubjectId(lector.SubjectId);
+        }
+
+        public void BindingSubject(string gradebookNumber, int subjectId)
+        {
+            _studentStorage.BindingSubject(gradebookNumber, subjectId);
         }
     }
 }

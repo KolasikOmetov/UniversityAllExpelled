@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniversityAllExpelledWarehouserView"
         mc:Ignorable="d"
-        Title="Список студентов" Height="450" Width="300">
+        Title="Список студентов" Height="450" Width="300" Loaded="GetListWindow_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -13,22 +13,26 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <Label>Дисциплина</Label>
-            <ComboBox Margin="10"/>
+            <Label>Преподаватель</Label>
+            <ComboBox Margin="10" Name="ComboBoxLectors" SelectionChanged="ComboBoxLectors_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
-        <ListBox Grid.Row="1" ItemsSource="{Binding StudentViewModel}" Name="ListBoxStudents">
+        <ListBox Grid.Row="1" Name="ListBoxStudent">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked}"/>
-                    </StackPanel>
+                    <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
-            <Button Margin="10">Word</Button>
-            <Button Margin="10">Excel</Button>
-            <Button Margin="10">Отмена</Button>
+            <Button Margin="10" Click="ButtonWord_Click">Word</Button>
+            <Button Margin="10" Click="ButtonExcel_Click">Excel</Button>
+            <Button Margin="10" Click="ButtonCancel_Click">Отмена</Button>
         </StackPanel>
     </Grid>
 </Window>
