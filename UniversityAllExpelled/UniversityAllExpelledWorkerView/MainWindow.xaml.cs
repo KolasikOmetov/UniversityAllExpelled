@@ -122,5 +122,17 @@ namespace UniversityAllExpelledWorkerView
                 labelUser.Content = $"Кафедра {currentUser.Name}";
             }
         }
+
+        private void ButtonAuth_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Container.Resolve<AuthorizationWindow>();
+            window.ShowDialog();
+        }
+
+        private void ButtonRegister_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Container.Resolve<RegistrationWindow>();
+            window.ShowDialog();
+        }
     }
 }

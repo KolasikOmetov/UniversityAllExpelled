@@ -20,6 +20,7 @@ namespace UniversityDatabaseImplement.Implements
                 {
                     Login = rec.Login,
                     Name = rec.Name,
+                    Email = rec.Email,
                     Password = rec.Password
                 }).ToList();
             }
@@ -38,6 +39,7 @@ namespace UniversityDatabaseImplement.Implements
                 {
                     Login = rec.Login,
                     Name = rec.Name,
+                    Email = rec.Email,
                     Password = rec.Password
                 })
                 .ToList();
@@ -58,6 +60,7 @@ namespace UniversityDatabaseImplement.Implements
                 {
                     Login = Deneary.Login,
                     Name = Deneary.Name,
+                    Email = Deneary.Email,
                     Password = Deneary.Password,
                 } :
                 null;
@@ -105,6 +108,7 @@ namespace UniversityDatabaseImplement.Implements
             Deneary.Name = model.Name;
             Deneary.Password = model.Password;
             Deneary.Login = model.Login;
+            Deneary.Email = model.Email;
             return Deneary;
         }
     }

@@ -5,34 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniversityAllExpelledWorkerView"
         mc:Ignorable="d"
-        Title="Регистрация" MinHeight="220" MinWidth="230" d:DesignHeight="220" Width="230">
+        Title="Регистрация" MinHeight="220" MinWidth="230" Width="257.268" Height="238.592">
     <StackPanel Margin="20" VerticalAlignment="Top" HorizontalAlignment="Center">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel HorizontalAlignment="Stretch">
-                <Label>Деканат</Label>
-                <Label>Логин</Label>
-                <Label>Пароль</Label>
+                <Label Margin="2">Деканат</Label>
+                <Label Margin="1">Логин</Label>
+                <Label Margin="2">Email</Label>
+                <Label Margin="1">Пароль</Label>
             </StackPanel>
             <StackPanel Margin="10,0,0,0">
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" />
-                </Border>
-
-                <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" >
-
-                    </TextBox>
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxDenearyName"/>
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" >
-
-                    </TextBox>
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxLogin" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Margin="4">
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxEmail" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Margin="4">
+                    <PasswordBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxPassword"/>
                 </Border>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Margin="10" Padding="5">Создать</Button>
-            <Button Margin="10" Padding="5">Отмена</Button>
+            <Button Margin="10" Padding="5" Click="ButtonCreate_Click">Создать</Button>
+            <Button Margin="10" Padding="5" Click="ButtonCancel_Click">Отмена</Button>
         </StackPanel>
     </StackPanel>
 </Window>

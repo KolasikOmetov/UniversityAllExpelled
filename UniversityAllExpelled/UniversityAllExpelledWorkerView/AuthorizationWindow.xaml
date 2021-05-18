@@ -15,20 +15,16 @@
             <StackPanel Margin="10,0,0,0">
 
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBox x:Name="TextBoxLogin" HorizontalAlignment="Stretch" MinWidth="100" >
-
-                    </TextBox>
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxLogin"></TextBox>
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <PasswordBox x:Name="TextBoxPassword" HorizontalAlignment="Stretch" MinWidth="100" >
-
-                    </PasswordBox>
+                    <PasswordBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxPassword"></PasswordBox>
                 </Border>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Margin="10" Padding="5">Войти</Button>
-            <Button Margin="10" Padding="5">Отмена</Button>
+            <Button Margin="10" Padding="5" Name="ButtonEnter" Click="ButtonEnter_Click">Войти</Button>
+            <Button Margin="10" Padding="5" Name="ButtonCancel" Click="ButtonCancel_Click">Отмена</Button>
         </StackPanel>
     </StackPanel>
 </Window>

@@ -11,27 +11,18 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="White" Height="20">
-            <MenuItem x:Name="MenuItemPlans" Header="Планы" Click="MenuItemPlans_Click" RenderTransformOrigin="0.5,0.5">
-                <MenuItem.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="2.821"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </MenuItem.RenderTransform>
-            </MenuItem>
+            <MenuItem x:Name="MenuItemPlans" Header="Планы" Click="MenuItemPlans_Click"/>
             <MenuItem x:Name="MenuItemStudents" Header="Студенты" Click="MenuItemStudents_Click" />
             <MenuItem x:Name="MenuItemCertifications" Header="Аттестации" Click="MenuItemCertifications_Click" />
             <MenuItem x:Name="MenuItemGetList" Header="Получение списка" Click="MenuItemGetList_Click" />
             <MenuItem x:Name="MenuItemReport" Header="Отчёт" Click="MenuItemReport_Click" />
         </Menu>
         <StackPanel Grid.Row="1">
-            <Label Margin="10" Height="20" Name="labelUser"></Label>
-            <DockPanel>
+            <Label Margin="10" Height="56" Name="labelUser"></Label>
+            <DockPanel Height="397">
                 <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
-                    <Button Padding="5">Зарегистироваться</Button>
-                    <Button Padding="5">Войти</Button>
+                    <Button x:Name="ButtonRegister" Padding="5" Click="ButtonRegister_Click">Зарегистироваться</Button>
+                    <Button x:Name="ButtonAuth" Padding="5" Click="ButtonAuth_Click">Войти</Button>
                 </StackPanel>
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Логотип</TextBlock>
             </DockPanel>
