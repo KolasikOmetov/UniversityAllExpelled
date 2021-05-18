@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UniversityBusinessLogic.BindingModels;
+using UniversityBusinessLogic.Interfaces;
 using UniversityBusinessLogic.ViewModels;
 using UniversityDatabaseImplement.Models;
 
 namespace UniversityDatabaseImplement.Implements
 {
-    public class EducationPlanStorage
+    public class EducationPlanStorage : IEducationPlanStorage
     {
         public List<EducationPlanViewModel> GetFullList()
         {

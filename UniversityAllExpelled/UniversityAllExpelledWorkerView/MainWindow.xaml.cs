@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Unity;
 using UniversityAllExpelledWarehouserView;
+using UniversityBusinessLogic.BindingModels;
 using UniversityBusinessLogic.BusinessLogics;
 
 namespace UniversityAllExpelledWorkerView
@@ -29,6 +30,10 @@ namespace UniversityAllExpelledWorkerView
         public string Login { set { login = value; } }
 
         private string login;
+
+        private string id;
+
+        public string Id { set { id = value; } }
 
         private readonly DenearyLogic _logicDeneary;
         public MainWindow(DenearyLogic logic)
@@ -70,6 +75,19 @@ namespace UniversityAllExpelledWorkerView
             var window = Container.Resolve<ReportWindow>();
             //window.Login = login;
             window.ShowDialog();
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            var currentUser = _logicDeneary.Read(new DenearyBindingModel { Login = id })?[0];
+            if (currentUser == null)
+            {
+                labelUser.Content = "Войдите или Зарегистрируйтесь";
+            }
+            else
+            {
+                labelUser.Content = $"Кафедра {currentUser.Name}";
+            }
         }
     }
 }
