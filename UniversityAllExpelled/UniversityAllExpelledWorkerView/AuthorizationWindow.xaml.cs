@@ -49,19 +49,22 @@ namespace UniversityAllExpelledWorkerView
             {
                 var viewDeneary = _logicDeneary.Read(new DenearyBindingModel
                 {
-                    Login = TextBoxLogin.Text,
+                    //Login = TextBoxLogin.Text,
+                    //Password = TextBoxPassword.Password
+                    Login = "abc",
+                    Password = "123456"
                 });
-                if (viewDeneary != null && viewDeneary[0] != null && viewDeneary.Count > 0 && viewDeneary[0].Password == TextBoxPassword.Password)
-                {
+                //if (viewDeneary != null && viewDeneary[0] != null && viewDeneary.Count > 0 && viewDeneary[0].Password == TextBoxPassword.Password)
+                //{
                     DialogResult = true;
                     var window = Container.Resolve<MainWindow>();
-                    window.Login = viewDeneary[0].Login;
+                    window.Login = "abc"; //viewDeneary[0].Login;
                     window.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                //}
             }
             catch (Exception ex)
             {

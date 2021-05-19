@@ -112,14 +112,14 @@ namespace UniversityAllExpelledWorkerView
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            var currentUser = _logic.Read(new DenearyBindingModel { Login = id })?[0];
+            var currentUser = _logic.Read(new DenearyBindingModel { Login = "abc", Password = "123456", Email = "abc@email.com", Name = "abc" })?[0];
             if (currentUser == null)
             {
                 labelUser.Content = "Войдите или Зарегистрируйтесь";
             }
             else
             {
-                labelUser.Content = $"Кафедра {currentUser.Name}";
+                labelUser.Content = $"Деканат {currentUser.Name}";
             }
         }
 
