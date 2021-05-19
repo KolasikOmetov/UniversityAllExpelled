@@ -68,7 +68,7 @@ namespace UniversityAllExpelledWorkerView
             }
             try
             {
-                _logicStudent.CreateOrUpdate(new StudentBindingModel
+                _logicStudent.Create(new StudentBindingModel
                 {
                     GradebookNumber = TextBoxGradBook.Text,
                     Name = TextBoxName.Text,         

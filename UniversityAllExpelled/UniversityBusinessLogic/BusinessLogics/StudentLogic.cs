@@ -27,10 +27,28 @@ namespace UniversityBusinessLogic.BusinessLogics
             }
             return _studentStorage.GetFilteredList(model);
         }
-        public void CreateOrUpdate(StudentBindingModel model)
+        public void Create(StudentBindingModel model)
         {
             var element = _studentStorage.GetElement(new StudentBindingModel { 
                 Name = model.Name,
+                GradebookNumber = model.GradebookNumber
+            });
+            if (element != null && element.GradebookNumber != model.GradebookNumber)
+            {
+                throw new Exception("Уже есть студент с таким именем");
+            }
+            if (!string.IsNullOrEmpty(model.GradebookNumber))
+            {
+                _studentStorage.Insert(model);
+            }
+        }
+
+        public void Update(StudentBindingModel model)
+        {
+            var element = _studentStorage.GetElement(new StudentBindingModel
+            {
+                Name = model.Name,
+                GradebookNumber = model.GradebookNumber
             });
             if (element != null && element.GradebookNumber != model.GradebookNumber)
             {
@@ -40,11 +58,8 @@ namespace UniversityBusinessLogic.BusinessLogics
             {
                 _studentStorage.Update(model);
             }
-            else
-            {
-                _studentStorage.Insert(model);
-            }
         }
+
         public void Delete(StudentBindingModel model)
         {
             var element = _studentStorage.GetElement(new StudentBindingModel { GradebookNumber = model.GradebookNumber });
