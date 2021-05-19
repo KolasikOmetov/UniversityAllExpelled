@@ -67,8 +67,31 @@ namespace UniversityDatabaseImplement.Implements
         {
             using (var context = new UniversityDatabase())
             {
-                context.EducationPlans.Add(CreateModel(model, new EducationPlan()));
-                context.SaveChanges();
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        EducationPlan s = new EducationPlan
+                        {
+                            Id = (int)model.Id,
+                            StreamName = model.StreamName,
+                            Hours = model.Hours,
+                            
+                        };
+                        model.Lectors = new Dictionary<int, string>();
+                        model.Students = new Dictionary<int, string>();
+                        context.EducationPlans.Add(s);
+                        context.SaveChanges();
+                        CreateModel(model, s, context);
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                }
             }
         }
         public void Update(EducationPlanBindingModel model)
@@ -100,11 +123,42 @@ namespace UniversityDatabaseImplement.Implements
                 }
             }
         }
-        private EducationPlan CreateModel(EducationPlanBindingModel model, EducationPlan EducationPlan)
-        {
-            EducationPlan.StreamName = model.StreamName;
-            EducationPlan.Hours = model.Hours;
-            return EducationPlan;
+        //private EducationPlan CreateModel(EducationPlanBindingModel model, EducationPlan EducationPlan)
+        //{
+        //    EducationPlan.StreamName = model.StreamName;
+        //    EducationPlan.Hours = model.Hours;
+        //    return EducationPlan;
+        //}
+        private EducationPlan CreateModel(EducationPlanBindingModel model, EducationPlan ep, UniversityDatabase context)
+        { 
+            if (model.Id == null)
+            {
+                var educationPlanStudents = context.EducationPlanStudents.Where(rec => rec.GradebookNumber == model.GradebookNumber).ToList();
+                context.StudentSubjects.RemoveRange(educationPlanStudents.Where(rec => !model.Subjects.ContainsKey(rec.SubjectId)).ToList());
+                var educationPlanLectors = context.EducationPlanLectors.Where(rec => rec.EducationPlanId == model.Id).ToList();
+
+                context.EducationPlanLectors.RemoveRange(educationPlanLectors.Where(rec => !model.EducationPlans.ContainsKey(rec.EducationPlanId)).ToList());
+                context.SaveChanges();
+            }
+            foreach (var ss in model.Subjects)
+            {
+                context.StudentSubjects.Add(new StudentSubject
+                {
+                    GradebookNumber = ep.GradebookNumber,
+                    SubjectId = ss.Key,
+                });
+                context.SaveChanges();
+            }
+            foreach (var ss in model.Subjects)
+            {
+                context.StudentSubjects.Add(new StudentSubject
+                {
+                    GradebookNumber = ep.GradebookNumber,
+                    SubjectId = ss.Key,
+                });
+                context.SaveChanges();
+            }
+            return ep;
         }
     }
 }
