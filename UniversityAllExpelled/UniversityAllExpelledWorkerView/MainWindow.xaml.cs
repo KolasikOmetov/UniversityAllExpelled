@@ -24,9 +24,9 @@ namespace UniversityAllExpelledWorkerView
         [Dependency]
         public IUnityContainer Container { get; set; }
 
-        public string Id { set { id = value; } }
+        public int Id { set { id = value; } }
 
-        private string id;
+        private int? id;
 
         public string Login { set { login = value; } }
 
@@ -45,7 +45,7 @@ namespace UniversityAllExpelledWorkerView
             if (_currentUser != null)
             {
                 var window = Container.Resolve<EditingPlansWindow>();
-                //window.Id = id;
+                window.Id = (int)id;
                 window.ShowDialog();
             }
             else
@@ -112,14 +112,15 @@ namespace UniversityAllExpelledWorkerView
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            var currentUser = _logic.Read(new DenearyBindingModel { Login = "abc", Password = "123456", Email = "abc@email.com", Name = "abc" })?[0];
-            if (currentUser == null)
+            _currentUser = _logic.Read(new DenearyBindingModel { Login = "abc", Password = "123456", Email = "abc@email.com", Name = "abc" })?[0];
+            this.id = 1;
+            if (_currentUser == null)
             {
                 labelUser.Content = "Войдите или Зарегистрируйтесь";
             }
             else
             {
-                labelUser.Content = $"Деканат {currentUser.Name}";
+                labelUser.Content = $"Деканат {_currentUser.Name}";
             }
         }
 
