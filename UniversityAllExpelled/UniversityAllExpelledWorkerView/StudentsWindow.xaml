@@ -11,18 +11,16 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="0">
+        <DataGrid x:Name="dataGrid" Grid.Column="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ФИО" Width="*">
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Группа" Width="*">
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Номер зачетной книжки" Width="2*">
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-            <Button x:Name="ButtonAdd" Margin="10" Padding="5">Добавить</Button>
+            <Button x:Name="ButtonAdd" Margin="10" Padding="5" Click="ButtonAdd_Click">Добавить</Button>
             <Button x:Name="ButtonUpd" Margin="10" Padding="5">Изменить</Button>
             <Button x:Name="ButtonDel" Margin="10" Padding="5">Удалить</Button>
         </StackPanel>

@@ -5,21 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniversityAllExpelledWorkerView"
         mc:Ignorable="d"
-        Title="Студент" Height="150" Width="300" Loaded="StudentWindow_Loaded">
-    <StackPanel Margin="20" VerticalAlignment="Top" HorizontalAlignment="Center">
+        Title="Студент" Height="298.31" Width="300">
+    <StackPanel Margin="25,6,8,0" VerticalAlignment="Top" HorizontalAlignment="Center" Height="154" Width="259">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel HorizontalAlignment="Stretch">
                 <Label>ФИО</Label>
             </StackPanel>
             <StackPanel Margin="10,0,0,0">
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxName"></TextBox>
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxName" Width="123"></TextBox>
+                </Border>
+            </StackPanel>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="228" Margin="0,0,31,0">
+            <StackPanel HorizontalAlignment="Stretch">
+                <Label Content="Номер зачетки" Width="95"/>
+            </StackPanel>
+            <StackPanel Margin="10,0,0,0">
+                <Border BorderBrush="Black" BorderThickness="1" Margin="4">
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxGradBook" Width="106"></TextBox>
                 </Border>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Margin="10" Padding="5" Name="ButtonEnter" Click="ButtonSave_Click">Сохранить</Button>
-            <Button Margin="10" Padding="5" Name="ButtonCancel" Click="ButtonCancel_Click">Отмена</Button>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="48,0,47,0">
+            <Button Margin="10" Padding="5" x:Name="ButtonEnter" Click="ButtonSave_Click" Content="Сохранить"/>
+            <Button Margin="10" Padding="5" x:Name="ButtonCancel" Click="ButtonCancel_Click" Content="Отмена"/>
         </StackPanel>
     </StackPanel>
 </Window>

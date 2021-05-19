@@ -63,14 +63,14 @@ namespace UniversityAllExpelledWorkerView
         {
             if (string.IsNullOrEmpty(TextBoxName.Text))
             {
-                MessageBox.Show("Заполните название", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Заполните ФИО", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             try
             {
                 _logicStudent.CreateOrUpdate(new StudentBindingModel
                 {
-                    GradebookNumber = gbn,
+                    GradebookNumber = TextBoxGradBook.Text,
                     Name = TextBoxName.Text,         
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
