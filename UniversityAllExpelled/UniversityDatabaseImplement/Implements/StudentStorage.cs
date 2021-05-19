@@ -96,7 +96,10 @@ namespace UniversityDatabaseImplement.Implements
                         Student s = new Student
                         {
                             Name = model.Name,
+                            GradebookNumber = model.GradebookNumber
                         };
+                        model.Subjects = new Dictionary<int, string>();
+                        model.EducationPlans = new Dictionary<int, string>();
                         context.Students.Add(s);
                         context.SaveChanges();
                         CreateModel(model, s, context);
