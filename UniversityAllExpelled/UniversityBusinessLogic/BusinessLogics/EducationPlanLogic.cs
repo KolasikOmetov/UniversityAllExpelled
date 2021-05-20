@@ -26,7 +26,7 @@ namespace UniversityBusinessLogic.BusinessLogics
 			}
 			return _educationPlanStorage.GetFilteredList(model);
 		}
-		public void CreateOrUpdate(EducationPlanBindingModel model)
+		public void Create(EducationPlanBindingModel model)
 		{
 			var element = _educationPlanStorage.GetElement(new EducationPlanBindingModel
 			{
@@ -39,13 +39,27 @@ namespace UniversityBusinessLogic.BusinessLogics
 			}
 			if (model.Id.HasValue)
 			{
-				_educationPlanStorage.Update(model);
-			}
-			else
-			{
 				_educationPlanStorage.Insert(model);
 			}
 		}
+
+		public void Update(EducationPlanBindingModel model)
+		{
+			var element = _educationPlanStorage.GetElement(new EducationPlanBindingModel
+			{
+				StreamName = model.StreamName,
+				Hours = model.Hours
+			});
+			if (element != null && element.Id != model.Id)
+			{
+				throw new Exception("Уже есть студент с таким именем");
+			}
+			if (model.Id.HasValue)
+			{
+				_educationPlanStorage.Update(model);
+			}
+		}
+
 		public void Delete(EducationPlanBindingModel model)
 		{
 			var element = _educationPlanStorage.GetElement(new EducationPlanBindingModel { Id = model.Id });

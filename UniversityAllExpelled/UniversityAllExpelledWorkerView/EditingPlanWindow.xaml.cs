@@ -71,7 +71,7 @@ namespace UniversityAllExpelledWorkerView
             }
             try
             {
-                _logicEP.CreateOrUpdate(new EducationPlanBindingModel
+                _logicEP.Create(new EducationPlanBindingModel
                 {
                     Id = id,
                     StreamName = TextBoxStream.Text,
