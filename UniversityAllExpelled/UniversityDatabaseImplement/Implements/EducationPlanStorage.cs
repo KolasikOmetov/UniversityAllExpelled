@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,12 +16,18 @@ namespace UniversityDatabaseImplement.Implements
         {
             using (var context = new UniversityDatabase())
             {
-                return context.EducationPlans   
+                return context.EducationPlans
+                          .Include(rec => rec.EducationPlanLectors)
+                          .ThenInclude(rec => rec.Lector)
+                          .Include(rec => rec.EducationPlanStudents)
+                          .ThenInclude(rec => rec.Student).ToList()
                 .Select(rec => new EducationPlanViewModel
                 {
                     Id = rec.Id,
                     StreamName = rec.StreamName,
                     Hours = rec.Hours,
+                    Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId, recEPS => recEPS.EducationPlan.StreamName),
+                    Lectors = rec.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
                 }).ToList();
             }
         }
@@ -33,12 +40,18 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 return context.EducationPlans
+                          .Include(rec => rec.EducationPlanLectors)
+                          .ThenInclude(rec => rec.Lector)
+                          .Include(rec => rec.EducationPlanStudents)
+                          .ThenInclude(rec => rec.Student).ToList()
                 .Where(rec => rec.StreamName == model.StreamName)
                 .Select(rec => new EducationPlanViewModel
                 {
                     Id = rec.Id,
                     StreamName = rec.StreamName,
                     Hours = rec.Hours,
+                    Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId, recEPS => recEPS.EducationPlan.StreamName),
+                    Lectors = rec.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
                 })
                 .ToList();
             }
@@ -52,13 +65,19 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 var ep = context.EducationPlans
+                          .Include(rec => rec.EducationPlanLectors)
+                          .ThenInclude(rec => rec.Lector)
+                          .Include(rec => rec.EducationPlanStudents)
+                          .ThenInclude(rec => rec.Student)
                 .FirstOrDefault(rec => rec.StreamName == model.StreamName || rec.Id == model.Id);
                 return ep != null ?
                 new EducationPlanViewModel
                 {
                     Id = ep.Id,
                     StreamName = ep.StreamName,
-                    Hours = ep.Hours
+                    Hours = ep.Hours,
+                    Students = ep.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId, recEPS => recEPS.EducationPlan.StreamName),
+                    Lectors = ep.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
                 } :
                 null;
             }
@@ -79,7 +98,7 @@ namespace UniversityDatabaseImplement.Implements
                             
                         };
                         model.Lectors = new Dictionary<int, string>();
-                        model.Students = new Dictionary<int, string>();
+                        model.Students = new Dictionary<string, string>();
                         context.EducationPlans.Add(s);
                         context.SaveChanges();
                         CreateModel(model, s, context);
@@ -98,13 +117,31 @@ namespace UniversityDatabaseImplement.Implements
         {
             using (var context = new UniversityDatabase())
             {
-                var element = context.EducationPlans.FirstOrDefault(rec => rec.Id == model.Id);
-                if (element == null)
+                using (var transaction = context.Database.BeginTransaction())
                 {
-                    throw new Exception("Элемент не найден");
+                    try
+                    {
+                        var element = context.EducationPlans
+                          .Include(rec => rec.EducationPlanLectors)
+                          .ThenInclude(rec => rec.Lector)
+                          .Include(rec => rec.EducationPlanStudents)
+                          .ThenInclude(rec => rec.Student).FirstOrDefault(rec => rec.Id == model.Id);
+                        if (element == null)
+                        {
+                            throw new Exception("Элемент не найден");
+                        }
+                        element.StreamName = model.StreamName;
+                        element.Hours = model.Hours;
+                        CreateModel(model, element, context);
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
                 }
-                CreateModel(model, element);
-                context.SaveChanges();
             }
         }
         public void Delete(EducationPlanBindingModel model)
@@ -123,41 +160,28 @@ namespace UniversityDatabaseImplement.Implements
                 }
             }
         }
-        //private EducationPlan CreateModel(EducationPlanBindingModel model, EducationPlan EducationPlan)
-        //{
-        //    EducationPlan.StreamName = model.StreamName;
-        //    EducationPlan.Hours = model.Hours;
-        //    return EducationPlan;
-        //}
+
         private EducationPlan CreateModel(EducationPlanBindingModel model, EducationPlan ep, UniversityDatabase context)
         { 
             if (model.Id == null)
             {
-                var educationPlanStudents = context.EducationPlanStudents.Where(rec => rec.GradebookNumber == model.GradebookNumber).ToList();
-                context.StudentSubjects.RemoveRange(educationPlanStudents.Where(rec => !model.Subjects.ContainsKey(rec.SubjectId)).ToList());
+                var educationPlanStudents = context.EducationPlanStudents.Where(rec => rec.Id == model.Id).ToList();
+                context.EducationPlanStudents.RemoveRange(educationPlanStudents.Where(rec => !model.Students.ContainsKey(rec.GradebookNumber)).ToList());
                 var educationPlanLectors = context.EducationPlanLectors.Where(rec => rec.EducationPlanId == model.Id).ToList();
 
-                context.EducationPlanLectors.RemoveRange(educationPlanLectors.Where(rec => !model.EducationPlans.ContainsKey(rec.EducationPlanId)).ToList());
+                context.EducationPlanLectors.RemoveRange(educationPlanLectors.Where(rec => !model.Lectors.ContainsKey(rec.EducationPlanId)).ToList());
                 context.SaveChanges();
             }
-            foreach (var ss in model.Subjects)
+            foreach (var ss in model.Students)
             {
-                context.StudentSubjects.Add(new StudentSubject
+                context.EducationPlanStudents.Add(new EducationPlanStudent
                 {
-                    GradebookNumber = ep.GradebookNumber,
-                    SubjectId = ss.Key,
+                    EducationPlanId = ep.Id,
+                    GradebookNumber = ss.Key                  
                 });
                 context.SaveChanges();
             }
-            foreach (var ss in model.Subjects)
-            {
-                context.StudentSubjects.Add(new StudentSubject
-                {
-                    GradebookNumber = ep.GradebookNumber,
-                    SubjectId = ss.Key,
-                });
-                context.SaveChanges();
-            }
+
             return ep;
         }
     }

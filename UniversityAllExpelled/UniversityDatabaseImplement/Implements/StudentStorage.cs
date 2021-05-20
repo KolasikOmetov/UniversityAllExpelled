@@ -181,15 +181,7 @@ namespace UniversityDatabaseImplement.Implements
                 });
                 context.SaveChanges();
             }
-            foreach (var ss in model.Subjects)
-            {
-                context.StudentSubjects.Add(new StudentSubject
-                {
-                    GradebookNumber = student.GradebookNumber,
-                    SubjectId = ss.Key,
-                });
-                context.SaveChanges();
-            }
+
             return student;
         }
 
