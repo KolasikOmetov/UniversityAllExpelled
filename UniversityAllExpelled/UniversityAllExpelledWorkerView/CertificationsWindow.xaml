@@ -6,7 +6,24 @@
         xmlns:local="clr-namespace:UniversityAllExpelledWorkerView"
         mc:Ignorable="d"
         Title="CertificationsWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Margin="0,0,2,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dataGrid" Grid.Column="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата" Width="*">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Студент" Width="2*">
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <Button Margin="10" Padding="5" Click="ButtonAdd_Click">Добавить</Button>
+            <Button Margin="10" Padding="5" Click="ButtonUpd_Click">Изменить</Button>
+            <Button Margin="10" Padding="5" Click="ButtonDel_Click">Удалить</Button>
+            <Button Margin="10" Padding="5" Click="ButtonRef_Click">Обновить</Button>
+        </StackPanel>
     </Grid>
 </Window>

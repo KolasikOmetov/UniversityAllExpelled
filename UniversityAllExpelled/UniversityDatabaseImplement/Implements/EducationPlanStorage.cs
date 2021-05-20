@@ -26,7 +26,7 @@ namespace UniversityDatabaseImplement.Implements
                     Id = rec.Id,
                     StreamName = rec.StreamName,
                     Hours = rec.Hours,
-                    Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId, recEPS => recEPS.EducationPlan.StreamName),
+                    Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId.ToString(), recEPS => recEPS.EducationPlan.StreamName),
                     Lectors = rec.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
                 }).ToList();
             }
@@ -50,7 +50,7 @@ namespace UniversityDatabaseImplement.Implements
                     Id = rec.Id,
                     StreamName = rec.StreamName,
                     Hours = rec.Hours,
-                    Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId, recEPS => recEPS.EducationPlan.StreamName),
+                    Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId.ToString(), recEPS => recEPS.EducationPlan.StreamName),
                     Lectors = rec.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
                 })
                 .ToList();
@@ -76,7 +76,7 @@ namespace UniversityDatabaseImplement.Implements
                     Id = ep.Id,
                     StreamName = ep.StreamName,
                     Hours = ep.Hours,
-                    Students = ep.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId, recEPS => recEPS.EducationPlan.StreamName),
+                    Students = ep.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId.ToString(), recEPS => recEPS.EducationPlan.StreamName),
                     Lectors = ep.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
                 } :
                 null;
@@ -97,8 +97,8 @@ namespace UniversityDatabaseImplement.Implements
                             Hours = model.Hours,
                             
                         };
-                        model.Lectors = new Dictionary<int, string>();
-                        model.Students = new Dictionary<string, string>();
+                        //model.Lectors = new Dictionary<int, string>();
+                        //model.Students = new Dictionary<string, string>();
                         context.EducationPlans.Add(s);
                         context.SaveChanges();
                         CreateModel(model, s, context);

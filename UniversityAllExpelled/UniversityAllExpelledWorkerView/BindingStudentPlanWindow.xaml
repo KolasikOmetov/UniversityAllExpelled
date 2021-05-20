@@ -12,8 +12,13 @@
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <ComboBox Margin="10">
-            Выбранный предмет
+        <ComboBox x:Name="ComboBoxPlan" Margin="10">
+            Выбранный план
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
         <ListBox Grid.Row="1"></ListBox>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">

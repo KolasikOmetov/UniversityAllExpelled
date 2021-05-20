@@ -185,6 +185,9 @@
     <Compile Include="CertificationsWindow.xaml.cs">
       <DependentUpon>CertificationsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CertificationWindow.xaml.cs">
+      <DependentUpon>CertificationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditingPlansWindow.xaml.cs">
       <DependentUpon>EditingPlansWindow.xaml</DependentUpon>
     </Compile>
@@ -223,6 +226,10 @@
     <Page Include="CertificationsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CertificationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditingPlansWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
