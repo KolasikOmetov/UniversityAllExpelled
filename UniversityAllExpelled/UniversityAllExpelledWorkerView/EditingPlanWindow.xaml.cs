@@ -73,7 +73,7 @@ namespace UniversityAllExpelledWorkerView
             {
                 _logicEP.CreateOrUpdate(new EducationPlanBindingModel
                 {
-                    Id = id,
+                    //Id = id,
                     StreamName = TextBoxStream.Text,
                     Hours = int.Parse(TextBoxHours.Text)
                 });
