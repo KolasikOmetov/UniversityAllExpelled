@@ -23,5 +23,15 @@ namespace UniversityAllExpelledWorkerView
         {
             InitializeComponent();
         }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
