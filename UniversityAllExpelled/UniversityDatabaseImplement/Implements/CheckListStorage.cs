@@ -34,7 +34,6 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 return context.CheckLists
-                .Include(rec => rec.LectorId)
                 .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.LectorId == model.LectorId || rec.DateOfExam == model.DateOfExam) ||
                 (model.DateFrom.HasValue && model.DateTo.HasValue && (rec.LectorId == model.LectorId
                 || rec.DateOfExam.Date >= model.DateFrom.Value.Date && rec.DateOfExam.Date <= model.DateTo.Value.Date)))
@@ -112,6 +111,31 @@ namespace UniversityDatabaseImplement.Implements
             checkList.DateOfExam = model.DateOfExam;
             checkList.LectorId = model.LectorId;
             return checkList;
+        }
+
+        public List<ReportCheckListViewModel> GetBySubject(DateTime? dateFrom, DateTime? dateTo, int? subjectId)
+        {
+            if (dateFrom.HasValue && dateTo.HasValue && subjectId.HasValue)
+            {
+                using (var context = new UniversityDatabase())
+                {
+                    return context.CheckLists
+                    .Where(rec => rec.DateOfExam >= dateFrom && rec.DateOfExam <= dateTo &&
+                    context.Lectors.FirstOrDefault(l => l.Id == rec.LectorId && l.SubjectId == subjectId) != null)
+                    .ToList()
+                    .Select(rec => new ReportCheckListViewModel
+                    {
+                        CheckListId = rec.Id,
+                        CheckListDate = rec.DateOfExam,
+                        LectorName = context.Lectors.FirstOrDefault(recLector => recLector.Id == rec.LectorId).Name,
+                    })
+                    .ToList();
+                }
+            }
+            else
+            {
+                throw new Exception("Данные не переданы");
+            }
         }
     }
 }

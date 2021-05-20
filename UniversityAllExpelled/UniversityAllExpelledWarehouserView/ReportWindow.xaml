@@ -6,7 +6,7 @@
         xmlns:wfr="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Отчёт" Height="450" Width="1000">
+        Title="Отчёт" Height="450" Width="1000" Loaded="ReportWindow_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -14,16 +14,22 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Label Margin="10">С</Label>
-            <DatePicker Margin="10"/>
+            <DatePicker Margin="10" Name="datePickerFrom"/>
             <Label Margin="10">по</Label>
-            <DatePicker Margin="10"/>
+            <DatePicker Margin="10" Name="datePickerTo"/>
             <Label Margin="10">Дисциплина</Label>
-            <ComboBox Margin="10" MinWidth="100"/>
-            <Button Margin="10">Показать</Button>
-            <Button Margin="10">На почту</Button>
+            <ComboBox Margin="10" MinWidth="100" Name="ComboBoxSubject"> 
+                <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Margin="10" Click="ButtonShow_Click">Показать</Button>
+            <Button Margin="10" Click="ButtonSendToMail">На почту</Button>
         </StackPanel>
-        <!--<WindowsFormsHost Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="6">
-            <wfr:ReportViewer x:Name="reportViewer" ProcessingMode="Local" Load="ReportViewer_Load"/>
-        </WindowsFormsHost>-->
+        <WindowsFormsHost Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="6">
+            <wfr:ReportViewer x:Name="reportViewer" ProcessingMode="Local" Load="ReportViewer_Load"></wfr:ReportViewer>
+        </WindowsFormsHost>
     </Grid>
 </Window>
