@@ -110,7 +110,7 @@ namespace UniversityAllExpelledWarehouserView
                 {
                     SeriesCollection.Add(new ColumnSeries
                     {
-                        Title = "Количество ведомостей за период",
+                        Title = CheckLector.IsChecked == true ? "Преподаватель" : "Дисциплины",
                         Values = values,
                         Fill = new SolidColorBrush(Color.FromRgb(0, 255, 0))
                     });

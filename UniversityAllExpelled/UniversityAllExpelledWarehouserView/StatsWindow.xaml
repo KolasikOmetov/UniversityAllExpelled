@@ -22,10 +22,10 @@
         </StackPanel>
         <lvc:CartesianChart Grid.Column="0" Grid.Row="1" Series="{Binding SeriesCollection}" LegendLocation="Top">
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Количество ведомостей" Labels="{Binding BarLabels}"/>
+                <lvc:Axis Title="" Labels="{Binding BarLabels}"/>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Дата" LabelFormatter="{Binding Formatter}"/>
+                <lvc:Axis Title="Количество ведомостей" LabelFormatter="{Binding Formatter}"/>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
     </Grid>
