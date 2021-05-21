@@ -14,14 +14,18 @@ namespace UniversityAllExpelledWarehouserView
     /// </summary>
     public partial class App : Application
     {
+		public static string defaultReportPath = "D:\\Report.pdf";
+		public static string emailSender = "lab7using@gmail.com";
+		public static string emailHost = "smtp.gmail.com";
+		public static int emailPort = 587;
+		public static string emailPassword = "321ewq#@!";
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
 
 			IUnityContainer currentContainer = BuildUnityContainer();
 
-			var enterWindow = currentContainer.Resolve<MainWindow>();
-			enterWindow.Login = "ist";
+			var enterWindow = currentContainer.Resolve<EnterWindow>();
 			enterWindow.Show();
 		}
 

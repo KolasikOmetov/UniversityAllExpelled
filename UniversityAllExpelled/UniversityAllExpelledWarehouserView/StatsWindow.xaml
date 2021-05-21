@@ -1,0 +1,32 @@
+﻿<Window x:Class="UniversityAllExpelledWarehouserView.StatsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="Отчёт" Height="450" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Label Margin="10">С</Label>
+            <DatePicker Margin="10" Name="datePickerFrom"/>
+            <Label Margin="10">по</Label>
+            <DatePicker Margin="10" Name="datePickerTo"/>
+            <CheckBox Margin="10" x:Name="CheckSubject" Content="По дисциплинам"/>
+            <CheckBox Margin="10" x:Name="CheckLector" Content="По преподавателям"/>
+            <Button Margin="10" Click="ButtonShow_Click">Показать</Button>
+        </StackPanel>
+        <lvc:CartesianChart Grid.Column="0" Grid.Row="1" Series="{Binding SeriesCollection}" LegendLocation="Top">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Количество ведомостей" Labels="{Binding BarLabels}"/>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Дата" LabelFormatter="{Binding Formatter}"/>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
+    </Grid>
+</Window>

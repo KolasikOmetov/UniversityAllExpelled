@@ -17,6 +17,7 @@
             <MenuItem Header="Привязка дисциплины" Click="MenuItemBinding_Click" />
             <MenuItem Header="Получение списка" Click="MenuItemGetList_Click" />
             <MenuItem Header="Отчёт" Click="MenuItemReport_Click" />
+            <MenuItem Header="Статистика" Click="MenuItemStats_Click" />
         </Menu>
         <StackPanel Grid.Row="1">
             <Label Margin="10" Height="30" Name="labelUser"></Label>

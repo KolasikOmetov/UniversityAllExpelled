@@ -14,11 +14,13 @@ namespace UniversityBusinessLogic.BusinessLogics
         private readonly ILectorStorage _lectorStorage;
         private readonly ICheckListStorage _checkListStorage;
         private readonly IStudentStorage _studentStorage;
-        public ReportLogic(ILectorStorage lectorStorage, ICheckListStorage checkListStorage, IStudentStorage studentStorage)
+        private readonly ISubjectStorage _subjectStorage;
+        public ReportLogic(ILectorStorage lectorStorage, ICheckListStorage checkListStorage, IStudentStorage studentStorage, ISubjectStorage subjectStorage)
         {
             _lectorStorage = lectorStorage;
             _checkListStorage = checkListStorage;
             _studentStorage = studentStorage;
+            _subjectStorage = subjectStorage;
         }
         public List<ReportSubjectStudentViewModel> GetSubjectStudent()
         {
@@ -41,20 +43,7 @@ namespace UniversityBusinessLogic.BusinessLogics
         }
         public List<ReportCheckListViewModel> GetCheckLists(ReportBindingModel model)
         {
-            List<ReportCheckListViewModel> checkLists = new List<ReportCheckListViewModel>();
-            List<LectorViewModel> lectors = _lectorStorage.GetFilteredList(new LectorBindingModel { SubjectId = (int)model.SubjectId });
-            foreach (var lector in lectors)
-            {
-                checkLists.AddRange(_checkListStorage.GetFilteredList(new CheckListBindingModel { DateFrom = model.DateFrom, DateTo = model.DateTo, LectorId = lector.Id })
-            .Select(x => new ReportCheckListViewModel
-            {
-                LectorName = x.LectorName,
-                CheckListDate = x.DateOfExam
-            })
-            .ToList());
-            }
-
-            return checkLists;
+            return _checkListStorage.GetBySubject(model.DateFrom, model.DateTo, model.SubjectId);
         }
         public void SaveLectorStudentsToWordFile(ReportBindingModel model, List<StudentViewModel> students)
         {
@@ -84,15 +73,24 @@ namespace UniversityBusinessLogic.BusinessLogics
         }
 
         [Obsolete]
-        public void SaveCheckListsToPdfFile(ReportBindingModel model)
+        public void SaveCheckListsByDateBySubjectToPdfFile(ReportBindingModel model)
         {
             SaveToPdf.CreateDoc(new PdfInfo
             {
                 FileName = model.FileName,
-                Title = "Список заказов",
-                DateFrom = model.DateFrom.Value,
-                DateTo = model.DateTo.Value,
-                CheckLists = GetCheckLists(model)
+                Title = "Отчёт по дисциплине",
+                CheckLists = GetCheckLists(new ReportBindingModel
+                {
+                    DateFrom = model.DateFrom,
+                    DateTo = model.DateTo,
+                    SubjectId = model.SubjectId
+                }),
+                SubjectName = _subjectStorage.GetElement(new SubjectBindingModel
+                {
+                    Id = model.SubjectId
+                }).Name,
+                DateFrom = (DateTime)model.DateFrom,
+                DateTo = (DateTime)model.DateTo,
             });
         }
     }
