@@ -25,8 +25,7 @@ namespace UniversityAllExpelledWarehouserView
 
 			IUnityContainer currentContainer = BuildUnityContainer();
 
-			var enterWindow = currentContainer.Resolve<MainWindow>();
-			enterWindow.Login = "ist";
+			var enterWindow = currentContainer.Resolve<EnterWindow>();
 			enterWindow.Show();
 		}
 
