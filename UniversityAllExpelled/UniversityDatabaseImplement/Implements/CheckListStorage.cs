@@ -137,5 +137,44 @@ namespace UniversityDatabaseImplement.Implements
                 throw new Exception("Данные не переданы");
             }
         }
+
+        public List<CheckListViewModel> GetByDateRange(CheckListBindingModel model)
+        {
+            if (model == null)
+            {
+                return null;
+            }
+            using (var context = new UniversityDatabase())
+            {
+                return context.CheckLists
+                .Where(rec => rec.DateOfExam.Date >= model.DateFrom.Value.Date && rec.DateOfExam.Date <= model.DateTo.Value.Date)
+                .ToList()
+                .Select(rec => new CheckListViewModel
+                {
+                    Id = rec.Id,
+                    DateOfExam = rec.DateOfExam,
+                    LectorName = context.Lectors.FirstOrDefault(recLector => recLector.Id == rec.LectorId).Name,
+                    LectorId = rec.LectorId,
+                })
+                .ToList();
+            }
+        }
+
+        public List<StatsViewModel> GetByDateRangeWithSubjets(CheckListBindingModel model)
+        {
+            using (var context = new UniversityDatabase())
+            {
+                return context.CheckLists
+                .Where(rec => rec.DateOfExam >= model.DateFrom && rec.DateOfExam <= model.DateTo)
+                .ToList()
+                .Select(rec => new StatsViewModel
+                {
+                    CheckListId = rec.Id,
+                    CheckListDate = rec.DateOfExam,
+                    ItemName = context.Subjects.FirstOrDefault(recS => recS.Id == context.Lectors.FirstOrDefault(recLector => recLector.Id == rec.LectorId).SubjectId).Name,
+                })
+                .ToList();
+            }
+        }
     }
 }

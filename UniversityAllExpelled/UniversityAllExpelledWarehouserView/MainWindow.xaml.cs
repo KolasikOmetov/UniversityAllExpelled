@@ -71,5 +71,11 @@ namespace UniversityAllExpelledWarehouserView
             window.Login = login;
             window.ShowDialog();
         }
+
+        private void MenuItemStats_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Container.Resolve<StatsWindow>();
+            window.ShowDialog();
+        }
     }
 }

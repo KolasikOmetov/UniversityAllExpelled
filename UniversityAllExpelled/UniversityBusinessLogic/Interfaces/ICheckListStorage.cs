@@ -9,6 +9,8 @@ namespace UniversityBusinessLogic.Interfaces
 	{
 		List<CheckListViewModel> GetFullList();
 		List<CheckListViewModel> GetFilteredList(CheckListBindingModel model);
+		List<CheckListViewModel> GetByDateRange(CheckListBindingModel model);
+		List<StatsViewModel> GetByDateRangeWithSubjets(CheckListBindingModel model);
 		List<ReportCheckListViewModel> GetBySubject(DateTime? dateFrom, DateTime? dateTo, int? subjectId);
 		CheckListViewModel GetElement(CheckListBindingModel model);
 		void Insert(CheckListBindingModel model);

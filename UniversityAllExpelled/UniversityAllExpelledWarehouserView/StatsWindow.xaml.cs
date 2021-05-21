@@ -1,9 +1,13 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using Microsoft.Reporting.WinForms;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Windows;
+using System.Windows.Media;
 using Unity;
 using UniversityBusinessLogic.BindingModels;
 using UniversityBusinessLogic.BusinessLogics;
@@ -16,21 +20,19 @@ namespace UniversityAllExpelledWarehouserView
     /// </summary>
     public partial class StatsWindow : Window
     {
+        public SeriesCollection SeriesCollection { get; set; }
+
+        public string[] BarLabels { get; set; }
+
+        public Func<double, string> Formatter { get; set; }
+
         [Dependency]
         public IUnityContainer Container { get; set; }
 
-        public string Login { set { login = value; } }
-
-        private string login;
-
         private readonly StatsLogic _logic;
-        private readonly SubjectLogic _logicSubject;
-        private readonly DepartmentLogic _logicDepartment;
-        public StatsWindow(ReportLogic logic, SubjectLogic logicSubject, DepartmentLogic departmentLogic)
+        public StatsWindow(StatsLogic logic)
         {
             _logic = logic;
-            _logicSubject = logicSubject;
-            _logicDepartment = departmentLogic;
             InitializeComponent();
         }
 
@@ -41,82 +43,85 @@ namespace UniversityAllExpelledWarehouserView
                 MessageBox.Show("Вы не указали дату начала или дату окончания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (ComboBoxSubject.SelectedIndex == -1)
-            {
-                MessageBox.Show("Вы не указали дисциплину", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
             if (datePickerFrom.SelectedDate >= datePickerTo.SelectedDate)
             {
                 MessageBox.Show("Дата начала должна быть меньше даты окончания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            try
+            if (CheckLector.IsChecked != true && CheckSubject.IsChecked != true)
             {
-                var subject = (SubjectViewModel)ComboBoxSubject.SelectedItem;
-                string desc = $"{subject.Name}\nc {datePickerFrom.SelectedDate.Value.ToShortDateString()} по {datePickerTo.SelectedDate.Value.ToShortDateString()}";
-                ReportParameter parameterPeriod = new ReportParameter("ReportParameterPeriod", desc );
-                reportViewer.LocalReport.SetParameters(parameterPeriod);
-
-                var dataSource = _logic.GetCheckLists(new ReportBindingModel
-                {
-                    DateFrom = datePickerFrom.SelectedDate,
-                    DateTo = datePickerTo.SelectedDate,
-                    SubjectId = subject.Id
-                });
-                ReportDataSource source = new ReportDataSource("DataSetSubject", dataSource);
-                reportViewer.LocalReport.DataSources.Clear();
-                reportViewer.LocalReport.DataSources.Add(source);
-                reportViewer.RefreshReport();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        [Obsolete]
-        private void ButtonSendToMail(object sender, RoutedEventArgs e)
-        {
-            if (datePickerFrom.SelectedDate >= datePickerTo.SelectedDate)
-            {
-                MessageBox.Show("Дата начала должна быть меньше даты окончания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Выберите параметр, по которому будет показана статистика", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            MailMessage msg = new MailMessage();
-            SmtpClient client = new SmtpClient();
+            if (CheckLector.IsChecked == true && CheckSubject.IsChecked == true)
+            {
+                MessageBox.Show("Выберите только 1 параметр, по которому будет показана статистика", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             try
             {
-                var subject = (SubjectViewModel)ComboBoxSubject.SelectedItem;
-                var department = _logicDepartment.Read(new DepartmentBindingModel { DepartmentLogin = login })[0];
-                msg.Subject = "Отчёт по дисциплине";
-                msg.Body = $"Отчёт по дисциплине {subject.Name} за период c " + datePickerFrom.SelectedDate.Value.ToShortDateString() +
-                " по " + datePickerTo.SelectedDate.Value.ToShortDateString();
-                msg.From = new MailAddress(App.emailSender);
-                msg.To.Add(department.Email);
-                msg.IsBodyHtml = true;
-                _logic.SaveCheckListsByDateBySubjectToPdfFile(new ReportBindingModel
+                List<StatsViewModel> dataSource;
+                if (CheckLector.IsChecked == true)
                 {
-                    FileName = App.defaultReportPath,
-                    DateFrom = datePickerFrom.SelectedDate,
-                    DateTo = datePickerTo.SelectedDate,
-                    SubjectId = subject.Id
-                });
-                string file = App.defaultReportPath;
-                Attachment attach = new Attachment(file, MediaTypeNames.Application.Octet);
-                ContentDisposition disposition = attach.ContentDisposition;
-                disposition.CreationDate = System.IO.File.GetCreationTime(file);
-                disposition.ModificationDate = System.IO.File.GetLastWriteTime(file);
-                disposition.ReadDate = System.IO.File.GetLastAccessTime(file);
-                msg.Attachments.Add(attach);
-                client.Host = App.emailHost;
-                client.Port = App.emailPort;
-                client.EnableSsl = true;
-                client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential(App.emailSender, App.emailPassword);
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.Send(msg);
-                MessageBox.Show("Сообщение отправлено", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                   dataSource = _logic.GetCheckListsWithLectors(new StatsBindingModel
+                   {
+                       DateFrom = datePickerFrom.SelectedDate,
+                       DateTo = datePickerTo.SelectedDate,
+                   });
+                }
+                else
+                {
+                    dataSource = _logic.GetCheckListsWithSubjets(new StatsBindingModel
+                    {
+                        DateFrom = datePickerFrom.SelectedDate,
+                        DateTo = datePickerTo.SelectedDate,
+                    });
+                }
+                string[] barLabels = new string[dataSource.Count];
+
+                ChartValues<int> values = new ChartValues<int>();
+                Dictionary<string, int> dictionary = new Dictionary<string, int>();
+
+                foreach (var data in dataSource)
+                {
+                    if (dictionary.ContainsKey(data.ItemName))
+                    {
+                        dictionary[data.ItemName] += 1;
+                    }
+                    else
+                    {
+                        dictionary.Add(data.ItemName, 1);
+                    }
+                }
+
+                int i = 0;
+                foreach (var d in dictionary)
+                {
+                    barLabels[i] = d.Key;
+                    values.Add(d.Value);
+                    i++;
+                }
+
+                BarLabels = barLabels;
+
+                SeriesCollection = new SeriesCollection();
+
+                if (values != null)
+                {
+                    SeriesCollection.Add(new ColumnSeries
+                    {
+                        Title = "Количество ведомостей за период",
+                        Values = values,
+                        Fill = new SolidColorBrush(Color.FromRgb(0, 255, 0))
+                    });
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                Formatter = value => value.ToString("N");
+                DataContext = null;
+                DataContext = this;
             }
             catch (Exception ex)
             {
