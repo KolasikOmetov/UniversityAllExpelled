@@ -25,14 +25,14 @@ namespace UniversityAllExpelledWorkerView
     public partial class GetListWindow : Window
     {       
         private readonly EducationPlanLogic _epLogic;
-        private readonly StudentLogic _studentLogic;
-        private readonly ReportLogic _reportLogic;
-        public GetListWindow()//(EducationPlanLogic epLogic, StudentLogic studentLogic, ReportLogic reportLogic)
+        private readonly SubjectLogic _subjectLogic;
+        private readonly ReportWorkerLogic _reportLogic;
+        public GetListWindow(EducationPlanLogic epLogic, SubjectLogic subjectLogic, ReportLogic reportLogic)//()//(EducationPlanLogic epLogic, StudentLogic studentLogic, ReportLogic reportLogic)
         {
             InitializeComponent();
-            //_epLogic = epLogic;
-            //_studentLogic = studentLogic;
-            //_reportLogic = reportLogic;
+  //          _epLogic = epLogic;
+ //           _subjectLogic = subjectLogic;
+ //           _reportLogic = reportLogic;
         }
 
         private void GetListWindow_Loaded(object sender, RoutedEventArgs e)
@@ -70,31 +70,31 @@ namespace UniversityAllExpelledWorkerView
             }
         }
 
-        //private void ButtonWord_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (ComboBoxPlans.SelectedIndex == -1)
-        //    {
-        //        MessageBox.Show("Выберите преподавателя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-        //        return;
-        //    }
-        //    var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
-        //    if ((bool)dialog.ShowDialog())
-        //    {
-        //        try
-        //        {
-        //            _reportLogic.SaveLectorStudentsToWordFile(new ReportWorkerBindingModel
-        //            {
-        //                FileName = dialog.FileName,
-        //                LectorId = (ComboBoxPlans.SelectedItem as EducationPlanViewModel).Id
-        //            }, ListBoxStudent.ItemsSource as List<StudentViewModel>);
-        //            MessageBox.Show("Выполнено", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-        //        }
-        //    }
-        //}
+        private void ButtonWord_Click(object sender, RoutedEventArgs e)
+        {
+            //if (ComboBoxPlans.SelectedIndex == -1)
+            //{
+            //    MessageBox.Show("Выберите преподавателя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return;
+            //}
+            //var dialog = new SaveFileDialog { Filter = "docx|*.docx" };
+            //if ((bool)dialog.ShowDialog())
+            //{
+            //    try
+            //    {
+            //        //_reportLogic.SaveSubjectPlanToWordFile(new ReportWorkerBindingModel
+            //        //{
+            //        //    FileName = dialog.FileName,
+            //        //    SubjectId = (ComboBoxPlans.SelectedItem as EducationPlanViewModel).Id,
+            //        //}, ListBoxStudent.ItemsSource as List<StudentViewModel>);
+            //        //MessageBox.Show("Выполнено", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    }
+            //}
+        }
 
         //private void ButtonExcel_Click(object sender, RoutedEventArgs e)
         //{
@@ -120,6 +120,6 @@ namespace UniversityAllExpelledWorkerView
         //            MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         //        }
         //    }
-        }
+    }
     }
     

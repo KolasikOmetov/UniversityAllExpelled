@@ -92,13 +92,13 @@ namespace UniversityDatabaseImplement.Implements
                     {
                         EducationPlan s = new EducationPlan
                         {
-                            Id = (int)model.Id,
+                            //Id = (int)model.Id,
                             StreamName = model.StreamName,
                             Hours = model.Hours,
                             
                         };
-                        //model.Lectors = new Dictionary<int, string>();
-                        //model.Students = new Dictionary<string, string>();
+                        model.Lectors = new Dictionary<int, string>();
+                        model.Students = new Dictionary<string, string>();
                         context.EducationPlans.Add(s);
                         context.SaveChanges();
                         CreateModel(model, s, context);

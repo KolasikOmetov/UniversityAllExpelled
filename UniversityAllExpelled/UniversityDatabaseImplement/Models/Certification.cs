@@ -12,7 +12,7 @@ namespace UniversityDatabaseImplement.Models
         public DateTime Date { get; set; }
         [ForeignKey("GradebookNumber")]
         public string StudentGradebookNumber { get; set; }
-        [ForeignKey("DepartmentLogin")]
+        [ForeignKey("DenearyLogin")]
         public string DenearyLogin { get; set; }
     }
 }
