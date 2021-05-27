@@ -11,7 +11,7 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="0" Name="DataGridView" ColumnWidth="*"/>
+        <DataGrid Grid.Column="0" Name="DataGridView" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" ColumnWidth="*"/>
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
             <Button Margin="10" Padding="5" Click="ButtonAdd_Click">Добавить</Button>
             <Button Margin="10" Padding="5" Click="ButtonUpd_Click">Изменить</Button>
