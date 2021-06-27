@@ -10,9 +10,9 @@ namespace UniversityDatabaseImplement.Models
 		public string GradebookNumber { get; set; }
 		[Required]
 		public string Name { get; set; }
-		[ForeignKey("GradebookNumber")]
+		[ForeignKey("StudentGradebookNumber")]
 		public virtual List<StudentSubject> StudentSubjects { get; set; }
-		[ForeignKey("GradebookNumber")]
+		[ForeignKey("StudentGradebookNumber")]
 		public virtual List<EducationPlanStudent> EducationPlanStudents { get; set; }
 	}
 }

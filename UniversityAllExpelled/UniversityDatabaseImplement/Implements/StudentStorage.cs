@@ -165,7 +165,7 @@ namespace UniversityDatabaseImplement.Implements
             // нужно передавать student уже с заполнеными полями и добавленным таблицу Students  
             if (string.IsNullOrEmpty(model.GradebookNumber))
             {
-                var studentSubjects = context.StudentSubjects.Where(rec => rec.GradebookNumber == model.GradebookNumber).ToList();
+                var studentSubjects = context.StudentSubjects.Where(rec => rec.StudentGradebookNumber == model.GradebookNumber).ToList();
                 context.StudentSubjects.RemoveRange(studentSubjects.Where(rec => !model.Subjects.ContainsKey(rec.SubjectId)).ToList());
                 var educationPlanStudents = context.EducationPlanStudents.Where(rec => rec.GradebookNumber == model.GradebookNumber).ToList();
                
@@ -176,7 +176,7 @@ namespace UniversityDatabaseImplement.Implements
             {
                 context.StudentSubjects.Add(new StudentSubject
                 {
-                    GradebookNumber = student.GradebookNumber,
+                    StudentGradebookNumber = student.GradebookNumber,
                     SubjectId = ss.Key,
                 });
                 context.SaveChanges();
@@ -191,7 +191,7 @@ namespace UniversityDatabaseImplement.Implements
             {
                 context.StudentSubjects.Add(new StudentSubject
                 {
-                    GradebookNumber = gradebookNumber,
+                    StudentGradebookNumber = gradebookNumber,
                     SubjectId = subjectId,
                 });
                 context.SaveChanges();
