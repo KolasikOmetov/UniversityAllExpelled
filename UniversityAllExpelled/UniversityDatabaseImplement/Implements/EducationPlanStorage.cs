@@ -166,7 +166,7 @@ namespace UniversityDatabaseImplement.Implements
             if (model.Id == null)
             {
                 var educationPlanStudents = context.EducationPlanStudents.Where(rec => rec.Id == model.Id).ToList();
-                context.EducationPlanStudents.RemoveRange(educationPlanStudents.Where(rec => !model.Students.ContainsKey(rec.GradebookNumber)).ToList());
+                context.EducationPlanStudents.RemoveRange(educationPlanStudents.Where(rec => !model.Students.ContainsKey(rec.StudentGradebookNumber)).ToList());
                 var educationPlanLectors = context.EducationPlanLectors.Where(rec => rec.EducationPlanId == model.Id).ToList();
 
                 context.EducationPlanLectors.RemoveRange(educationPlanLectors.Where(rec => !model.Lectors.ContainsKey(rec.EducationPlanId)).ToList());
@@ -177,7 +177,7 @@ namespace UniversityDatabaseImplement.Implements
                 context.EducationPlanStudents.Add(new EducationPlanStudent
                 {
                     EducationPlanId = ep.Id,
-                    GradebookNumber = ss.Key                  
+                    StudentGradebookNumber = ss.Key                  
                 });
                 context.SaveChanges();
             }

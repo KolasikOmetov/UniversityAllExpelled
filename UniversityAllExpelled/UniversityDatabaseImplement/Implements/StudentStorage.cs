@@ -167,7 +167,7 @@ namespace UniversityDatabaseImplement.Implements
             {
                 var studentSubjects = context.StudentSubjects.Where(rec => rec.StudentGradebookNumber == model.GradebookNumber).ToList();
                 context.StudentSubjects.RemoveRange(studentSubjects.Where(rec => !model.Subjects.ContainsKey(rec.SubjectId)).ToList());
-                var educationPlanStudents = context.EducationPlanStudents.Where(rec => rec.GradebookNumber == model.GradebookNumber).ToList();
+                var educationPlanStudents = context.EducationPlanStudents.Where(rec => rec.StudentGradebookNumber == model.GradebookNumber).ToList();
                
                 context.EducationPlanStudents.RemoveRange(educationPlanStudents.Where(rec => !model.EducationPlans.ContainsKey(rec.EducationPlanId)).ToList());
                 context.SaveChanges();

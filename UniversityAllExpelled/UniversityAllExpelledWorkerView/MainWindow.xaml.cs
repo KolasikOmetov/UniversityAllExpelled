@@ -24,20 +24,15 @@ namespace UniversityAllExpelledWorkerView
         [Dependency]
         public IUnityContainer Container { get; set; }
 
-        public int Id { set { id = value; } }
-
-        private int? id;
-
         public string Login { set { login = value; } }
 
         private string login;
 
-        private DenearyLogic _logic;
-        private DenearyViewModel _currentUser;
+        private readonly DenearyLogic _logicDeneary;
         public MainWindow(DenearyLogic logic)
         {
             InitializeComponent();
-            this._logic = logic;
+            this._logicDeneary = logic;
         }
 
         private void MenuItemPlans_Click(object sender, RoutedEventArgs e)
@@ -71,57 +66,28 @@ namespace UniversityAllExpelledWorkerView
 
         private void MenuItemCertifications_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentUser != null)
-            {
-                var window = Container.Resolve<CertificationsWindow>();
-                //window.Id = id;
-                window.ShowDialog();
-            }
-            else
-            {
-                // call ErrorWindow
-            }
+            var window = Container.Resolve<CertificationsWindow>();
+            window.Id = id;
+            window.ShowDialog();
         }
 
         private void MenuItemGetList_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentUser != null)
-            {
-                var window = Container.Resolve<GetListWindow>();
-                window.ShowDialog();
-            }
-            else
-            {
-                // call ErrorWindow
-            }
+            var window = Container.Resolve<GetListWindow>();
+            window.ShowDialog();
         }
 
         private void MenuItemReport_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentUser != null)
-            {
-                var window = Container.Resolve<ReportWindow>();
-                //window.Login = login;
-                window.ShowDialog();
-            }
-            else
-            {
-                // call ErrorWindow
-            }
+            var window = Container.Resolve<ReportWindow>();
+            window.Login = login;
+            window.ShowDialog();
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            _currentUser = _logic.Read(new DenearyBindingModel { Login = "abc", Password = "123456", Email = "abc@email.com", Name = "abc" })?[0];
-            this.id = 1;
-            if (_currentUser == null)
-            {
-                labelUser.Content = "Войдите или Зарегистрируйтесь";
-            }
-            else
-            {
-                labelUser.Content = $"Деканат {_currentUser.Name}";
-            }
+            var _currentUser = _logicDeneary.Read(new DenearyBindingModel { Login = login})?[0];
+            labelUser.Content = $"Деканат \"{_currentUser.Name}\"";
         }
 
         private void ButtonAuth_Click(object sender, RoutedEventArgs e)
