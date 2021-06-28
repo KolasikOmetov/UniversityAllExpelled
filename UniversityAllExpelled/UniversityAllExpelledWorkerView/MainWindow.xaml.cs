@@ -45,7 +45,7 @@ namespace UniversityAllExpelledWorkerView
         private void MenuItemStudents_Click(object sender, RoutedEventArgs e)
         {
             var window = Container.Resolve<StudentsWindow>();
-            window.Id = id;
+            //window.Id = id;
             window.ShowDialog();
         }
 
@@ -53,7 +53,7 @@ namespace UniversityAllExpelledWorkerView
         private void MenuItemCertifications_Click(object sender, RoutedEventArgs e)
         {
             var window = Container.Resolve<CertificationsWindow>();
-            window.Id = id;
+            //window.Id = id;
             window.ShowDialog();
         }
 
@@ -66,13 +66,13 @@ namespace UniversityAllExpelledWorkerView
         private void MenuItemReport_Click(object sender, RoutedEventArgs e)
         {
             var window = Container.Resolve<ReportWindow>();
-            window.Login = login;
+            //window.Login = login;
             window.ShowDialog();
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            var _currentUser = _logicDeneary.Read(new DenearyBindingModel { Login = login})?[0];
+            var _currentUser = _logicDeneary.Read(new DenearyBindingModel { Login = login })?[0];
             labelUser.Content = $"Деканат \"{_currentUser.Name}\"";
         }
 

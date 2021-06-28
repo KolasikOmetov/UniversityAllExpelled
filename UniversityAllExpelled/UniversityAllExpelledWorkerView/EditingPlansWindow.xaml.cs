@@ -39,7 +39,7 @@ namespace UniversityAllExpelledWorkerView
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
             var window = Container.Resolve<EditingPlanWindow>();
-            window.Login = login;
+
             if (window.ShowDialog().Value)
             {
                 LoadData();
@@ -52,8 +52,8 @@ namespace UniversityAllExpelledWorkerView
             {
                 var window = Container.Resolve<EditingPlanWindow>();
                 var cellInfo = DataGridPlans.SelectedCells[0];
-                EducationPlanViewModel content = (EducationPlanViewModel)(cellInfo.Item);
-                window.Login = login;
+                EducationPlanViewModel record = (EducationPlanViewModel)(cellInfo.Item);
+                window.Id = record.Id;
                 if (window.ShowDialog().Value)
                 {
                     LoadData();
@@ -95,10 +95,11 @@ namespace UniversityAllExpelledWorkerView
         private void LoadData()
         {
 
-            var list = logic.Read(new EducationPlanBindingModel
-            {
-                Id = id
-            });
+            //var list = logic.Read(new EducationPlanBindingModel
+            //{
+            //    Id = id
+            //});
+            var list = logic.Read(null);
             if (list != null)
             {
                 DataGridPlans.ItemsSource = list;
