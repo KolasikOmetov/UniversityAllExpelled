@@ -25,9 +25,9 @@ namespace UniversityAllExpelledWorkerView
         [Dependency]
         public IUnityContainer Container { get; set; }
 
-        public int Id { set { id = value; } }
+        public string Login { set { login = value; } }
 
-        private int? id;
+        private string login;
 
         private readonly EducationPlanLogic _logicEP;
 
@@ -39,11 +39,11 @@ namespace UniversityAllExpelledWorkerView
 
         private void EditingPlanWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if (id.HasValue)
+            if (!string.IsNullOrEmpty(login))
             {
                 try
                 {
-                    var view = _logicEP.Read(new EducationPlanBindingModel { Id = id })?[0];
+                    var view = _logicEP.Read(new EducationPlanBindingModel { Id = login })?[0];
                     if (view != null)
                     {
                         TextBoxStream.Text = view.StreamName;
@@ -73,7 +73,7 @@ namespace UniversityAllExpelledWorkerView
             {
                 _logicEP.Create(new EducationPlanBindingModel
                 {
-                    Id = id,
+                    Id = login,
                     StreamName = TextBoxStream.Text,
                     Hours = int.Parse(TextBoxHours.Text)
                 });

@@ -27,9 +27,9 @@ namespace UniversityAllExpelledWorkerView
         public IUnityContainer Container { get; set; }
         private readonly EducationPlanLogic logic;
 
-        public int Id { set { id = value; } }
+        public string Login { set { login = value; } }
 
-        private int? id;
+        private string login;
         public EditingPlansWindow()
         {
             InitializeComponent();
@@ -39,7 +39,7 @@ namespace UniversityAllExpelledWorkerView
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
             var window = Container.Resolve<EditingPlanWindow>();
-            window.Id = (int)id;
+            window.Login = login;
             if (window.ShowDialog().Value)
             {
                 LoadData();
@@ -53,7 +53,7 @@ namespace UniversityAllExpelledWorkerView
                 var window = Container.Resolve<EditingPlanWindow>();
                 var cellInfo = DataGridPlans.SelectedCells[0];
                 EducationPlanViewModel content = (EducationPlanViewModel)(cellInfo.Item);
-                window.Id = content.Id;
+                window.Login = login;
                 if (window.ShowDialog().Value)
                 {
                     LoadData();

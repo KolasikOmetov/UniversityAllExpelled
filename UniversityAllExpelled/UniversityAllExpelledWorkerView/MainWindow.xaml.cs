@@ -37,30 +37,16 @@ namespace UniversityAllExpelledWorkerView
 
         private void MenuItemPlans_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentUser != null)
-            {
-                var window = Container.Resolve<EditingPlansWindow>();
-                window.Id = (int)id;
-                window.ShowDialog();
-            }
-            else
-            {
-                // call ErrorWindow
-            }
+            var window = Container.Resolve<EditingPlansWindow>();
+            window.Login = login;
+            window.ShowDialog();
         }
 
         private void MenuItemStudents_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentUser != null)
-            {
-                var window = Container.Resolve<StudentsWindow>();
-                //window.Id = id;
-                window.ShowDialog();
-            }
-            else
-            {
-                // call ErrorWindow
-            }
+            var window = Container.Resolve<StudentsWindow>();
+            window.Id = id;
+            window.ShowDialog();
         }
 
 
