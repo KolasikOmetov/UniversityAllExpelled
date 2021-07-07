@@ -20,7 +20,7 @@ namespace UniversityBusinessLogic.BusinessLogics
             {
                 return _denearyStorage.GetFullList();
             }
-            if (string.IsNullOrEmpty(model.Login))
+            if (!string.IsNullOrEmpty(model.Login))
             {
                 return new List<DenearyViewModel> { _denearyStorage.GetElement(model) };
             }
