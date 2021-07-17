@@ -12,15 +12,15 @@
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <ComboBox x:Name="ComboBoxPlan" Margin="10">
-            Выбранный план
+        <ComboBox x:Name="ComboBoxStudent" Margin="10">
+            Выбранный студент
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ListBox Grid.Row="1"></ListBox>
+        <ListBox x:Name="ListBoxPlan" Grid.Row="1"></ListBox>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
             <Button Margin="10">Привязать</Button>
             <Button Margin="10">Отмена</Button>

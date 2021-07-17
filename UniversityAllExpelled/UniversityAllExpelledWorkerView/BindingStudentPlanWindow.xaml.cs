@@ -43,11 +43,11 @@ namespace UniversityAllExpelledWorkerView
         {
             try
             {
-                //ComboBoxPlan.ItemsSource = _subjectLogic.Read(new EducationPlanBindingModel
-                //{
-                //    Id = login //??
-                //});
-                //ListBoxStudent.ItemsSource = _studentLogic.Read(null);
+                ComboBoxStudent.ItemsSource = _studentLogic.Read(new StudentBindingModel
+                {
+                    GradebookNumber = login //??
+                });
+                ListBoxPlan.ItemsSource = _studentLogic.Read(null);
             }
             catch (Exception ex)
             {

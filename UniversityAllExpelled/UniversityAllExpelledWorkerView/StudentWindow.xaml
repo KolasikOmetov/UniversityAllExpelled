@@ -13,19 +13,30 @@
             </StackPanel>
             <StackPanel Margin="10,0,0,0">
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxName" Width="123"></TextBox>
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxName" Width="127"></TextBox>
                 </Border>
             </StackPanel>
 
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="228" Margin="0,0,31,0">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="221" Margin="0,0,38,0">
             <StackPanel HorizontalAlignment="Stretch">
                 <Label Content="Номер зачетки" Width="95"/>
             </StackPanel>
             <StackPanel Margin="10,0,0,0">
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxGradBook" Width="106"></TextBox>
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxGradBook" Width="107"></TextBox>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="221" Margin="0,0,38,0">
+            <StackPanel HorizontalAlignment="Stretch">
+                <Label Content="             Группа" Width="95"/>
+            </StackPanel>
+            <StackPanel Margin="10,0,0,0">
+                <Border BorderBrush="Black" BorderThickness="1" Margin="4">
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxGroup" Width="107"></TextBox>
                 </Border>
             </StackPanel>
         </StackPanel>

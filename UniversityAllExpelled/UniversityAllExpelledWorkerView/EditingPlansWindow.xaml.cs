@@ -30,7 +30,7 @@ namespace UniversityAllExpelledWorkerView
         public string Login { set { login = value; } }
 
         private string login;
-        public EditingPlansWindow()
+        public EditingPlansWindow(EducationPlanLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
@@ -103,11 +103,6 @@ namespace UniversityAllExpelledWorkerView
             if (list != null)
             {
                 DataGridPlans.ItemsSource = list;
-                DataGridPlans.Columns[0].Visibility = Visibility.Hidden;
-                DataGridPlans.Columns[0].Width = 0;
-                DataGridPlans.Columns[1].Visibility = Visibility.Hidden;
-                DataGridPlans.Columns[1].Width = 0;
-
             }
         }
     }
