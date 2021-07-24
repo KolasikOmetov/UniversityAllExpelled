@@ -28,10 +28,6 @@ namespace UniversityBusinessLogic.BusinessLogics
 		}
 		public void CreateOrUpdate(EducationPlanBindingModel model)
 		{						
-			if (model.Id.HasValue)
-			{
-				_educationPlanStorage.Insert(model);
-			}
 			var element = _educationPlanStorage.GetElement(new EducationPlanBindingModel
 			{
 				StreamName = model.StreamName,
