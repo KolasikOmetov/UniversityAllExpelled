@@ -162,26 +162,29 @@ namespace UniversityDatabaseImplement.Implements
         }
         private Student CreateModel(StudentBindingModel model, Student student, UniversityDatabase context)
         {
-            // нужно передавать student уже с заполнеными полями и добавленным таблицу Students  
-            if (string.IsNullOrEmpty(model.GradebookNumber))
-            {
-                var studentSubjects = context.StudentSubjects.Where(rec => rec.StudentGradebookNumber == model.GradebookNumber).ToList();
-                context.StudentSubjects.RemoveRange(studentSubjects.Where(rec => !model.Subjects.ContainsKey(rec.SubjectId)).ToList());
-                var educationPlanStudents = context.EducationPlanStudents.Where(rec => rec.StudentGradebookNumber == model.GradebookNumber).ToList();
-               
-                context.EducationPlanStudents.RemoveRange(educationPlanStudents.Where(rec => !model.EducationPlans.ContainsKey(rec.EducationPlanId)).ToList());
-                context.SaveChanges();
-            }
-            foreach (var ss in model.Subjects)
-            {
-                context.StudentSubjects.Add(new StudentSubject
-                {
-                    StudentGradebookNumber = student.GradebookNumber,
-                    SubjectId = ss.Key,
-                });
-                context.SaveChanges();
-            }
+            //// нужно передавать student уже с заполнеными полями и добавленным таблицу Students  
+            //if (string.IsNullOrEmpty(model.GradebookNumber))
+            //{
+            //    var studentSubjects = context.StudentSubjects.Where(rec => rec.StudentGradebookNumber == model.GradebookNumber).ToList();
+            //    context.StudentSubjects.RemoveRange(studentSubjects.Where(rec => !model.Subjects.ContainsKey(rec.SubjectId)).ToList());
+            //    var educationPlanStudents = context.EducationPlanStudents.Where(rec => rec.StudentGradebookNumber == model.GradebookNumber).ToList();
 
+            //    context.EducationPlanStudents.RemoveRange(educationPlanStudents.Where(rec => !model.EducationPlans.ContainsKey(rec.EducationPlanId)).ToList());
+            //    context.SaveChanges();
+            //}
+            //foreach (var ss in model.Subjects)
+            //{
+            //    context.StudentSubjects.Add(new StudentSubject
+            //    {
+            //        StudentGradebookNumber = student.GradebookNumber,
+            //        SubjectId = ss.Key,
+            //    });
+            //    context.SaveChanges();
+            //}
+
+            //return student;
+
+            student.Name = model.Name;
             return student;
         }
 
