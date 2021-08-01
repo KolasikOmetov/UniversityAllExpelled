@@ -67,10 +67,10 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 var student = context.Students
-                  .Include(rec => rec.StudentSubjects)
-                  .ThenInclude(rec => rec.Subject)
-                  .Include(rec => rec.EducationPlanStudents)
-                  .ThenInclude(rec => rec.EducationPlan)
+                  //.Include(rec => rec.StudentSubjects)
+                  //.ThenInclude(rec => rec.Subject)
+                  //.Include(rec => rec.EducationPlanStudents)
+                  //.ThenInclude(rec => rec.EducationPlan)
                   .FirstOrDefault(rec => rec.Name == model.Name || rec.GradebookNumber == model.GradebookNumber);
                 return student != null ?
                   new StudentViewModel
@@ -89,29 +89,33 @@ namespace UniversityDatabaseImplement.Implements
         {
             using (var context = new UniversityDatabase())
             {
-                using (var transaction = context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        Student s = new Student
-                        {
-                            Name = model.Name,
-                            GradebookNumber = model.GradebookNumber
-                        };
-                        //model.Subjects = new Dictionary<int, string>();
-                        //model.EducationPlans = new Dictionary<int, string>();
-                        context.Students.Add(s);
-                        context.SaveChanges();
-                        CreateModel(model, s, context);
-                        context.SaveChanges();
-                        transaction.Commit();
-                    }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        throw ex;
-                    }
-                }
+                //using (var transaction = context.Database.BeginTransaction())
+                //{
+                //    try
+                //    {
+                //        Student s = new Student
+                //        {
+                //            Name = model.Name,
+                //            GradebookNumber = model.GradebookNumber
+                //        };
+                //        //model.Subjects = new Dictionary<int, string>();
+                //        //model.EducationPlans = new Dictionary<int, string>();
+                //        context.Students.Add(s);
+                //        context.SaveChanges();
+                //        CreateModel(model, s, context);
+                //        context.SaveChanges();
+                //        transaction.Commit();
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        transaction.Rollback();
+                //        throw ex;
+                //    }
+                //}
+                model.Subjects = new Dictionary<int, string>();
+                model.EducationPlans = new Dictionary<int, string>();
+                context.Students.Add(CreateModel(model, new Student()));
+                context.SaveChanges();
             }
         }
         public void Update(StudentBindingModel model)
@@ -132,7 +136,7 @@ namespace UniversityDatabaseImplement.Implements
                             throw new Exception("Элемент не найден");
                         }
                         element.Name = model.Name;
-                        CreateModel(model, element, context);
+                        CreateModel(model, element);
                         context.SaveChanges();
                         transaction.Commit();
                     }
@@ -160,28 +164,12 @@ namespace UniversityDatabaseImplement.Implements
                 }
             }
         }
-        private Student CreateModel(StudentBindingModel model, Student student, UniversityDatabase context)
+        private Student CreateModel(StudentBindingModel model, Student student)
         {
             // нужно передавать student уже с заполнеными полями и добавленным таблицу Students  
-            if (string.IsNullOrEmpty(model.GradebookNumber))
-            {
-                var studentSubjects = context.StudentSubjects.Where(rec => rec.StudentGradebookNumber == model.GradebookNumber).ToList();
-                context.StudentSubjects.RemoveRange(studentSubjects.Where(rec => !model.Subjects.ContainsKey(rec.SubjectId)).ToList());
-                var educationPlanStudents = context.EducationPlanStudents.Where(rec => rec.StudentGradebookNumber == model.GradebookNumber).ToList();
 
-                context.EducationPlanStudents.RemoveRange(educationPlanStudents.Where(rec => !model.EducationPlans.ContainsKey(rec.EducationPlanId)).ToList());
-                context.SaveChanges();
-            }
-            foreach (var ss in model.Subjects)
-            {
-                context.StudentSubjects.Add(new StudentSubject
-                {
-                    StudentGradebookNumber = student.GradebookNumber,
-                    SubjectId = ss.Key,
-                });
-                context.SaveChanges();
-            }
-
+            student.Name = model.Name;
+            student.GradebookNumber = model.GradebookNumber;
             return student;
         }
 
