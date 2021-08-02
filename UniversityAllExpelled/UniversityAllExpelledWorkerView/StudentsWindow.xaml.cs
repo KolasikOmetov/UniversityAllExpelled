@@ -41,7 +41,8 @@ namespace UniversityAllExpelledWorkerView
         {
             try
             {
-                var list = logic.Read(new StudentBindingModel { GradebookNumber = id });
+                //var list = logic.Read(new StudentBindingModel { GradebookNumber = id });
+                var list = logic.Read(null);
                 if (list != null)
                 {
                     dataGrid.ItemsSource = list;
