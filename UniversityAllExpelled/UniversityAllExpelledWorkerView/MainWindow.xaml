@@ -15,6 +15,7 @@
             <MenuItem x:Name="MenuItemStudents" Header="Студенты" Click="MenuItemStudents_Click" />
             <MenuItem x:Name="MenuItemCertifications" Header="Аттестации" Click="MenuItemCertifications_Click" />
             <MenuItem x:Name="MenuItemGetList" Header="Получение списка" Click="MenuItemGetList_Click" />
+            <MenuItem x:Name="MenuBindingStudentPlan" Header="Привязка студентов" Click="MenuBindingStudent_Click"/>
             <MenuItem x:Name="MenuItemReport" Header="Отчёт" Click="MenuItemReport_Click" />
         </Menu>
         <StackPanel Grid.Row="1">

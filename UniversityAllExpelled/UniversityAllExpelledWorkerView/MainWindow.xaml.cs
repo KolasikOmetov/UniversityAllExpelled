@@ -70,6 +70,13 @@ namespace UniversityAllExpelledWorkerView
             window.ShowDialog();
         }
 
+        private void MenuBindingStudent_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Container.Resolve<BindingStudentPlanWindow>();
+            //window.Login = login;
+            window.ShowDialog();
+        }
+
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             var _currentUser = _logicDeneary.Read(new DenearyBindingModel { Login = login })?[0];

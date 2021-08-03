@@ -34,25 +34,25 @@ namespace UniversityAllExpelledWorkerView
             _studentLogic = studentLogic;
         }
 
-        private void BindingStudentPlanWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadData();
-        }
-
         private void LoadData()
         {
             try
             {
                 ComboBoxStudent.ItemsSource = _studentLogic.Read(new StudentBindingModel
                 {
-                    GradebookNumber = login //??
+                    //GradebookNumber = login
                 });
-                ListBoxPlan.ItemsSource = _studentLogic.Read(null);
+                ListBoxPlan.ItemsSource = _epLogic.Read(null);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void BindingStudentWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadData();
         }
     }
 }
