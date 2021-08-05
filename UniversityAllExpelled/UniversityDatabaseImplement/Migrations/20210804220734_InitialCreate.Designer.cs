@@ -10,8 +10,8 @@ using UniversityDatabaseImplement;
 namespace UniversityDatabaseImplement.Migrations
 {
     [DbContext(typeof(UniversityDatabase))]
-    [Migration("20210406163231_Init")]
-    partial class Init
+    [Migration("20210804220734_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,9 +30,6 @@ namespace UniversityDatabaseImplement.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DenearyLogin")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StudentGradebookNumber")
                         .HasColumnType("nvarchar(max)");
@@ -65,6 +62,9 @@ namespace UniversityDatabaseImplement.Migrations
                     b.Property<string>("Login")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -82,6 +82,10 @@ namespace UniversityDatabaseImplement.Migrations
                 {
                     b.Property<string>("DepartmentLogin")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -147,14 +151,14 @@ namespace UniversityDatabaseImplement.Migrations
                     b.Property<int>("EducationPlanId")
                         .HasColumnType("int");
 
-                    b.Property<string>("GradebookNumber")
+                    b.Property<string>("StudentGradebookNumber")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EducationPlanId");
 
-                    b.HasIndex("GradebookNumber");
+                    b.HasIndex("StudentGradebookNumber");
 
                     b.ToTable("EducationPlanStudents");
                 });
@@ -183,6 +187,9 @@ namespace UniversityDatabaseImplement.Migrations
                     b.Property<string>("GradebookNumber")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("DenearyLogin")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -199,7 +206,7 @@ namespace UniversityDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("GradebookNumber")
+                    b.Property<string>("StudentGradebookNumber")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("SubjectId")
@@ -207,7 +214,7 @@ namespace UniversityDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GradebookNumber");
+                    b.HasIndex("StudentGradebookNumber");
 
                     b.HasIndex("SubjectId");
 
@@ -258,14 +265,14 @@ namespace UniversityDatabaseImplement.Migrations
 
                     b.HasOne("UniversityDatabaseImplement.Models.Student", "Student")
                         .WithMany("EducationPlanStudents")
-                        .HasForeignKey("GradebookNumber");
+                        .HasForeignKey("StudentGradebookNumber");
                 });
 
             modelBuilder.Entity("UniversityDatabaseImplement.Models.StudentSubject", b =>
                 {
                     b.HasOne("UniversityDatabaseImplement.Models.Student", "Student")
                         .WithMany("StudentSubjects")
-                        .HasForeignKey("GradebookNumber");
+                        .HasForeignKey("StudentGradebookNumber");
 
                     b.HasOne("UniversityDatabaseImplement.Models.Subject", "Subject")
                         .WithMany("StudentSubjects")

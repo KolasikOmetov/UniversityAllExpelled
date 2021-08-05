@@ -10,11 +10,13 @@ namespace UniversityBusinessLogic.BusinessLogics
     {
         private readonly IStudentStorage _studentStorage;
         private readonly ILectorStorage _lectorStorage;
+
         public StudentLogic(IStudentStorage studentStorage, ILectorStorage lectorStorage)
         {
             _studentStorage = studentStorage;
             _lectorStorage = lectorStorage;
         }
+
         public List<StudentViewModel> Read(StudentBindingModel model)
         {
             if (model == null)
@@ -27,34 +29,21 @@ namespace UniversityBusinessLogic.BusinessLogics
             }
             return _studentStorage.GetFilteredList(model);
         }
-        public void Create(StudentBindingModel model)
+
+        public void CreateOrUpdate(StudentBindingModel model)
         {
             var element = _studentStorage.GetElement(new StudentBindingModel { 
-                Name = model.Name,
-                //GradebookNumber = model.GradebookNumber
+                Name = model.Name
             });
             if (element != null && element.GradebookNumber != model.GradebookNumber)
             {
-                throw new Exception("Уже есть студент с таким именем");
+                throw new Exception("Уже есть такой студент");
             }
             if (!string.IsNullOrEmpty(model.GradebookNumber))
             {
                 _studentStorage.Insert(model);
             }
-        }
-
-        public void Update(StudentBindingModel model)
-        {
-            var element = _studentStorage.GetElement(new StudentBindingModel
-            {
-                Name = model.Name,
-                GradebookNumber = model.GradebookNumber
-            });
-            if (element != null && element.GradebookNumber != model.GradebookNumber)
-            {
-                throw new Exception("Уже есть студент с таким именем");
-            }
-            if (!string.IsNullOrEmpty(model.GradebookNumber))
+            else
             {
                 _studentStorage.Update(model);
             }

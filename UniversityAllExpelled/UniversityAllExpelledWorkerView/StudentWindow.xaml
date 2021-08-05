@@ -13,7 +13,7 @@
             </StackPanel>
             <StackPanel Margin="10,0,0,0">
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxName" Width="127"></TextBox>
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxName" Width="128"></TextBox>
                 </Border>
             </StackPanel>
 

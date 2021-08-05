@@ -25,9 +25,9 @@ namespace UniversityAllExpelledWorkerView
         [Dependency]
         public IUnityContainer Container { get; set; }
 
-        public string Id { set { id = value; } }
+        public string Login { set { login = value; } }
 
-        private string id;
+        private string login;
 
         private readonly StudentLogic logic;
 
@@ -41,11 +41,11 @@ namespace UniversityAllExpelledWorkerView
         {
             try
             {
-                //var list = logic.Read(new StudentBindingModel { GradebookNumber = id });
-                var list = logic.Read(null);
+                var list = logic.Read(new StudentBindingModel { DenearyLogin = login });
                 if (list != null)
                 {
                     dataGrid.ItemsSource = list;
+                    // СКРЫТЬ
                 }
             }
             catch (Exception ex)
@@ -54,15 +54,15 @@ namespace UniversityAllExpelledWorkerView
             }
         }
 
-        //private void StudentsWindow_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    LoadData();
-        //}
+        private void StudentsWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+        }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
             var window = Container.Resolve<StudentWindow>();
-            window.GrdBookNum = id;
+            window.Login = login;
             if (window.ShowDialog().Value)
             {
                 LoadData();

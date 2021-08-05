@@ -68,10 +68,11 @@ namespace UniversityAllExpelledWorkerView
             }
             try
             {
-                _logicStudent.Create(new StudentBindingModel
+                _logicStudent.CreateOrUpdate(new StudentBindingModel
                 {
                     GradebookNumber = TextBoxGradBook.Text,
-                    Name = TextBoxName.Text         
+                    Name = TextBoxName.Text,
+                    DenearyLogin = login
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;

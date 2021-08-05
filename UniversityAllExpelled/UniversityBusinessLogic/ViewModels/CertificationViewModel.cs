@@ -12,8 +12,5 @@ namespace UniversityBusinessLogic.ViewModels
 
         [DisplayName("Студент")]
         public string StudentName { get; set; }
-
-        [DisplayName("Деканат")]
-        public string DenearyName { get; set; }
     }
 }

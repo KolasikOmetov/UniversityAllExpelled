@@ -45,7 +45,7 @@ namespace UniversityAllExpelledWorkerView
         private void MenuItemStudents_Click(object sender, RoutedEventArgs e)
         {
             var window = Container.Resolve<StudentsWindow>();
-            //window.Id = id;
+            window.Login = login;
             window.ShowDialog();
         }
 
@@ -73,7 +73,7 @@ namespace UniversityAllExpelledWorkerView
         private void MenuBindingStudent_Click(object sender, RoutedEventArgs e)
         {
             var window = Container.Resolve<BindingStudentPlanWindow>();
-            //window.Login = login;
+            window.Login = login;
             window.ShowDialog();
         }
 

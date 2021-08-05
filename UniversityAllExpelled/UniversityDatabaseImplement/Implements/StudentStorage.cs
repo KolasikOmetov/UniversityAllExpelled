@@ -24,6 +24,7 @@ namespace UniversityDatabaseImplement.Implements
                   {
                       GradebookNumber = rec.GradebookNumber,
                       Name = rec.Name,
+                      DenearyName = context.Denearies.FirstOrDefault(x => x.Login == rec.DenearyLogin).Name,
                       Subjects = rec.StudentSubjects
                       .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
                       EducationPlans = rec.EducationPlanStudents
@@ -45,15 +46,16 @@ namespace UniversityDatabaseImplement.Implements
                   .ThenInclude(rec => rec.Subject)
                   .Include(rec => rec.EducationPlanStudents)
                   .ThenInclude(rec => rec.EducationPlan)
-                  .Where(rec => rec.Name == model.Name)
+                  .Where(rec => rec.DenearyLogin == model.DenearyLogin)
                   .Select(rec => new StudentViewModel
                   {
                       GradebookNumber = rec.GradebookNumber,
                       Name = rec.Name,
-                      Subjects = rec.StudentSubjects
-                      .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
-                      EducationPlans = rec.EducationPlanStudents
-                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                      DenearyName = context.Denearies.FirstOrDefault(x => x.Login == model.DenearyLogin).Name,
+                      //Subjects = rec.StudentSubjects
+                      //.ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
+                      //EducationPlans = rec.EducationPlanStudents
+                      //.ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
                   })
                   .ToList();
             }
@@ -67,16 +69,17 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 var student = context.Students
-                  //.Include(rec => rec.StudentSubjects)
-                  //.ThenInclude(rec => rec.Subject)
-                  //.Include(rec => rec.EducationPlanStudents)
-                  //.ThenInclude(rec => rec.EducationPlan)
+                  .Include(rec => rec.StudentSubjects)
+                  .ThenInclude(rec => rec.Subject)
+                  .Include(rec => rec.EducationPlanStudents)
+                  .ThenInclude(rec => rec.EducationPlan)
                   .FirstOrDefault(rec => rec.Name == model.Name || rec.GradebookNumber == model.GradebookNumber);
                 return student != null ?
                   new StudentViewModel
                   {
                       GradebookNumber = student.GradebookNumber,
                       Name = student.Name,
+                      DenearyName = context.Denearies.FirstOrDefault(x => x.Login == student.DenearyLogin).Name,
                       Subjects = student.StudentSubjects
                       .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
                       EducationPlans = student.EducationPlanStudents
@@ -167,9 +170,9 @@ namespace UniversityDatabaseImplement.Implements
         private Student CreateModel(StudentBindingModel model, Student student)
         {
             // нужно передавать student уже с заполнеными полями и добавленным таблицу Students  
-
-            student.Name = model.Name;
             student.GradebookNumber = model.GradebookNumber;
+            student.Name = model.Name;
+            student.DenearyLogin = model.DenearyLogin;           
             return student;
         }
 

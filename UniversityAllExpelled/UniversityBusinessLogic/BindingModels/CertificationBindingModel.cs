@@ -10,8 +10,6 @@ namespace UniversityBusinessLogic.BindingModels
 
         public DateTime Date { get; set; }
 
-        public string StudentId { get; set; }
-
-        public string DenearyLogin { get; set; }
+        public string StudentGradebookNumber { get; set; }
     }
 }

@@ -31,8 +31,7 @@ namespace UniversityBusinessLogic.BusinessLogics
             var element = _certificationStorage.GetElement(new CertificationBindingModel
             {
                 Date = model.Date,
-                StudentId = model.StudentId,
-                DenearyLogin = model.DenearyLogin
+                StudentGradebookNumber = model.StudentGradebookNumber
             }); 
             if (element != null && element.Id != model.Id)
             {

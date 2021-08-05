@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UniversityDatabaseImplement.Migrations
 {
-    public partial class Init : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,7 @@ namespace UniversityDatabaseImplement.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(nullable: false),
-                    StudentGradebookNumber = table.Column<string>(nullable: true),
-                    DenearyLogin = table.Column<string>(nullable: true)
+                    StudentGradebookNumber = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,7 +41,8 @@ namespace UniversityDatabaseImplement.Migrations
                 {
                     Login = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false)
+                    Password = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,6 +55,7 @@ namespace UniversityDatabaseImplement.Migrations
                 {
                     DepartmentLogin = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -95,7 +96,8 @@ namespace UniversityDatabaseImplement.Migrations
                 columns: table => new
                 {
                     GradebookNumber = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false)
+                    Name = table.Column<string>(nullable: false),
+                    DenearyLogin = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -148,7 +150,7 @@ namespace UniversityDatabaseImplement.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    GradebookNumber = table.Column<string>(nullable: true),
+                    StudentGradebookNumber = table.Column<string>(nullable: true),
                     EducationPlanId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -161,8 +163,8 @@ namespace UniversityDatabaseImplement.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EducationPlanStudents_Students_GradebookNumber",
-                        column: x => x.GradebookNumber,
+                        name: "FK_EducationPlanStudents_Students_StudentGradebookNumber",
+                        column: x => x.StudentGradebookNumber,
                         principalTable: "Students",
                         principalColumn: "GradebookNumber",
                         onDelete: ReferentialAction.Restrict);
@@ -174,15 +176,15 @@ namespace UniversityDatabaseImplement.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    GradebookNumber = table.Column<string>(nullable: true),
+                    StudentGradebookNumber = table.Column<string>(nullable: true),
                     SubjectId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StudentSubjects", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StudentSubjects_Students_GradebookNumber",
-                        column: x => x.GradebookNumber,
+                        name: "FK_StudentSubjects_Students_StudentGradebookNumber",
+                        column: x => x.StudentGradebookNumber,
                         principalTable: "Students",
                         principalColumn: "GradebookNumber",
                         onDelete: ReferentialAction.Restrict);
@@ -210,14 +212,14 @@ namespace UniversityDatabaseImplement.Migrations
                 column: "EducationPlanId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EducationPlanStudents_GradebookNumber",
+                name: "IX_EducationPlanStudents_StudentGradebookNumber",
                 table: "EducationPlanStudents",
-                column: "GradebookNumber");
+                column: "StudentGradebookNumber");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentSubjects_GradebookNumber",
+                name: "IX_StudentSubjects_StudentGradebookNumber",
                 table: "StudentSubjects",
-                column: "GradebookNumber");
+                column: "StudentGradebookNumber");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StudentSubjects_SubjectId",

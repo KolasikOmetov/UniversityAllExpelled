@@ -9,6 +9,8 @@ namespace UniversityBusinessLogic.ViewModels
 		public string GradebookNumber { get; set; }
 		[DisplayName("Имя")]
 		public string Name { get; set; }
+		[DisplayName("Деканат")]
+		public string DenearyName { get; set; }
 		public Dictionary<int, string> Subjects { get; set; }
 		public Dictionary<int, string> EducationPlans { get; set; }
 	}

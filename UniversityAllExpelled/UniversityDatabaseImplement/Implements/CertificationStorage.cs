@@ -9,7 +9,7 @@ using UniversityDatabaseImplement.Models;
 
 namespace UniversityDatabaseImplement.Implements
 {
-    public class CertificationStorage : ICertificationStorage
+    public class CertificationStorage : ICertificationStorage //МЕНЯТЬ
     {
         public List<CertificationViewModel> GetFullList()
         {
@@ -20,8 +20,7 @@ namespace UniversityDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     Date = rec.Date,
-                    StudentName = context.Students.FirstOrDefault(x => x.GradebookNumber == rec.StudentGradebookNumber).Name,
-                    DenearyName = context.Denearies.FirstOrDefault(x => x.Name == rec.DenearyLogin).Name
+                    StudentName = context.Students.FirstOrDefault(x => x.GradebookNumber == rec.StudentGradebookNumber).Name                    
                 }).ToList();
             }
         }
@@ -34,13 +33,12 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 return context.Certifications
-                .Where(rec => rec.StudentGradebookNumber == model.StudentId && rec.DenearyLogin == model.DenearyLogin)
+                .Where(rec => rec.StudentGradebookNumber == model.StudentGradebookNumber /*&& rec.DenearyLogin == model.DenearyLogin*/)
                 .Select(rec => new CertificationViewModel
                 {
                     Id = rec.Id,
                     Date = rec.Date,
                     StudentName = context.Students.FirstOrDefault(x => x.GradebookNumber == rec.StudentGradebookNumber).Name,
-                    DenearyName = context.Denearies.FirstOrDefault(x => x.Name == rec.DenearyLogin).Name
                 })
                 .ToList();
             }
@@ -54,13 +52,12 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 var Cert = context.Certifications
-                .FirstOrDefault(rec => rec.Date == model.Date || rec.DenearyLogin == model.DenearyLogin);
+                .FirstOrDefault(rec => rec.Date == model.Date /*|| rec.DenearyLogin == model.DenearyLogin*/);
                 return Cert != null ?
                 new CertificationViewModel
                 {
                     Id = Cert.Id,
                     Date = Cert.Date,
-                    DenearyName = Cert.DenearyLogin,
                     StudentName = Cert.StudentGradebookNumber
                 } :
                 null;
@@ -106,7 +103,7 @@ namespace UniversityDatabaseImplement.Implements
         private Certification CreateModel(CertificationBindingModel model, Certification Certification)
         {
             Certification.Date = model.Date;
-            Certification.DenearyLogin = model.DenearyLogin;
+            //???
             return Certification;
         }
     }

@@ -29,9 +29,6 @@ namespace UniversityDatabaseImplement.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DenearyLogin")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("StudentGradebookNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -187,6 +184,9 @@ namespace UniversityDatabaseImplement.Migrations
                 {
                     b.Property<string>("GradebookNumber")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("DenearyLogin")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()

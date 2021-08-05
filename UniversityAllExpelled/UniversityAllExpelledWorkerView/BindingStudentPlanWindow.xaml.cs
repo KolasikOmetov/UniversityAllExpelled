@@ -40,8 +40,7 @@ namespace UniversityAllExpelledWorkerView
             {
                 ComboBoxStudent.ItemsSource = _studentLogic.Read(new StudentBindingModel
                 {
-                    // ЧТО-ТО = login
-                    
+                    DenearyLogin = login                  
                 });
                 ListBoxPlan.ItemsSource = _epLogic.Read(null);
             }
