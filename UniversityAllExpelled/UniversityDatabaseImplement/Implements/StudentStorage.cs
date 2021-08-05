@@ -25,10 +25,10 @@ namespace UniversityDatabaseImplement.Implements
                       GradebookNumber = rec.GradebookNumber,
                       Name = rec.Name,
                       DenearyName = context.Denearies.FirstOrDefault(x => x.Login == rec.DenearyLogin).Name,
-                      Subjects = rec.StudentSubjects
-                      .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
-                      EducationPlans = rec.EducationPlanStudents
-                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                      //Subjects = rec.StudentSubjects
+                      //.ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
+                      //EducationPlans = rec.EducationPlanStudents
+                      //.ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
 
                   }).ToList();
             }
@@ -45,17 +45,17 @@ namespace UniversityDatabaseImplement.Implements
                   .Include(rec => rec.StudentSubjects)
                   .ThenInclude(rec => rec.Subject)
                   .Include(rec => rec.EducationPlanStudents)
-                  .ThenInclude(rec => rec.EducationPlan)
+                  .ThenInclude(rec => rec.EducationPlan).ToList()
                   .Where(rec => rec.DenearyLogin == model.DenearyLogin)
                   .Select(rec => new StudentViewModel
                   {
                       GradebookNumber = rec.GradebookNumber,
                       Name = rec.Name,
                       DenearyName = context.Denearies.FirstOrDefault(x => x.Login == model.DenearyLogin).Name,
-                      //Subjects = rec.StudentSubjects
-                      //.ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
-                      //EducationPlans = rec.EducationPlanStudents
-                      //.ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                      Subjects = rec.StudentSubjects
+                      .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
+                      EducationPlans = rec.EducationPlanStudents
+                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
                   })
                   .ToList();
             }
@@ -80,10 +80,10 @@ namespace UniversityDatabaseImplement.Implements
                       GradebookNumber = student.GradebookNumber,
                       Name = student.Name,
                       DenearyName = context.Denearies.FirstOrDefault(x => x.Login == student.DenearyLogin).Name,
-                      Subjects = student.StudentSubjects
-                      .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
-                      EducationPlans = student.EducationPlanStudents
-                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                      //Subjects = student.StudentSubjects
+                      //.ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
+                      //EducationPlans = student.EducationPlanStudents
+                      //.ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
                   } :
                   null;
             }
@@ -203,10 +203,10 @@ namespace UniversityDatabaseImplement.Implements
                   {
                       GradebookNumber = rec.GradebookNumber,
                       Name = rec.Name,
-                      Subjects = rec.StudentSubjects
-                      .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
-                      EducationPlans = rec.EducationPlanStudents
-                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                      //Subjects = rec.StudentSubjects
+                      //.ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
+                      //EducationPlans = rec.EducationPlanStudents
+                      //.ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
                   })
                   .ToList();
             }

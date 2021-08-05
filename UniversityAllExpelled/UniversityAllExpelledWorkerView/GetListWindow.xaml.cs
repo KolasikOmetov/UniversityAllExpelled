@@ -26,7 +26,7 @@ namespace UniversityAllExpelledWorkerView
     {       
         private readonly EducationPlanLogic _epLogic;
         private readonly SubjectLogic _subjectLogic;
-        private readonly ReportWorkerLogic _reportLogic;
+        //private readonly ReportWorkerLogic _reportLogic;
         public GetListWindow(EducationPlanLogic epLogic, SubjectLogic subjectLogic, ReportLogic reportLogic)//()//(EducationPlanLogic epLogic, StudentLogic studentLogic, ReportLogic reportLogic)
         {
             InitializeComponent();
