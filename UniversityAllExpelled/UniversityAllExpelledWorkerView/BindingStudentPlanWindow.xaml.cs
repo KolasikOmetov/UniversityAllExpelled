@@ -38,11 +38,11 @@ namespace UniversityAllExpelledWorkerView
         {
             try
             {
-                ListBoxPlan.ItemsSource = _epLogic.Read(null);
-                ComboBoxStudent.ItemsSource = _studentLogic.Read(new StudentBindingModel
-                {
-                    DenearyLogin = login                  
-                });               
+                ListBoxStudent.ItemsSource = _studentLogic.Read(null);
+                //ComboBoxPlan.ItemsSource = _epLogic.Read(new EducationPlanBindingModel
+                //{
+                //    DenearyLogin = login                  
+                //});               
             }
             catch (Exception ex)
             {
