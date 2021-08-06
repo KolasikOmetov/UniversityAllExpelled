@@ -73,5 +73,10 @@ namespace UniversityBusinessLogic.BusinessLogics
         {
             _studentStorage.BindingSubject(gradebookNumber, subjectId);
         }
+
+        public void BindingPlan(string gradebookNumber, int id)
+        {
+            _studentStorage.BindingPlan(gradebookNumber, id);
+        }
     }
 }

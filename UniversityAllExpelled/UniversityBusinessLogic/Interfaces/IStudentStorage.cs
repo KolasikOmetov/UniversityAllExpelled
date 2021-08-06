@@ -14,5 +14,6 @@ namespace UniversityBusinessLogic.Interfaces
 		void Update(StudentBindingModel model);
 		void Delete(StudentBindingModel model);
 		void BindingSubject(string gradebookNumber, int subjectId);
+		void BindingPlan(string gradebookNumber, int epId);
 	}
 }

@@ -46,7 +46,7 @@ namespace UniversityDatabaseImplement.Implements
                   .ThenInclude(rec => rec.Subject)
                   .Include(rec => rec.EducationPlanStudents)
                   .ThenInclude(rec => rec.EducationPlan)//.ToList()
-                  .Where(rec => rec.DenearyLogin.Contains(model.DenearyLogin) /*== model.DenearyLogin*/)
+                  .Where(rec => rec.DenearyLogin == model.DenearyLogin)
                   .Select(rec => new StudentViewModel
                   {
                       GradebookNumber = rec.GradebookNumber,
@@ -54,10 +54,10 @@ namespace UniversityDatabaseImplement.Implements
                       DenearyName = context.Denearies.FirstOrDefault(x => x.Login == model.DenearyLogin).Name,
                       //Subjects = rec.StudentSubjects
                       //.ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
-                      //EducationPlans = rec.EducationPlanStudents
-                      //.ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                      EducationPlans = rec.EducationPlanStudents
+                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName),
                       Subjects = new Dictionary<int, string>(),
-                      EducationPlans = new Dictionary<int, string>()
+                      //EducationPlans = new Dictionary<int, string>()
                   })
                   .ToList();
             }
@@ -82,10 +82,10 @@ namespace UniversityDatabaseImplement.Implements
                       GradebookNumber = student.GradebookNumber,
                       Name = student.Name,
                       DenearyName = context.Denearies.FirstOrDefault(x => x.Login == student.DenearyLogin).Name,
-                      //Subjects = student.StudentSubjects
-                      //.ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
-                      //EducationPlans = student.EducationPlanStudents
-                      //.ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                      Subjects = student.StudentSubjects
+                      .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
+                      EducationPlans = student.EducationPlanStudents
+                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
                   } :
                   null;
             }
@@ -190,6 +190,19 @@ namespace UniversityDatabaseImplement.Implements
                 context.SaveChanges();
             }
         }
+
+        public void BindingPlan(string gradebookNumber, int epId)
+        {
+            using (var context = new UniversityDatabase())
+            {
+                context.EducationPlanStudents.Add(new EducationPlanStudent
+                {
+                    StudentGradebookNumber = gradebookNumber,
+                    EducationPlanId = epId,
+                });
+                context.SaveChanges();
+            }
+        }
         public List<StudentViewModel> GetBySubjectId(int subjectId)
         {
             using (var context = new UniversityDatabase())
@@ -205,10 +218,10 @@ namespace UniversityDatabaseImplement.Implements
                   {
                       GradebookNumber = rec.GradebookNumber,
                       Name = rec.Name,
-                      //Subjects = rec.StudentSubjects
-                      //.ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
-                      //EducationPlans = rec.EducationPlanStudents
-                      //.ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                      Subjects = rec.StudentSubjects
+                      .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
+                      EducationPlans = rec.EducationPlanStudents
+                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
                   })
                   .ToList();
             }
