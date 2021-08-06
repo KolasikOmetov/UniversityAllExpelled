@@ -41,8 +41,8 @@ namespace UniversityAllExpelledWorkerView
                 ListBoxPlan.ItemsSource = _epLogic.Read(null);
                 ComboBoxStudent.ItemsSource = _studentLogic.Read(new StudentBindingModel
                 {
-                    DenearyLogin = login                  
-                });               
+                    DenearyLogin = login
+                });
             }
             catch (Exception ex)
             {
@@ -53,6 +53,17 @@ namespace UniversityAllExpelledWorkerView
         private void BindingStudentWindow_Loaded(object sender, RoutedEventArgs e)
         {
             LoadData();
+        }
+
+        private void ButtonBinding_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
         }
     }
 }

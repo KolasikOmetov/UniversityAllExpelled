@@ -45,17 +45,19 @@ namespace UniversityDatabaseImplement.Implements
                   .Include(rec => rec.StudentSubjects)
                   .ThenInclude(rec => rec.Subject)
                   .Include(rec => rec.EducationPlanStudents)
-                  .ThenInclude(rec => rec.EducationPlan).ToList()
-                  .Where(rec => rec.DenearyLogin == model.DenearyLogin)
+                  .ThenInclude(rec => rec.EducationPlan)//.ToList()
+                  .Where(rec => rec.DenearyLogin.Contains(model.DenearyLogin) /*== model.DenearyLogin*/)
                   .Select(rec => new StudentViewModel
                   {
                       GradebookNumber = rec.GradebookNumber,
                       Name = rec.Name,
                       DenearyName = context.Denearies.FirstOrDefault(x => x.Login == model.DenearyLogin).Name,
-                      Subjects = rec.StudentSubjects
-                      .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
-                      EducationPlans = rec.EducationPlanStudents
-                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                      //Subjects = rec.StudentSubjects
+                      //.ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
+                      //EducationPlans = rec.EducationPlanStudents
+                      //.ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                      Subjects = new Dictionary<int, string>(),
+                      EducationPlans = new Dictionary<int, string>()
                   })
                   .ToList();
             }
@@ -172,7 +174,7 @@ namespace UniversityDatabaseImplement.Implements
             // нужно передавать student уже с заполнеными полями и добавленным таблицу Students  
             student.GradebookNumber = model.GradebookNumber;
             student.Name = model.Name;
-            student.DenearyLogin = model.DenearyLogin;           
+            student.DenearyLogin = model.DenearyLogin;
             return student;
         }
 
