@@ -45,8 +45,8 @@ namespace UniversityDatabaseImplement.Implements
                   .Include(rec => rec.StudentSubjects)
                   .ThenInclude(rec => rec.Subject)
                   .Include(rec => rec.EducationPlanStudents)
-                  .ThenInclude(rec => rec.EducationPlan)//.ToList()
-                  .Where(rec => rec.DenearyLogin == model.DenearyLogin)
+                  .ThenInclude(rec => rec.EducationPlan)
+                  .Where(rec => rec.DenearyLogin == model.DenearyLogin).ToList()
                   .Select(rec => new StudentViewModel
                   {
                       GradebookNumber = rec.GradebookNumber,
@@ -94,33 +94,21 @@ namespace UniversityDatabaseImplement.Implements
         {
             using (var context = new UniversityDatabase())
             {
-                //using (var transaction = context.Database.BeginTransaction())
-                //{
-                //    try
-                //    {
-                //        Student s = new Student
-                //        {
-                //            Name = model.Name,
-                //            GradebookNumber = model.GradebookNumber
-                //        };
-                //        //model.Subjects = new Dictionary<int, string>();
-                //        //model.EducationPlans = new Dictionary<int, string>();
-                //        context.Students.Add(s);
-                //        context.SaveChanges();
-                //        CreateModel(model, s, context);
-                //        context.SaveChanges();
-                //        transaction.Commit();
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        transaction.Rollback();
-                //        throw ex;
-                //    }
-                //}
-                model.Subjects = new Dictionary<int, string>();
-                model.EducationPlans = new Dictionary<int, string>();
-                context.Students.Add(CreateModel(model, new Student()));
-                context.SaveChanges();
+
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        CreateModel(model, new Student(), context);
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
             }
         }
         public void Update(StudentBindingModel model)
@@ -129,19 +117,31 @@ namespace UniversityDatabaseImplement.Implements
             {
                 using (var transaction = context.Database.BeginTransaction())
                 {
+                    //try
+                    //{
+                    //    var element = context.Students
+                    //      .Include(rec => rec.StudentSubjects)
+                    //      .ThenInclude(rec => rec.Subject)
+                    //      .Include(rec => rec.EducationPlanStudents)
+                    //      .ThenInclude(rec => rec.EducationPlan).FirstOrDefault(rec => rec.GradebookNumber == model.GradebookNumber);
+                    //    if (element == null)
+                    //    {
+                    //        throw new Exception("Элемент не найден");
+                    //    }
+                    //    element.Name = model.Name;
+                    //    CreateModel(model, element);
+                    //    context.SaveChanges();
+                    //    transaction.Commit();
+                    //}
                     try
                     {
-                        var element = context.Students
-                          .Include(rec => rec.StudentSubjects)
-                          .ThenInclude(rec => rec.Subject)
-                          .Include(rec => rec.EducationPlanStudents)
-                          .ThenInclude(rec => rec.EducationPlan).FirstOrDefault(rec => rec.GradebookNumber == model.GradebookNumber);
+                        var element = context.Students.FirstOrDefault(rec => rec.GradebookNumber ==
+                       model.GradebookNumber);
                         if (element == null)
                         {
                             throw new Exception("Элемент не найден");
                         }
-                        element.Name = model.Name;
-                        CreateModel(model, element);
+                        CreateModel(model, element, context);
                         context.SaveChanges();
                         transaction.Commit();
                     }
@@ -169,12 +169,41 @@ namespace UniversityDatabaseImplement.Implements
                 }
             }
         }
-        private Student CreateModel(StudentBindingModel model, Student student)
+        private Student CreateModel(StudentBindingModel model, Student student, UniversityDatabase context)
         {
             // нужно передавать student уже с заполнеными полями и добавленным таблицу Students  
             student.GradebookNumber = model.GradebookNumber;
             student.Name = model.Name;
             student.DenearyLogin = model.DenearyLogin;
+            context.Students.Add(student);
+            context.SaveChanges();
+
+            if(!string.IsNullOrEmpty(model.GradebookNumber))
+            {
+                var StudentComponents = context.EducationPlanStudents.Where(rec => rec.StudentGradebookNumber == model.GradebookNumber).ToList(); //?
+                context.EducationPlanStudents.RemoveRange(StudentComponents.Where(rec =>
+                !model.EducationPlanStudents.ContainsKey(rec.EducationPlanId)).ToList());
+
+                foreach (var update in StudentComponents)
+                {
+
+                    model.EducationPlanStudents.Remove(update.EducationPlanId);
+                }
+
+                context.SaveChanges();
+            }
+
+            //// добавили новые
+            //foreach (var pp in model.EducationPlanStudents)
+            //{
+            //    context.EducationPlanStudents.Add(new EducationPlanStudent
+            //    {
+            //         StudentGradebookNumber = student.GradebookNumber,
+            //         EducationPlanId = pp.Key
+            //    });
+            //    context.SaveChanges();
+            //}
+
             return student;
         }
 
