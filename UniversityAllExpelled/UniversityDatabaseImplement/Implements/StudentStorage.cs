@@ -57,7 +57,6 @@ namespace UniversityDatabaseImplement.Implements
                       EducationPlans = rec.EducationPlanStudents
                       .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName),
                       Subjects = new Dictionary<int, string>(),
-                      //EducationPlans = new Dictionary<int, string>()
                   })
                   .ToList();
             }
@@ -117,22 +116,6 @@ namespace UniversityDatabaseImplement.Implements
             {
                 using (var transaction = context.Database.BeginTransaction())
                 {
-                    //try
-                    //{
-                    //    var element = context.Students
-                    //      .Include(rec => rec.StudentSubjects)
-                    //      .ThenInclude(rec => rec.Subject)
-                    //      .Include(rec => rec.EducationPlanStudents)
-                    //      .ThenInclude(rec => rec.EducationPlan).FirstOrDefault(rec => rec.GradebookNumber == model.GradebookNumber);
-                    //    if (element == null)
-                    //    {
-                    //        throw new Exception("Элемент не найден");
-                    //    }
-                    //    element.Name = model.Name;
-                    //    CreateModel(model, element);
-                    //    context.SaveChanges();
-                    //    transaction.Commit();
-                    //}
                     try
                     {
                         var element = context.Students.FirstOrDefault(rec => rec.GradebookNumber ==
@@ -192,17 +175,6 @@ namespace UniversityDatabaseImplement.Implements
 
                 context.SaveChanges();
             }
-
-            //// добавили новые
-            //foreach (var pp in model.EducationPlanStudents)
-            //{
-            //    context.EducationPlanStudents.Add(new EducationPlanStudent
-            //    {
-            //         StudentGradebookNumber = student.GradebookNumber,
-            //         EducationPlanId = pp.Key
-            //    });
-            //    context.SaveChanges();
-            //}
 
             return student;
         }

@@ -26,7 +26,7 @@ namespace UniversityDatabaseImplement.Implements
                     Id = rec.Id,
                     StreamName = rec.StreamName,
                     Hours = rec.Hours,
-                    Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId.ToString(), recEPS => recEPS.EducationPlan.StreamName),
+                    //Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId, recEPS => recEPS.EducationPlan.StreamName),
                     Lectors = rec.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
                 }).ToList();
             }

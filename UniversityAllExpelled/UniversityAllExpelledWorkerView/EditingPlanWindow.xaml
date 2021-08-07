@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniversityAllExpelledWorkerView"
         mc:Ignorable="d"
-        Title="План" Height="171.333" Width="310.667" Loaded="EditingPlanWindow_Loaded">
-    <StackPanel Margin="20" VerticalAlignment="Top" HorizontalAlignment="Center">
+        Title="План" Height="193.66" Width="310.667" Loaded="EditingPlanWindow_Loaded">
+    <StackPanel Margin="37,20,37,0" VerticalAlignment="Top" HorizontalAlignment="Center" Height="134">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel HorizontalAlignment="Stretch">
                 <Label>Поток</Label>
                 <Label>Количество часов</Label>
+                <Label>Преподаватель</Label>
             </StackPanel>
             <StackPanel Margin="10,0,0,0">
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
@@ -18,6 +19,9 @@
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
                     <TextBox HorizontalAlignment="Stretch" MinWidth="100" x:Name="TextBoxHours"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Margin="4">
+                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" x:Name="TextBoxLectors"/>
                 </Border>
             </StackPanel>
         </StackPanel>
