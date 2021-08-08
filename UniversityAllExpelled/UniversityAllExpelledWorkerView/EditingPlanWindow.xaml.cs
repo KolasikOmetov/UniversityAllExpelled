@@ -30,15 +30,18 @@ namespace UniversityAllExpelledWorkerView
         private int? id;
 
         private readonly EducationPlanLogic _logicEP;
+        private readonly LectorLogic _logicL;
 
-        public EditingPlanWindow(EducationPlanLogic logic)
+        public EditingPlanWindow(EducationPlanLogic logicEP, LectorLogic logicL)
         {
             InitializeComponent();
-            this._logicEP = logic;
+            this._logicEP = logicEP;
+            this._logicL = logicL;
         }
 
         private void EditingPlanWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            ListBoxLectors.ItemsSource = _logicL.Read(null);
             if (id.HasValue)
             {
                 try
@@ -91,6 +94,16 @@ namespace UniversityAllExpelledWorkerView
         {
             DialogResult = false;
             Close();
+        }
+
+        private void buttonToSelectedLectors_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void buttonToLectors_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
