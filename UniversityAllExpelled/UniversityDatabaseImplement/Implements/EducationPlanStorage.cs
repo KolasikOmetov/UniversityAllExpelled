@@ -76,7 +76,7 @@ namespace UniversityDatabaseImplement.Implements
                     Id = ep.Id,
                     StreamName = ep.StreamName,
                     Hours = ep.Hours,
-                    Students = ep.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId.ToString(), recEPS => recEPS.EducationPlan.StreamName),
+                    Students = ep.EducationPlanStudents.ToDictionary(recEPS => recEPS.StudentGradebookNumber.ToString(), recEPS => recEPS.EducationPlan.StreamName),
                     Lectors = ep.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
                 } :
                 null;
