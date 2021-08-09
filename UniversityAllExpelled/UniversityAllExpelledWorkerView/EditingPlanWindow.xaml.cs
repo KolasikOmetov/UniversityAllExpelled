@@ -31,6 +31,8 @@ namespace UniversityAllExpelledWorkerView
 
         private readonly EducationPlanLogic _logicEP;
         private readonly LectorLogic _logicL;
+        //private List<LectorBindingModel> listAllLectors;
+        private List<LectorBindingModel> listSelectedLectors;
 
         public EditingPlanWindow(EducationPlanLogic logicEP, LectorLogic logicL)
         {
@@ -42,6 +44,10 @@ namespace UniversityAllExpelledWorkerView
         private void EditingPlanWindow_Loaded(object sender, RoutedEventArgs e)
         {
             ListBoxLectors.ItemsSource = _logicL.Read(null);
+            //foreach(var item in ListBoxLectors.Items)
+            //{
+            //    listAllLectors.Add(item as LectorBindingModel);
+            //}
             if (id.HasValue)
             {
                 try
@@ -98,12 +104,15 @@ namespace UniversityAllExpelledWorkerView
 
         private void buttonToSelectedLectors_Click(object sender, RoutedEventArgs e)
         {
-            
+            ListBoxLectors.ItemsSource = null;
+            ListBoxSelectedLectors.Items.Add(ListBoxLectors.SelectedItem as LectorBindingModel);
+            ListBoxLectors.Items.Remove(ListBoxLectors.SelectedItem as LectorBindingModel);
         }
 
         private void buttonToLectors_Click(object sender, RoutedEventArgs e)
         {
-
+            ListBoxLectors.Items.Add(ListBoxSelectedLectors.SelectedItem as LectorBindingModel);
+            ListBoxSelectedLectors.Items.Remove(ListBoxSelectedLectors.SelectedItem as LectorBindingModel);
         }
     }
 }
