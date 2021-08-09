@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Unity;
 using UniversityBusinessLogic.BindingModels;
 using UniversityBusinessLogic.BusinessLogics;
+using UniversityBusinessLogic.ViewModels;
 
 namespace UniversityAllExpelledWorkerView
 {
@@ -31,8 +32,8 @@ namespace UniversityAllExpelledWorkerView
 
         private readonly EducationPlanLogic _logicEP;
         private readonly LectorLogic _logicL;
-        private List<LectorBindingModel> listAllLectors;
-        private List<LectorBindingModel> listSelectedLectors;
+
+        private List<LectorViewModel> listAllLectors = new List<LectorViewModel>();
 
         public EditingPlanWindow(EducationPlanLogic logicEP, LectorLogic logicL)
         {
@@ -43,11 +44,10 @@ namespace UniversityAllExpelledWorkerView
 
         private void EditingPlanWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            ListBoxLectors.ItemsSource = _logicL.Read(null);
-            foreach(var item in ListBoxLectors.Items)
-            {
-                listAllLectors.Add(item as LectorBindingModel);
-            }
+            listAllLectors = _logicL.Read(null);
+
+            ListBoxLectors.ItemsSource = listAllLectors;
+
             if (id.HasValue)
             {
                 try
@@ -104,17 +104,34 @@ namespace UniversityAllExpelledWorkerView
 
         private void buttonToSelectedLectors_Click(object sender, RoutedEventArgs e)
         {
-            
+            if(ListBoxLectors.SelectedItem == null)
+            {
+                return;
+            }
+            var currentIndex = ListBoxLectors.SelectedIndex;
+            ListBoxSelectedLectors.Items.Add(ListBoxLectors.SelectedItem as LectorViewModel);
+            if (listAllLectors != null)
+            {
+                listAllLectors.RemoveAt(currentIndex);
+            }
+            LoadLectors();
         }
 
         private void buttonToLectors_Click(object sender, RoutedEventArgs e)
         {
-
+            if (ListBoxSelectedLectors.SelectedItem == null)
+            {
+                return;
+            }
+            listAllLectors.Add(ListBoxSelectedLectors.SelectedItem as LectorViewModel);
+            ListBoxSelectedLectors.Items.RemoveAt(ListBoxSelectedLectors.Items.IndexOf(ListBoxSelectedLectors.SelectedItem));
+            LoadLectors();
         }
 
-        private void ReloadLectors()
+        private void LoadLectors()
         {
-            
+            ListBoxLectors.ItemsSource = null;
+            ListBoxLectors.ItemsSource = listAllLectors;
         }
     }
 }
