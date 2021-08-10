@@ -174,7 +174,7 @@ namespace UniversityDatabaseImplement.Implements
             }
             foreach (var ss in model.Students)
             {
-                context.EducationPlanStudents.Add(new EducationPlanStudent
+                context.EducationPlanLectors.Add(new EducationPlanLector
                 {
                     EducationPlanId = ep.Id,
                     StudentGradebookNumber = ss.Key                  
