@@ -84,8 +84,9 @@ namespace UniversityAllExpelledWorkerView
                 {
                     Id = id,
                     StreamName = TextBoxStream.Text,
-                    Hours = int.Parse(TextBoxHours.Text)
+                    Hours = int.Parse(TextBoxHours.Text)                    
                 });
+
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
                 Close();
