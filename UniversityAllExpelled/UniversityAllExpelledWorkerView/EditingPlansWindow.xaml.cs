@@ -40,6 +40,8 @@ namespace UniversityAllExpelledWorkerView
         {
             var window = Container.Resolve<EditingPlanWindow>();
 
+            window.Login = login;
+
             if (window.ShowDialog().Value)
             {
                 LoadData();

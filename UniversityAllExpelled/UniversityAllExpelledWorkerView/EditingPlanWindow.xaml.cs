@@ -26,12 +26,16 @@ namespace UniversityAllExpelledWorkerView
         [Dependency]
         public IUnityContainer Container { get; set; }
 
+        public string Login { set { login = value; } }
         public int Id { set { id = value; } }
 
         private int? id;
+        private string login;
 
         private readonly EducationPlanLogic _logicEP;
         private readonly LectorLogic _logicL;
+
+        private EducationPlanViewModel plan;
 
         private List<LectorViewModel> listAllLectors = new List<LectorViewModel>();
 
@@ -48,15 +52,15 @@ namespace UniversityAllExpelledWorkerView
 
             ListBoxLectors.ItemsSource = listAllLectors;
 
-            if (id.HasValue)
+            if (id.HasValue) //?
             {
                 try
                 {
-                    var view = _logicEP.Read(new EducationPlanBindingModel { Id = id })?[0];
-                    if (view != null)
+                    plan = _logicEP.Read(new EducationPlanBindingModel { Id = id })?[0];
+                    if (plan != null)
                     {
-                        TextBoxStream.Text = view.StreamName;
-                        TextBoxHours.Text = view.Hours.ToString();
+                        TextBoxStream.Text = plan.StreamName;
+                        TextBoxHours.Text = plan.Hours.ToString();                    
                     }
                 }
                 catch (Exception ex)
@@ -84,8 +88,24 @@ namespace UniversityAllExpelledWorkerView
                 {
                     Id = id,
                     StreamName = TextBoxStream.Text,
-                    Hours = int.Parse(TextBoxHours.Text)                    
+                    Hours = int.Parse(TextBoxHours.Text)                   
                 });
+                foreach (LectorViewModel item in ListBoxSelectedLectors.Items)
+                {
+                    var lector = _logicL.Read(new LectorBindingModel { Id = item.Id })?[0];
+
+                    if (lector == null)
+                    {
+                        throw new Exception("Такой преподаватель не найден");
+                    }
+
+                    if (plan.EducationPlanLectors.ContainsKey(lector.Id))
+                    {
+                        throw new Exception("Преподаватель уже привязан к данному плану");
+                    }
+
+                    _logicEP.BindingLector((int)id, lector.Id);
+                }
 
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;

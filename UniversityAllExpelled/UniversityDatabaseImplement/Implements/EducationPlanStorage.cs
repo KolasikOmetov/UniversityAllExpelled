@@ -27,7 +27,7 @@ namespace UniversityDatabaseImplement.Implements
                     StreamName = rec.StreamName,
                     Hours = rec.Hours,
                     //Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId, recEPS => recEPS.EducationPlan.StreamName),
-                    Lectors = rec.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)          
+                    //Lectors = rec.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)          
                 }).ToList();
             }
         }
@@ -51,7 +51,7 @@ namespace UniversityDatabaseImplement.Implements
                     StreamName = rec.StreamName,
                     Hours = rec.Hours,
                     //Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId.ToString(), recEPS => recEPS.EducationPlan.StreamName),
-                    Lectors = rec.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
+                    EducationPlanLectors = rec.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
                 })
                 .ToList();
             }
@@ -76,8 +76,8 @@ namespace UniversityDatabaseImplement.Implements
                     Id = ep.Id,
                     StreamName = ep.StreamName,
                     Hours = ep.Hours,
-                    Students = ep.EducationPlanStudents.ToDictionary(recEPS => recEPS.StudentGradebookNumber.ToString(), recEPS => recEPS.EducationPlan.StreamName),
-                    Lectors = ep.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
+                    EducationPlanStudents = ep.EducationPlanStudents.ToDictionary(recEPS => recEPS.StudentGradebookNumber.ToString(), recEPS => recEPS.EducationPlan.StreamName),
+                    EducationPlanLectors = ep.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
                 } :
                 null;
             }
@@ -192,16 +192,29 @@ namespace UniversityDatabaseImplement.Implements
 
             }
             // добавили новые
-            foreach (var epl in model.EducationPlanLectors)
+            //foreach (var epl in model.EducationPlanLectors)
+            //{
+            //    context.EducationPlanLectors.Add(new EducationPlanLector
+            //    {
+            //        EducationPlanId = ep.Id,
+            //        LectorId = epl.Key,
+            //    });
+            //    context.SaveChanges();
+            //}
+            return ep;
+        }
+
+        public void BindingLector(int epId, int lId)
+        {
+            using (var context = new UniversityDatabase())
             {
                 context.EducationPlanLectors.Add(new EducationPlanLector
                 {
-                    EducationPlanId = ep.Id,
-                    LectorId = epl.Key,
+                    EducationPlanId = epId,
+                    LectorId = lId
                 });
                 context.SaveChanges();
             }
-            return ep;
         }
     }
 }
