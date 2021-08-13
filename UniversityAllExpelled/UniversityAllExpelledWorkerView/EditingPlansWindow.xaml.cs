@@ -53,8 +53,8 @@ namespace UniversityAllExpelledWorkerView
             if (DataGridPlans.SelectedCells.Count != 0)
             {
                 var window = Container.Resolve<EditingPlanWindow>();
-                var cellInfo = DataGridPlans.SelectedCells[0];
-                EducationPlanViewModel record = (EducationPlanViewModel)(cellInfo.Item);
+                window.Login = login;
+                var record = (EducationPlanViewModel)DataGridPlans.SelectedCells[0].Item;
                 window.Id = record.Id;
                 if (window.ShowDialog().Value)
                 {
