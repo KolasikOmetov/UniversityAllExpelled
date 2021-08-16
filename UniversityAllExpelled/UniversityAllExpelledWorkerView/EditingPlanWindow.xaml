@@ -14,36 +14,21 @@
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
                     <Label Margin="-1,0,0,0">Выбранный преподаватель</Label>
                 </Border>
-                <ListBox x:Name="ListBoxSelectedLectors" Grid.Row="1" Height="290" Width="100">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <DataGrid x:Name="DataGridLectors" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="5" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" 
+                  ColumnWidth="*" IsReadOnly="True" Height="284">
+                </DataGrid>
             </StackPanel>
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="36" Margin="0,155,0,175">
-                <Button x:Name="buttonToSelectedLectors" Margin="0,0,0,5" Content="&lt;&lt;" Width="36" Click="buttonToSelectedLectors_Click"/>
-                <Button x:Name="buttonToLectors" Margin="0,0,0,0" Content=">>" Width="36" Click="buttonToLectors_Click"/>
-            </StackPanel>
-            <StackPanel Margin="25,0,0,0">
+            <StackPanel Margin="25,0,0,10">
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
                     <TextBox HorizontalAlignment="Stretch" MinWidth="100" x:Name="TextBoxStream"/>
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
                     <TextBox HorizontalAlignment="Stretch" MinWidth="100" x:Name="TextBoxHours"/>
                 </Border>
-                <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <Label>Преподаватели</Label>
-                </Border>
-                <ListBox x:Name="ListBoxLectors" Grid.Row="1" Height="290" Width="100">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
+                <Button x:Name="buttonAdd" Content="Добавить" Click="buttonAdd_Click"/>
+                <Button x:Name="buttonUpd" Content="Изменить" Click="buttonUpd_Click"/>
+                <Button x:Name="buttonDel" Content="Удалить" Click="buttonDel_Click"/>
+                <Button x:Name="buttonRef" Content="Обновить" Click="buttonRef_Click"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

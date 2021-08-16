@@ -191,16 +191,16 @@ namespace UniversityDatabaseImplement.Implements
                 context.SaveChanges();
 
             }
-            // добавили новые
-            //foreach (var epl in model.EducationPlanLectors)
-            //{
-            //    context.EducationPlanLectors.Add(new EducationPlanLector
-            //    {
-            //        EducationPlanId = ep.Id,
-            //        LectorId = epl.Key,
-            //    });
-            //    context.SaveChanges();
-            //}
+            //добавили новые
+            foreach (var epl in model.EducationPlanLectors)
+            {
+                context.EducationPlanLectors.Add(new EducationPlanLector
+                {
+                    EducationPlanId = ep.Id,
+                    LectorId = epl.Key,
+                });
+                context.SaveChanges();
+            }
             return ep;
         }
 
