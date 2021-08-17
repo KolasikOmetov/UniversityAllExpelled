@@ -211,11 +211,12 @@ namespace UniversityAllExpelledWorkerView
             {
                 try
                 {
-                    var view = _logicEP.Read(new EducationPlanBindingModel { Id = id })?[0];
+                    var view = _logicEP.Read(new EducationPlanBindingModel { Id = id.Value })?[0];
                     if (view != null)
                     {
                         TextBoxStream.Text = view.StreamName;
                         TextBoxHours.Text = view.Hours.ToString();
+                        epLectors = view.EducationPlanLectors;
                     }
                 }
                 catch (Exception ex)
@@ -276,7 +277,6 @@ namespace UniversityAllExpelledWorkerView
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
             var window = Container.Resolve<WindowBindingLector>();
-            //window.Id = (int)id;
             window.Login = login;
             if (window.ShowDialog().Value)
             {
@@ -315,7 +315,7 @@ namespace UniversityAllExpelledWorkerView
             if (DataGridLectors.SelectedCells.Count != 0)
             {
                 var window = Container.Resolve<WindowBindingLector>();
-                var conv = ((DataGridLectors.SelectedItem as KeyValuePair<int, string>?));
+                var conv = DataGridLectors.SelectedItem as KeyValuePair<int, string>?;
                 int id = 0;
                 foreach (var p in epLectors)
                 {
@@ -327,12 +327,12 @@ namespace UniversityAllExpelledWorkerView
                 }
                 epLectors.Remove(id);
                 window.Id = id;
-                //window.ClientId = (int)clientId;
+                window.Login = login;
                 if (window.ShowDialog().Value)
                 {
                     if (!epLectors.ContainsValue(window.LectorName))
                     {
-                        epLectors[window.Id] = (window.LectorName);
+                        epLectors[window.Id] = window.LectorName;
                     }
                     LoadData();
                 }
