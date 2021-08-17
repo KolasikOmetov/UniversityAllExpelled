@@ -14,6 +14,5 @@ namespace UniversityBusinessLogic.Interfaces
 		void Insert(EducationPlanBindingModel model);
 		void Update(EducationPlanBindingModel model);
 		void Delete(EducationPlanBindingModel model);
-		void BindingLector(int epId, int lId);
 	}
 }

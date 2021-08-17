@@ -146,27 +146,6 @@ namespace UniversityDatabaseImplement.Implements
 
         private EducationPlan CreateModel(EducationPlanBindingModel model, EducationPlan ep, UniversityDatabase context)
         {
-            //if (model.Id == null)
-            //{
-            //    var educationPlanStudents = context.EducationPlanStudents.Where(rec => rec.Id == model.Id).ToList();
-            //    context.EducationPlanStudents.RemoveRange(educationPlanStudents.Where(rec => !model.Students.ContainsKey(rec.StudentGradebookNumber)).ToList());
-            //    var educationPlanLectors = context.EducationPlanLectors.Where(rec => rec.EducationPlanId == model.Id).ToList();
-
-            //    context.EducationPlanLectors.RemoveRange(educationPlanLectors.Where(rec => !model.Lectors.ContainsKey(rec.EducationPlanId)).ToList());
-            //    context.SaveChanges();
-            //}
-            //foreach (var ss in model.Students)
-            //{
-            //    context.EducationPlanLectors.Add(new EducationPlanLector
-            //    {
-            //        EducationPlanId = ep.Id,
-            //        StudentGradebookNumber = ss.Key                  
-            //    });
-            //    context.SaveChanges();
-            //}
-
-            //return ep;
-
             ep.StreamName = model.StreamName;
             ep.Hours = model.Hours;
 
@@ -202,19 +181,6 @@ namespace UniversityDatabaseImplement.Implements
                 context.SaveChanges();
             }
             return ep;
-        }
-
-        public void BindingLector(int epId, int lId)
-        {
-            using (var context = new UniversityDatabase())
-            {
-                context.EducationPlanLectors.Add(new EducationPlanLector
-                {
-                    EducationPlanId = epId,
-                    LectorId = lId
-                });
-                context.SaveChanges();
-            }
         }
     }
 }

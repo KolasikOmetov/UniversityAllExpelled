@@ -55,10 +55,5 @@ namespace UniversityBusinessLogic.BusinessLogics
 			}
 			_educationPlanStorage.Delete(model);
 		}
-
-        public void BindingLector(int epId, int lId)
-        {
-            _educationPlanStorage.BindingLector(epId, lId);
-        }
     }
 }
