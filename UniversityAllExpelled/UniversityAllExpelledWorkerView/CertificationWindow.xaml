@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniversityAllExpelledWorkerView"
         mc:Ignorable="d"
-        Title="CertificationWindow" Height="204.085" Width="257.465">
+        Title="CertificationWindow" Height="204.085" Width="257.465" Loaded="CertificationWindow_Loaded">
     <Grid>
         <StackPanel Margin="20" VerticalAlignment="Top" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -19,7 +19,6 @@
                     </Border>
                     <Border BorderBrush="Black" BorderThickness="1" Margin="4">
                         <ComboBox x:Name="ComboBoxStudent" Margin="10">
-                            Выбранный план
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Name}"/>

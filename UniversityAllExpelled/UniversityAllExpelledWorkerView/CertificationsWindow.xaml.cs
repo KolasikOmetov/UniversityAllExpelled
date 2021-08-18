@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Unity;
+using UniversityBusinessLogic.BindingModels;
 using UniversityBusinessLogic.BusinessLogics;
+using UniversityBusinessLogic.ViewModels;
 
 namespace UniversityAllExpelledWorkerView
 {
@@ -33,17 +35,42 @@ namespace UniversityAllExpelledWorkerView
 
         private void ButtonUpd_Click(object sender, RoutedEventArgs e)
         {
-
+            if (dataGrid.SelectedCells.Count != 0)
+            {
+                var window = Container.Resolve<CertificationWindow>();
+                CertificationViewModel record = (CertificationViewModel)dataGrid.SelectedCells[0].Item;
+                window.Id = record.Id;
+                window.StudentGradebookNumber = record.StudentGradebookNumber;
+                if (window.ShowDialog().Value)
+                {
+                    LoadData();
+                }
+            }
         }
 
         private void ButtonDel_Click(object sender, RoutedEventArgs e)
         {
-
+            if (dataGrid.SelectedCells.Count != 0)
+            {
+                if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    int id = ((CertificationViewModel)dataGrid.SelectedCells[0].Item).Id;
+                    try
+                    {
+                        logic.Delete(new CertificationBindingModel { Id = id });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    LoadData();
+                }
+            }
         }
 
         private void ButtonRef_Click(object sender, RoutedEventArgs e)
         {
-
+            LoadData();
         }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)

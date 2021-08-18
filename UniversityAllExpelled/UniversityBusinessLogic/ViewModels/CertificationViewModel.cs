@@ -12,5 +12,7 @@ namespace UniversityBusinessLogic.ViewModels
 
         [DisplayName("Студент")]
         public string StudentName { get; set; }
+
+        public string StudentGradebookNumber { get; set; }
     }
 }
