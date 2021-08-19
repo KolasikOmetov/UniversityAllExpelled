@@ -11,5 +11,9 @@ namespace UniversityBusinessLogic.BindingModels
         public DateTime Date { get; set; }
 
         public string StudentGradebookNumber { get; set; }
+
+        public DateTime? DateFrom { get; set; }
+
+        public DateTime? DateTo { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace UniversityAllExpelledWorkerView
         private int? id;
         public string StudentGradebookNumber
         {
-            get { return (ComboBoxStudent.SelectedItem as StudentViewModel).GradebookNumber; }
+            get { return Convert.ToString((ComboBoxStudent.SelectedItem as StudentViewModel).GradebookNumber); }
             set
             {
                 studentGbn = value;
@@ -70,7 +70,7 @@ namespace UniversityAllExpelledWorkerView
                 {
                     Id = id,
                     Date = (DateTime)DatePicker.SelectedDate,
-                    StudentGradebookNumber = studentGbn
+                    StudentGradebookNumber = StudentGradebookNumber
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;

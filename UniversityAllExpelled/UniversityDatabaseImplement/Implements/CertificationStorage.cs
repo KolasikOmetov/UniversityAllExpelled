@@ -34,12 +34,16 @@ namespace UniversityDatabaseImplement.Implements
             using (var context = new UniversityDatabase())
             {
                 return context.Certifications
-                .Where(rec => rec.StudentGradebookNumber == model.StudentGradebookNumber /*&& rec.DenearyLogin == model.DenearyLogin*/)
+                .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.StudentGradebookNumber == model.StudentGradebookNumber || rec.Date == model.Date) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && (rec.StudentGradebookNumber == model.StudentGradebookNumber
+                || rec.Date.Date >= model.DateFrom.Value.Date && rec.Date.Date <= model.DateTo.Value.Date)))
+                .ToList()
                 .Select(rec => new CertificationViewModel
                 {
                     Id = rec.Id,
                     Date = rec.Date,
                     StudentName = context.Students.FirstOrDefault(x => x.GradebookNumber == rec.StudentGradebookNumber).Name,
+                    StudentGradebookNumber = rec.StudentGradebookNumber
                 })
                 .ToList();
             }
@@ -52,14 +56,15 @@ namespace UniversityDatabaseImplement.Implements
             }
             using (var context = new UniversityDatabase())
             {
-                var Cert = context.Certifications
-                .FirstOrDefault(rec => rec.Date == model.Date /*|| rec.DenearyLogin == model.DenearyLogin*/);
-                return Cert != null ?
+                var cert = context.Certifications
+                .FirstOrDefault(rec => (rec.StudentGradebookNumber == model.StudentGradebookNumber && rec.Date == model.Date) || rec.Id == model.Id);
+                return cert != null ?
                 new CertificationViewModel
                 {
-                    Id = Cert.Id,
-                    Date = Cert.Date,
-                    StudentName = Cert.StudentGradebookNumber
+                    Id = cert.Id,
+                    Date = cert.Date,
+                    StudentName = context.Students.FirstOrDefault(recStudent => recStudent.GradebookNumber == cert.StudentGradebookNumber).Name,
+                    StudentGradebookNumber = cert.StudentGradebookNumber,
                 } :
                 null;
             }
@@ -104,6 +109,7 @@ namespace UniversityDatabaseImplement.Implements
         private Certification CreateModel(CertificationBindingModel model, Certification Certification)
         {
             Certification.Date = model.Date;
+            Certification.StudentGradebookNumber = model.StudentGradebookNumber;
             
             return Certification;
         }

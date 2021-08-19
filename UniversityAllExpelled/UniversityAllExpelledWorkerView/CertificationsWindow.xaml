@@ -11,14 +11,7 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGrid" Grid.Column="0">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Дата" Width="*">
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Студент" Width="2*">
-                </DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <DataGrid Grid.Column="0" Name="dataGrid" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" ColumnWidth="*"/>
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
             <Button Margin="10" Padding="5" Click="ButtonAdd_Click">Добавить</Button>
             <Button Margin="10" Padding="5" Click="ButtonUpd_Click">Изменить</Button>
