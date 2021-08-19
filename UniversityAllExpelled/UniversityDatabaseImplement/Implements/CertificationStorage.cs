@@ -20,7 +20,8 @@ namespace UniversityDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     Date = rec.Date,
-                    StudentName = context.Students.FirstOrDefault(x => x.GradebookNumber == rec.StudentGradebookNumber).Name                    
+                    StudentName = context.Students.FirstOrDefault(x => x.GradebookNumber == rec.StudentGradebookNumber).Name,
+                    StudentGradebookNumber = rec.StudentGradebookNumber
                 }).ToList();
             }
         }
@@ -103,7 +104,7 @@ namespace UniversityDatabaseImplement.Implements
         private Certification CreateModel(CertificationBindingModel model, Certification Certification)
         {
             Certification.Date = model.Date;
-            //???
+            
             return Certification;
         }
     }
