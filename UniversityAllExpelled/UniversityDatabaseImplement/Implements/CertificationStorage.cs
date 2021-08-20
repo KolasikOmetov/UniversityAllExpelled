@@ -9,7 +9,7 @@ using UniversityDatabaseImplement.Models;
 
 namespace UniversityDatabaseImplement.Implements
 {
-    public class CertificationStorage : ICertificationStorage //МЕНЯТЬ
+    public class CertificationStorage : ICertificationStorage 
     {
         public List<CertificationViewModel> GetFullList()
         {
