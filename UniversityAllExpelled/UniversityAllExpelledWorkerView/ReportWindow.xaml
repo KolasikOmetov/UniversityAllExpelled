@@ -13,13 +13,13 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Label Margin="10">С</Label>
-            <DatePicker Margin="10"/>
+            <DatePicker x:Name="DatePickerFrom" Margin="10"/>
             <Label Margin="10">по</Label>
-            <DatePicker Margin="10"/>
+            <DatePicker x:Name="DatePickerTo" Margin="10"/>
             <ComboBox Margin="10" MinWidth="100"/>
-            <ComboBox Margin="10" MinWidth="100"/>
-            <Button Margin="10">Показать</Button>
-            <Button Margin="10">На почту</Button>
+            <Button x:Name="Button_Make" Margin="10" Click="Button_Make_Click">Сформировать</Button>
+            <Button x:Name="Button_ToPDF" Margin="10">В PDF</Button>
+            <Button x:Name="Button_ToMail" Margin="10">На почту</Button>
         </StackPanel>
     </Grid>
 </Window>

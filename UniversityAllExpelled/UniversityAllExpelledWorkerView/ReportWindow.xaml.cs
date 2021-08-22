@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Unity;
+using UniversityBusinessLogic.BusinessLogics;
 
 namespace UniversityAllExpelledWorkerView
 {
@@ -19,9 +21,23 @@ namespace UniversityAllExpelledWorkerView
     /// </summary>
     public partial class ReportWindow : Window
     {
-        public ReportWindow()
+        [Dependency]
+        public IUnityContainer Container { get; set; }
+
+        private readonly ReportWorkerLogic logic;
+        public ReportWindow(ReportWorkerLogic logic)
         {
             InitializeComponent();
+            this.logic = logic;
+        }
+
+        private void Button_Make_Click(object sender, RoutedEventArgs e)
+        {
+            if (DatePickerFrom.SelectedDate >= DatePickerTo.SelectedDate)
+            {
+                MessageBox.Show("Дата начала должна быть меньше даты окончания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
     }
 }
