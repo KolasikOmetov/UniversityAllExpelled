@@ -8,7 +8,6 @@ namespace TypographyShopBusinessLogic.BusinessLogics
 {
     class SaveToPdf
     {
-        [System.Obsolete]
         public static void CreateDoc(PdfInfo info)
         {
            
