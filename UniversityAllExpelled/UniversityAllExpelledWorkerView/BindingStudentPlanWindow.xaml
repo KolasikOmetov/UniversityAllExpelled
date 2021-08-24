@@ -22,7 +22,7 @@
         <ListBox x:Name="ListBoxPlan" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding StreamName}"/>
+                    <TextBlock Text="{Binding Name}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

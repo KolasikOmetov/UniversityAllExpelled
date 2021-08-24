@@ -4,9 +4,9 @@ using System.Text;
 
 namespace UniversityBusinessLogic.ViewModels
 {
-    public class ReportCertificationsSubjectsViewModel
+    public class ReportEducationPlanSubjectsViewModel
     {
-        public DateTime CertificationDate { get; set; }
+        public string EducationPlanName { get; set; }
         public List<SubjectViewModel> Subjects { get; set; }
     }
 }

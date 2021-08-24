@@ -22,8 +22,10 @@
         </StackPanel>
         <DataGrid x:Name="DataGridReport" MaxHeight="500">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Предмет" Binding="{Binding Path=Name}" Width="0.85*"/>
-                <DataGridTextColumn Header="Дата аттестации" Binding="{Binding Path=Date, StringFormat=dd/MM/yyyy}" Width="0.5*"/>
+                <DataGridTextColumn Header="Дисциплина" Binding="{Binding Path=Name}" Width="0.85*"/>
+                <DataGridTextColumn Header="План" Binding="{Binding Path=Name}" Width="0.85*"/>
+                <DataGridTextColumn Header="Дата начала" Binding="{Binding Path=Date, StringFormat=dd/MM/yyyy}" Width="0.5*"/>
+                <DataGridTextColumn Header="Дата окончания" Binding="{Binding Path=Date, StringFormat=dd/MM/yyyy}" Width="0.5*"/>
                 <DataGridTextColumn Header="Студент" Binding="{Binding Path=Name}" Width="1*"/>
             </DataGrid.Columns>
         </DataGrid>

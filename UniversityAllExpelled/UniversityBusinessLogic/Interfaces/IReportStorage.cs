@@ -8,7 +8,7 @@ namespace UniversityBusinessLogic.Interfaces
 {
     public interface IReportStorage
     {
-        ReportCertificationsSubjectsViewModel GetCertificationSubjects(CertificationBindingModel model);
-        List<ReportCertificationsViewModel> GetFullListCertifications(ReportCertificationBindingModel model);
+        ReportEducationPlanSubjectsViewModel GetEducationPlanSubjects(EducationPlanBindingModel model);
+        List<ReportEducationPlansViewModel> GetFullListEducationPlans(ReportEducationPlanBindingModel model);
     }
 }

@@ -46,11 +46,6 @@ namespace UniversityAllExpelledWorkerView
             InitializeComponent();
         }
 
-        private void ReportViewer_Load(object sender, EventArgs e)
-        {
-            reportViewer.LocalReport.ReportPath = "../../Report.rdlc";
-        }
-
         private void Button_Make_Click(object sender, RoutedEventArgs e)
         {
             if (DatePickerFrom.SelectedDate == null || DatePickerTo.SelectedDate == null)
@@ -66,10 +61,10 @@ namespace UniversityAllExpelledWorkerView
             }
             try
             {
-                var dataSource = _logic.GetEPStudentSubject(new ReportWorkerBindingModel
+                var dataSource = _logic.GetEducationPlanStudentsSubjects(new ReportEducationPlanBindingModel
                 {
                     DateFrom = DatePickerFrom.SelectedDate,
-                    DateTo = DatePickerTo.SelectedDate,                   
+                    DateTo = DatePickerTo.SelectedDate
                 });
                 DataGridReport.ItemsSource = dataSource;
             }
