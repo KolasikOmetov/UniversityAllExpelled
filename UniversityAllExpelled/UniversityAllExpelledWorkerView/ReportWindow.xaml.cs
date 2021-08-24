@@ -1,21 +1,7 @@
 ﻿
-using Microsoft.Reporting.WinForms;
+using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Unity;
 using UniversityBusinessLogic.BindingModels;
 using UniversityBusinessLogic.BusinessLogics;
@@ -77,6 +63,36 @@ namespace UniversityAllExpelledWorkerView
         private void Button_ToMail_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void Button_ToPDF_Click(object sender, RoutedEventArgs e)
+        {
+            if (DatePickerFrom.SelectedDate >= DatePickerTo.SelectedDate)
+            {
+                MessageBox.Show("Дата начала должна быть меньше даты окончания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            var dialog = new SaveFileDialog { Filter = "pdf|*.pdf" };
+            {
+                if (dialog.ShowDialog() == true)
+                {
+                    try
+                    {
+                        _logic.SaveEPStudentsSubjectsToPdf(new ReportEducationPlanBindingModel
+                        {
+                            FileName = dialog.FileName,
+                            DateFrom = DatePickerFrom.SelectedDate,
+                            DateTo = DatePickerTo.SelectedDate,
+                        });
+                        MessageBox.Show("Выполнено", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                       
+                    }
+                }
+            }
         }
     }
 }

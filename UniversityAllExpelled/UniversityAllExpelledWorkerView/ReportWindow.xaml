@@ -6,28 +6,24 @@
         xmlns:local="clr-namespace:UniversityAllExpelledWorkerView" xmlns:wfr="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
         mc:Ignorable="d"
         Title="Отчёт" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+    <StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Margin="10">С</Label>
             <DatePicker x:Name="DatePickerFrom" Margin="10"/>
             <Label Margin="10">по</Label>
             <DatePicker x:Name="DatePickerTo" Margin="10"/>
             <Button x:Name="Button_Make" Margin="10" Click="Button_Make_Click">Сформировать</Button>
-            <Button x:Name="Button_ToPDF" Margin="10">В PDF</Button>
+            <Button x:Name="Button_ToPDF" Margin="10" Click="Button_ToPDF_Click">В PDF</Button>
             <Button x:Name="Button_ToMail" Margin="10" Click="Button_ToMail_Click">На почту</Button>
         </StackPanel>
         <DataGrid x:Name="DataGridReport" MaxHeight="500">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Дисциплина" Binding="{Binding Path=Name}" Width="0.85*"/>
                 <DataGridTextColumn Header="План" Binding="{Binding Path=Name}" Width="0.85*"/>
-                <DataGridTextColumn Header="Дата начала" Binding="{Binding Path=Date, StringFormat=dd/MM/yyyy}" Width="0.5*"/>
-                <DataGridTextColumn Header="Дата окончания" Binding="{Binding Path=Date, StringFormat=dd/MM/yyyy}" Width="0.5*"/>
+                <DataGridTextColumn Header="Дата начала" Binding="{Binding Path=DateStart, StringFormat=dd/MM/yyyy}" Width="0.5*"/>
+                <DataGridTextColumn Header="Дата окончания" Binding="{Binding Path=DateEnd, StringFormat=dd/MM/yyyy}" Width="0.5*"/>
                 <DataGridTextColumn Header="Студент" Binding="{Binding Path=Name}" Width="1*"/>
             </DataGrid.Columns>
         </DataGrid>
-    </Grid>
+    </StackPanel>
 </Window>

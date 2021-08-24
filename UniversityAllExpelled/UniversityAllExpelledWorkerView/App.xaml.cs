@@ -38,6 +38,7 @@ namespace UniversityAllExpelledWorkerView
 			currentContainer.RegisterType<ILectorStorage, LectorStorage>(new HierarchicalLifetimeManager());
 			currentContainer.RegisterType<ISubjectStorage, SubjectStorage>(new HierarchicalLifetimeManager());
 			currentContainer.RegisterType<ICheckListStorage, CheckListStorage>(new HierarchicalLifetimeManager());
+			currentContainer.RegisterType<IReportStorage, ReportStorage>(new HierarchicalLifetimeManager());
 			currentContainer.RegisterType<StudentLogic>(new HierarchicalLifetimeManager());
 			currentContainer.RegisterType<CertificationLogic>(new HierarchicalLifetimeManager());
 			currentContainer.RegisterType<EducationPlanLogic>(new HierarchicalLifetimeManager());

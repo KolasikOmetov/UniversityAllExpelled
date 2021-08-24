@@ -4,6 +4,7 @@ using System.Text;
 using UniversityBusinessLogic.BindingModels;
 using UniversityBusinessLogic.Interfaces;
 using UniversityBusinessLogic.ViewModels;
+using System.Linq;
 
 namespace UniversityDatabaseImplement.Implements
 {
@@ -11,38 +12,51 @@ namespace UniversityDatabaseImplement.Implements
     {
         public ReportEducationPlanSubjectsViewModel GetEducationPlanSubjects(EducationPlanBindingModel model)
         {
-            throw new NotImplementedException();
+            using (var context = new UniversityDatabase())
+            {
+                var subjects = from plan in context.EducationPlans
+                             where plan.Id == model.Id
+                             join epStudents in context.EducationPlanStudents
+                             on plan.Id equals epStudents.EducationPlanId
+                             join studentSubjects in context.StudentSubjects
+                             on epStudents.StudentGradebookNumber equals studentSubjects.StudentGradebookNumber
+                             join subject in context.Subjects
+                             on studentSubjects.SubjectId equals subject.Id
+                             select new SubjectViewModel
+                             {
+                                 Name = subject.Name
+                             };
+                return new ReportEducationPlanSubjectsViewModel
+                {
+                    EducationPlanName = model.Name,
+                    Subjects = subjects.ToList()
+                };
+            }
         }
 
         public List<ReportEducationPlansViewModel> GetFullListEducationPlans(ReportEducationPlanBindingModel model)
         {
             using (var context = new UniversityDatabase())
             {
-                var eps = from lector in context.Lectors
-                          join epLectors in context.EducationPlanLectors
-                          on lector.Id equals travelTours.TourID
-                          where tour.OperatorID == _OperatorID
-                          join travel in context.Travels
-                          on travelTours.TravelID equals travel.ID
-                          where travel.DateStart >= model.DateFrom
-                          where travel.DateEnd <= model.DateTo
-                          join tourguide in context.TourGuides
-                          on tour.ID equals tourguide.TourID
-                          join guide in context.Guides
-                          on tourguide.GuideID equals guide.ID
-                          where guide.OperatorID == _OperatorID
-                          join guideExcursion in context.GuideExcursions
-                          on guide.ID equals guideExcursion.GuideID
-                          join excursion in context.Excursions
-                          on guideExcursion.ExcursionID equals excursion.ID
-                          select new ReportGuidesViewModel
+                var eps = from ep in context.EducationPlans
+                          join epStudents in context.EducationPlanStudents
+                          on ep.Id equals epStudents.EducationPlanId
+                          //where ep.TouristID == _TouristID
+                          where ep.DateStart >= model.DateFrom
+                          where ep.DateEnd <= model.DateTo
+                          join studentSubjects in context.StudentSubjects
+                          on epStudents.StudentGradebookNumber equals studentSubjects.StudentGradebookNumber
+                          join subject in context.Subjects
+                          on studentSubjects.SubjectId equals subject.Id
+                          join student in context.Students
+                          on epStudents.StudentGradebookNumber equals student.GradebookNumber
+                          select new ReportEducationPlansViewModel
                           {
-                              DateStartTravel = travel.DateStart,
-                              GuideSurname = guide.Surname,
-                              GuideName = guide.Name,
-                              GuideWorkPlace = guide.WorkPlace,
-                              ExcursionName = excursion.Name,
-                              TourName = tour.Name
+                              EducationPlanName = ep.Name,
+                              DateStart = ep.DateStart,
+                              DateEnd = ep.DateEnd,
+                              StudentName = student.Name,
+                              SubjectName = subject.Name                    
                           };
                 return eps.ToList();
             }
