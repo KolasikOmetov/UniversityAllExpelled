@@ -30,7 +30,7 @@ namespace UniversityBusinessLogic.BusinessLogics
 		{						
 			var element = _educationPlanStorage.GetElement(new EducationPlanBindingModel
 			{
-				StreamName = model.StreamName,
+				Name = model.Name,
 				Hours = model.Hours
 			});
 			if (element != null && element.Id != model.Id)

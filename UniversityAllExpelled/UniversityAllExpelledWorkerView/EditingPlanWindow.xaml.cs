@@ -214,8 +214,10 @@ namespace UniversityAllExpelledWorkerView
                     var view = _logicEP.Read(new EducationPlanBindingModel { Id = id.Value })?[0];
                     if (view != null)
                     {
-                        TextBoxStream.Text = view.StreamName;
+                        TextBoxStream.Text = view.Name;
                         TextBoxHours.Text = view.Hours.ToString();
+                        DatePickerStart.SelectedDate = view.DateStart;
+                        DatePickerEnd.SelectedDate = view.DateEnd;
                         epLectors = view.EducationPlanLectors;
                     }
                 }
@@ -254,7 +256,9 @@ namespace UniversityAllExpelledWorkerView
                 _logicEP.CreateOrUpdate(new EducationPlanBindingModel
                 {
                     Id = id,
-                    StreamName = TextBoxStream.Text,
+                    Name = TextBoxStream.Text,
+                    DateStart = (DateTime)DatePickerStart.SelectedDate,
+                    DateEnd = (DateTime)DatePickerEnd.SelectedDate,
                     EducationPlanLectors = epLectors,
                     Hours = int.Parse(TextBoxHours.Text)
                 });

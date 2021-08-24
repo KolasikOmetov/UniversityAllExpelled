@@ -1,9 +1,11 @@
-﻿using Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution;
+﻿
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,9 +46,9 @@ namespace UniversityAllExpelledWorkerView
             InitializeComponent();
         }
 
-        private void ReportWindow_Loaded(object sender, RoutedEventArgs e)
+        private void ReportViewer_Load(object sender, EventArgs e)
         {
-            ComboBoxStudent.ItemsSource = _logicStudent.Read(new StudentBindingModel { DenearyLogin = login });
+            reportViewer.LocalReport.ReportPath = "../../Report.rdlc";
         }
 
         private void Button_Make_Click(object sender, RoutedEventArgs e)
@@ -56,11 +58,7 @@ namespace UniversityAllExpelledWorkerView
                 MessageBox.Show("Вы не указали дату начала или дату окончания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (ComboBoxStudent.SelectedIndex == -1)
-            {
-                MessageBox.Show("Вы не указали дисциплину", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+
             if (DatePickerFrom.SelectedDate >= DatePickerTo.SelectedDate)
             {
                 MessageBox.Show("Дата начала должна быть меньше даты окончания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -68,21 +66,12 @@ namespace UniversityAllExpelledWorkerView
             }
             try
             {
-                var student = (StudentViewModel)ComboBoxStudent.SelectedItem;
-                string desc = $"{student.Name}\nc {DatePickerFrom.SelectedDate.Value.ToShortDateString()} по {DatePickerTo.SelectedDate.Value.ToShortDateString()}";
-                ReportParameter parameterPeriod = new ReportParameter("ReportParameterPeriod", desc);
-                reportViewer.LocalReport.SetParameters(parameterPeriod);
-
-                var dataSource = _logic.GetCheckLists(new ReportBindingModel
+                var dataSource = _logic.GetEPStudentSubject(new ReportWorkerBindingModel
                 {
                     DateFrom = DatePickerFrom.SelectedDate,
-                    DateTo = DatePickerTo.SelectedDate,
-                    SubjectId = student.Id
+                    DateTo = DatePickerTo.SelectedDate,                   
                 });
-                ReportDataSource source = new ReportDataSource("DataSetSubject", dataSource);
-                reportViewer.LocalReport.DataSources.Clear();
-                reportViewer.LocalReport.DataSources.Add(source);
-                reportViewer.RefreshReport();
+                DataGridReport.ItemsSource = dataSource;
             }
             catch (Exception ex)
             {
@@ -92,50 +81,7 @@ namespace UniversityAllExpelledWorkerView
 
         private void Button_ToMail_Click(object sender, RoutedEventArgs e)
         {
-            if (DatePickerFrom.SelectedDate >= DatePickerTo.SelectedDate)
-            {
-                MessageBox.Show("Дата начала должна быть меньше даты окончания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            MailMessage msg = new MailMessage();
-            SmtpClient client = new SmtpClient();
-            try
-            {
-                var student = (StudentViewModel)ComboBoxStudent.SelectedItem;
-                var department = _logicDeneary.Read(new DenearyBindingModel { Login = login })[0];
-                msg.Subject = "Отчёт по студенту";
-                msg.Body = $"Отчёт по студенту {student.Name} за период c " + DatePickerFrom.SelectedDate.Value.ToShortDateString() +
-                " по " + DatePickerTo.SelectedDate.Value.ToShortDateString();
-                msg.From = new MailAddress(App.emailSender);
-                msg.To.Add(department.Email);
-                msg.IsBodyHtml = true;
-                _logic.SaveCheckListsByDateBySubjectToPdfFile(new ReportBindingModel
-                {
-                    FileName = App.defaultReportPath,
-                    DateFrom = datePickerFrom.SelectedDate,
-                    DateTo = datePickerTo.SelectedDate,
-                    SubjectId = subject.Id
-                });
-                string file = App.defaultReportPath;
-                Attachment attach = new Attachment(file, MediaTypeNames.Application.Octet);
-                ContentDisposition disposition = attach.ContentDisposition;
-                disposition.CreationDate = System.IO.File.GetCreationTime(file);
-                disposition.ModificationDate = System.IO.File.GetLastWriteTime(file);
-                disposition.ReadDate = System.IO.File.GetLastAccessTime(file);
-                msg.Attachments.Add(attach);
-                client.Host = App.emailHost;
-                client.Port = App.emailPort;
-                client.EnableSsl = true;
-                client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential(App.emailSender, App.emailPassword);
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.Send(msg);
-                MessageBox.Show("Сообщение отправлено", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            
         }
     }
 }

@@ -55,7 +55,7 @@ namespace UniversityDatabaseImplement.Implements
                       //Subjects = rec.StudentSubjects
                       //.ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
                       EducationPlans = rec.EducationPlanStudents
-                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName),
+                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.Name),
                       Subjects = new Dictionary<int, string>(),
                   })
                   .ToList();
@@ -84,7 +84,7 @@ namespace UniversityDatabaseImplement.Implements
                       Subjects = student.StudentSubjects
                       .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
                       EducationPlans = student.EducationPlanStudents
-                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.Name)
                   } :
                   null;
             }
@@ -222,7 +222,7 @@ namespace UniversityDatabaseImplement.Implements
                       Subjects = rec.StudentSubjects
                       .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
                       EducationPlans = rec.EducationPlanStudents
-                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                      .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.Name)
                   })
                   .ToList();
             }

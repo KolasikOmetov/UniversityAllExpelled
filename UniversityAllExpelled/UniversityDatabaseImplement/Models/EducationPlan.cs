@@ -10,9 +10,13 @@ namespace UniversityDatabaseImplement.Models
     {
 		public int Id { get; set; }
 		[Required]
-		public string StreamName { get; set; }
+		public string Name { get; set; }
 		[Required]
 		public int Hours { get; set; }
+		[Required]
+		public DateTime DateStart { get; set; }
+		[Required]
+		public DateTime DateEnd { get; set; }
 		[ForeignKey("EducationPlanId")]
 		public virtual List<EducationPlanStudent> EducationPlanStudents { get; set; }
 		[ForeignKey("EducationPlanId")]

@@ -24,8 +24,10 @@ namespace UniversityDatabaseImplement.Implements
                 .Select(rec => new EducationPlanViewModel
                 {
                     Id = rec.Id,
-                    StreamName = rec.StreamName,
+                    Name = rec.Name,
                     Hours = rec.Hours,
+                    DateStart = rec.DateStart,
+                    DateEnd = rec.DateEnd
                     //Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId, recEPS => recEPS.EducationPlan.StreamName),
                     //Lectors = rec.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)          
                 }).ToList();
@@ -44,12 +46,16 @@ namespace UniversityDatabaseImplement.Implements
                           .ThenInclude(rec => rec.Lector)
                           .Include(rec => rec.EducationPlanStudents)
                           .ThenInclude(rec => rec.Student).ToList()
-                .Where(rec => rec.StreamName == model.StreamName)
+                .Where(rec => (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateStart.Date >= model.DateFrom.Value.Date
+                    && rec.DateEnd.Date <= model.DateTo.Value.Date)
+                    || (!model.DateFrom.HasValue && !model.DateTo.HasValue))
                 .Select(rec => new EducationPlanViewModel
                 {
                     Id = rec.Id,
-                    StreamName = rec.StreamName,
+                    Name = rec.Name,
                     Hours = rec.Hours,
+                    DateStart = rec.DateStart,
+                    DateEnd = rec.DateEnd,
                     //Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId.ToString(), recEPS => recEPS.EducationPlan.StreamName),
                     EducationPlanLectors = rec.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
                 })
@@ -69,14 +75,16 @@ namespace UniversityDatabaseImplement.Implements
                           .ThenInclude(rec => rec.Lector)
                           .Include(rec => rec.EducationPlanStudents)
                           .ThenInclude(rec => rec.Student)
-                .FirstOrDefault(rec => rec.StreamName == model.StreamName || rec.Id == model.Id);
+                .FirstOrDefault(rec => rec.Name == model.Name || rec.Id == model.Id);
                 return ep != null ?
                 new EducationPlanViewModel
                 {
                     Id = ep.Id,
-                    StreamName = ep.StreamName,
+                    Name = ep.Name,
                     Hours = ep.Hours,
-                    EducationPlanStudents = ep.EducationPlanStudents.ToDictionary(recEPS => recEPS.StudentGradebookNumber.ToString(), recEPS => recEPS.EducationPlan.StreamName),
+                    DateStart = ep.DateStart,
+                    DateEnd = ep.DateEnd,
+                    EducationPlanStudents = ep.EducationPlanStudents.ToDictionary(recEPS => recEPS.StudentGradebookNumber.ToString(), recEPS => recEPS.EducationPlan.Name),
                     EducationPlanLectors = ep.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
                 } :
                 null;
@@ -146,8 +154,10 @@ namespace UniversityDatabaseImplement.Implements
 
         private EducationPlan CreateModel(EducationPlanBindingModel model, EducationPlan ep, UniversityDatabase context)
         {
-            ep.StreamName = model.StreamName;
+            ep.Name = model.Name;
             ep.Hours = model.Hours;
+            ep.DateStart = model.DateStart;
+            ep.DateEnd = model.DateEnd;
 
             if (ep.Id == 0)
             {

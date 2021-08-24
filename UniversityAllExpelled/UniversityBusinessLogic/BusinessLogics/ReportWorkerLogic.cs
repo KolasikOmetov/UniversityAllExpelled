@@ -11,15 +11,16 @@ namespace UniversityBusinessLogic.BusinessLogics
 {
     public class ReportWorkerLogic
     {
-        private readonly ILectorStorage _lectorStorage;
-        private readonly ICheckListStorage _checkListStorage;
+        private readonly ISubjectStorage _subjectStorage;
+        private readonly ICertificationStorage _certificationStorage;
         private readonly IStudentStorage _studentStorage;
 
-        public ReportWorkerLogic(ILectorStorage lectorStorage, ICheckListStorage checkListStorage, IStudentStorage studentStorage)
+        public ReportWorkerLogic(ISubjectStorage subjectStorage, ICertificationStorage certificationStorage, IStudentStorage studentStorage)
         {
-            _lectorStorage = lectorStorage;
-            _checkListStorage = checkListStorage;
+            _subjectStorage = subjectStorage;
+            _certificationStorage = certificationStorage;
             _studentStorage = studentStorage;
         }
+
     }
 }
