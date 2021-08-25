@@ -46,8 +46,8 @@ namespace UniversityDatabaseImplement.Implements
                           where ep.DateEnd <= model.DateTo
                           join studentSubjects in context.StudentSubjects
                           on epStudents.StudentGradebookNumber equals studentSubjects.StudentGradebookNumber
-                          //join subject in context.Subjects
-                          //on studentSubjects.SubjectId equals subject.Id
+                          join subject in context.Subjects
+                          on studentSubjects.SubjectId equals subject.Id
                           join student in context.Students
                           on epStudents.StudentGradebookNumber equals student.GradebookNumber
                           select new ReportEducationPlansViewModel
@@ -56,7 +56,7 @@ namespace UniversityDatabaseImplement.Implements
                               DateStart = ep.DateStart,
                               DateEnd = ep.DateEnd,
                               StudentName = student.Name,
-                              //SubjectName = subject.Name                    
+                              SubjectName = subject.Name                    
                           };
                 return eps.ToList();
             }
