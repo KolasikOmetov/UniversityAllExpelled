@@ -32,7 +32,7 @@ namespace UniversityBusinessLogic.BusinessLogics
             CreateRow(new PdfRowParameters
             {
                 Table = table,
-                Texts = new List<string> { "Дисциплина", "Дата начала", "Дата окончания", "Студент", "План" },
+                Texts = new List<string> { "План", "Дата начала", "Дата окончания", "Студент", "Дисциплина" },
                 Style = "NormalTitle",
                 ParagraphAlignment = ParagraphAlignment.Center
             });
