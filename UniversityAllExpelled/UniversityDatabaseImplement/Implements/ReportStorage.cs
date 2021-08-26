@@ -16,12 +16,12 @@ namespace UniversityDatabaseImplement.Implements
             {
                 var subjects = from plan in context.EducationPlans
                              where plan.Id == model.Id
-                             join epStudents in context.EducationPlanStudents
-                             on plan.Id equals epStudents.EducationPlanId
-                             join studentSubjects in context.StudentSubjects
-                             on epStudents.StudentGradebookNumber equals studentSubjects.StudentGradebookNumber
+                             join epLectors in context.EducationPlanLectors
+                             on plan.Id equals epLectors.EducationPlanId
+                             join lectors in context.Lectors
+                             on epLectors.LectorId equals lectors.Id
                              join subject in context.Subjects
-                             on studentSubjects.SubjectId equals subject.Id
+                             on lectors.SubjectId equals subject.Id
                              select new SubjectViewModel
                              {
                                  Name = subject.Name
@@ -41,7 +41,6 @@ namespace UniversityDatabaseImplement.Implements
                 var eps = from ep in context.EducationPlans
                           join epStudents in context.EducationPlanStudents
                           on ep.Id equals epStudents.EducationPlanId
-                          //where ep.TouristID == _TouristID
                           where ep.DateStart >= model.DateFrom
                           where ep.DateEnd <= model.DateTo
                           join studentSubjects in context.StudentSubjects

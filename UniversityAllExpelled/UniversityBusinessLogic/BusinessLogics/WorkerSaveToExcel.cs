@@ -91,25 +91,6 @@ namespace UniversityBusinessLogic.BusinessLogics
                             Text = subject.Name,
                             StyleIndex = 1U
                         });
-
-                        //InsertCellInWorksheet(new ExcelCellParameters
-                        //{
-                        //    Worksheet = worksheetPart.Worksheet,
-                        //    ShareStringPart = shareStringPart,
-                        //    ColumnName = "C",
-                        //    RowIndex = rowIndex,
-                        //    Text = subject.Surname,
-                        //    StyleIndex = 1U
-                        //});
-                        //InsertCellInWorksheet(new ExcelCellParameters
-                        //{
-                        //    Worksheet = worksheetPart.Worksheet,
-                        //    ShareStringPart = shareStringPart,
-                        //    ColumnName = "D",
-                        //    RowIndex = rowIndex,
-                        //    Text = subject.WorkPlace,
-                        //    StyleIndex = 1U
-                        //});
                         rowIndex++;
                     }
                     i++;

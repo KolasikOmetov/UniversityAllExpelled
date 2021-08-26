@@ -45,7 +45,7 @@ namespace UniversityBusinessLogic.BusinessLogics
                         docBody.AppendChild(CreateParagraph(new WordParagraph
                         {
                             Texts = new List<(string, WordTextProperties)> {
-                        (subject.Name + "\"", new WordTextProperties { Bold = true, Size = "16", } ) },
+                        (subject.Name, new WordTextProperties { Bold = true, Size = "16", } ) },
                             TextProperties = new WordTextProperties
                             {
                                 Size = "16",

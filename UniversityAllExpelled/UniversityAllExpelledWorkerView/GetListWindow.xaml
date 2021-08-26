@@ -5,34 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniversityAllExpelledWorkerView"
         mc:Ignorable="d"
-        Title="GetListWindow" Height="319.274" Width="353.771">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        <StackPanel>
-            <Label>План</Label>
-            <ComboBox Margin="10" x:Name="ComboBoxPlans">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+        Loaded="GetListWindow_Loaded"
+        Title="Получение списка" Height="480" Width="450">
+    <StackPanel>
+        <Label Content="Выберите планы:" HorizontalAlignment="Center" Margin="0, 20, 0, 0" Foreground="#08244f"/>
+        <ListBox x:Name="ListBoxEducationPlans" DisplayMemberPath="Name" SelectionMode="Multiple" FontSize="14" HorizontalAlignment="Stretch" Height="320" Margin="0,10,0,0" BorderThickness="1" BorderBrush="#e9723d"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0, 20, 0, 0">
+            <Button x:Name="ButtonExcel" Content="Excel" Click="ButtonSaveToExcel_Click" VerticalAlignment="Bottom" Width="120" Height="40" Margin="20, 0, 0, 0"/>
+            <Button x:Name="ButtonWord" Content="Word" Click="ButtonSaveToWord_Click" VerticalAlignment="Bottom" Width="120" Height="40" Margin="20, 0, 0, 0"/>
+            <Button x:Name="ButtonCancel" Content="Отмена" Click="ButtonCancel_Click" VerticalAlignment="Bottom" Width="120" Height="40" Margin="20, 0, 0, 0"/>
         </StackPanel>
-        <ListBox Grid.Row="1" Name="ListBoxStudent">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
-            <Button Margin="10">Word</Button>
-            <Button Margin="10">Excel</Button>
-            <Button Margin="10">Отмена</Button>
-        </StackPanel>
-    </Grid>
+    </StackPanel>
 </Window>
