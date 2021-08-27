@@ -11,16 +11,11 @@
         <Style TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Foreground" Value="#003466"/>
             <Setter Property="FontSize" Value="15px"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="MaxWidth" Value="120"/>
             <Setter Property="MaxHeight" Value="40"/>
-            <Setter Property="Background" Value="#A4B9CA"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="White"/>
             <Setter Property="FontSize" Value="15px"/>
         </Style>
         <Style TargetType="ComboBox">

@@ -114,5 +114,43 @@ namespace UniversityDatabaseImplement.Implements
             return Certification;
         }
 
+        public List<CertificationViewModel> GetByDateRange(CertificationBindingModel model)
+        {
+            if (model == null)
+            {
+                return null;
+            }
+            using (var context = new UniversityDatabase())
+            {
+                return context.Certifications
+                .Where(rec => rec.Date.Date >= model.DateFrom.Value.Date && rec.Date.Date <= model.DateTo.Value.Date)
+                .ToList()
+                .Select(rec => new CertificationViewModel
+                {
+                    Id = rec.Id,
+                    Date = rec.Date,
+                    StudentName = context.Students.FirstOrDefault(recStudent => recStudent.GradebookNumber == rec.StudentGradebookNumber).Name,
+                    StudentGradebookNumber = rec.StudentGradebookNumber,
+                })
+                .ToList();
+            }
+        }
+
+        public List<WorkerStatsViewModel> GetByDateRangeWithSubjects(CheckListBindingModel model)
+        {
+            using (var context = new UniversityDatabase())
+            {
+                return context.Certifications
+                .Where(rec => rec.Date >= model.DateFrom && rec.Date <= model.DateTo)
+                .ToList()
+                .Select(rec => new WorkerStatsViewModel
+                {
+                    CertificationId = rec.Id,
+                    CertificationDate = rec.Date,
+                    ItemName = context.Subjects.FirstOrDefault(recS => recS.Id == context.StudentSubjects.FirstOrDefault(recSS => recSS.StudentGradebookNumber == rec.StudentGradebookNumber).SubjectId).Name,
+                })
+                .ToList();
+            }
+        }
     }
 }
