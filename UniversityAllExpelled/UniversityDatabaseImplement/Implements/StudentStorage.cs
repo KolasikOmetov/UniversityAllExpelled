@@ -24,11 +24,7 @@ namespace UniversityDatabaseImplement.Implements
                   {
                       GradebookNumber = rec.GradebookNumber,
                       Name = rec.Name,
-                      DenearyLogin = context.Denearies.FirstOrDefault(x => x.Login == rec.DenearyLogin).Login
-                      //Subjects = rec.StudentSubjects
-                      //.ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
-                      //EducationPlans = rec.EducationPlanStudents
-                      //.ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.StreamName)
+                      DenearyLogin = context.Denearies.FirstOrDefault(x => x.Login == rec.DenearyLogin).Login                
 
                   }).ToList();
             }

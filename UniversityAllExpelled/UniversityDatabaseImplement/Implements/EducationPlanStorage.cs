@@ -28,8 +28,6 @@ namespace UniversityDatabaseImplement.Implements
                     Hours = rec.Hours,
                     DateStart = rec.DateStart,
                     DateEnd = rec.DateEnd
-                    //Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId, recEPS => recEPS.EducationPlan.StreamName),
-                    //Lectors = rec.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)          
                 }).ToList();
             }
         }
@@ -56,7 +54,6 @@ namespace UniversityDatabaseImplement.Implements
                     Hours = rec.Hours,
                     DateStart = rec.DateStart,
                     DateEnd = rec.DateEnd,
-                    //Students = rec.EducationPlanStudents.ToDictionary(recEPS => recEPS.EducationPlanId.ToString(), recEPS => recEPS.EducationPlan.StreamName),
                     EducationPlanLectors = rec.EducationPlanLectors.ToDictionary(recL => recL.LectorId, recL => recL.Lector.Name)
                 })
                 .ToList();

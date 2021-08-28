@@ -53,7 +53,6 @@ namespace UniversityAllExpelledWorkerView
         private void MenuItemCertifications_Click(object sender, RoutedEventArgs e)
         {
             var window = Container.Resolve<CertificationsWindow>();
-            //window.Id = id;
             window.ShowDialog();
         }
 
