@@ -15,7 +15,7 @@ namespace UniversityDatabaseImplement.Implements
         {
             using (var context = new UniversityDatabase())
             {
-                return context.Certifications.Where(rec ).ToList()
+                return context.Certifications
                 .Select(rec => new CertificationViewModel
                 {
                     Id = rec.Id,
