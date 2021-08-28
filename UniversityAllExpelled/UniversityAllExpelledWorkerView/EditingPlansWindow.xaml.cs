@@ -103,6 +103,8 @@ namespace UniversityAllExpelledWorkerView
             {
                 DataGridPlans.ItemsSource = list;
                 DataGridPlans.Columns[0].Visibility = Visibility.Hidden;
+                (DataGridPlans.Columns[2] as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+                (DataGridPlans.Columns[3] as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
                 DataGridPlans.Columns[5].Visibility = Visibility.Hidden;
                 DataGridPlans.Columns[6].Visibility = Visibility.Hidden;
             }

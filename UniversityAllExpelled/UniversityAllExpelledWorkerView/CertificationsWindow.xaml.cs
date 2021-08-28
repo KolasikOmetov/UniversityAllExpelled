@@ -99,6 +99,7 @@ namespace UniversityAllExpelledWorkerView
                 {
                     dataGrid.ItemsSource = list;
                     dataGrid.Columns[0].Visibility = Visibility.Hidden;
+                    (dataGrid.Columns[1] as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
                     dataGrid.Columns[3].Visibility = Visibility.Hidden;
                 }
             }
