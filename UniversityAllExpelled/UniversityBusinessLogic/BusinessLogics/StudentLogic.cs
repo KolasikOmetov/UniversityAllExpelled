@@ -30,16 +30,17 @@ namespace UniversityBusinessLogic.BusinessLogics
             return _studentStorage.GetFilteredList(model);
         }
 
-        public void CreateOrUpdate(StudentBindingModel model)
+        public void CreateOrUpdate(StudentBindingModel model, bool isUpdating)
         {
             var element = _studentStorage.GetElement(new StudentBindingModel { 
-                Name = model.Name
+                GradebookNumber = model.GradebookNumber,
+                Name = model.Name               
             });
             if (element != null && element.GradebookNumber != model.GradebookNumber)
             {
                 throw new Exception("Уже есть такой студент");
             }
-            if (!string.IsNullOrEmpty(model.GradebookNumber))
+            if (!string.IsNullOrEmpty(model.GradebookNumber) && !isUpdating)
             {
                 _studentStorage.Insert(model);
             }

@@ -57,6 +57,10 @@ namespace UniversityAllExpelledWorkerView
                     DateTo = DatePickerTo.SelectedDate
                 });
                 DataGridReport.ItemsSource = dataSource;
+                for (int i = 5; i < 10; i++)
+                {
+                    DataGridReport.Columns[i].Visibility = Visibility.Hidden;
+                }
             }
             catch (Exception ex)
             {

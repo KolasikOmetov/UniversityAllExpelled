@@ -26,7 +26,7 @@ namespace UniversityBusinessLogic.BusinessLogics
             }).Select(
                 c => new WorkerStatsViewModel
                 {
-                    CertificationDate = c.DateOfExam,
+                    CertificationDate = c.Date,
                     CertificationId = c.Id,
                     ItemName = c.StudentName,
                 }

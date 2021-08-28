@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniversityAllExpelledWorkerView"
         mc:Ignorable="d"
-        Title="Формирование планов" MinHeight="180" MinWidth="270" Height="343" Width="546" >
+        Title="Формирование планов" MinHeight="180" MinWidth="270" Height="343" Width="546" Loaded="EditingPlansWindow_Loaded" >
     <Grid>
-        <DataGrid x:Name="DataGridPlans" HorizontalAlignment="Left" Height="312" VerticalAlignment="Top" Width="389"/>
+        <DataGrid x:Name="DataGridPlans" HorizontalAlignment="Left" Height="312" VerticalAlignment="Top" Width="389" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn" ColumnWidth="*" IsReadOnly="True"/>
         <Button x:Name="ButtonAdd" Content="Добавить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="428,29,0,0" Click="ButtonAdd_Click"/>
         <Button x:Name="ButtonUpd" Content="Изменить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="428,67,0,0" Click="ButtonUpd_Click"/>
         <Button x:Name="ButtonDel" Content="Удалить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="428,106,0,0" Click="ButtonDel_Click"/>

@@ -18,11 +18,11 @@
         </StackPanel>
         <DataGrid x:Name="DataGridReport" MaxHeight="500">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Дисциплина" Binding="{Binding Path=Name}" Width="0.85*"/>
-                <DataGridTextColumn Header="План" Binding="{Binding Path=Name}" Width="0.85*"/>
+                <DataGridTextColumn Header="Дисциплина" Binding="{Binding Path=SubjectName}" Width="0.85*"/>
+                <DataGridTextColumn Header="План" Binding="{Binding Path=EducationPlanName}" Width="0.85*"/>
                 <DataGridTextColumn Header="Дата начала" Binding="{Binding Path=DateStart, StringFormat=dd/MM/yyyy}" Width="0.5*"/>
                 <DataGridTextColumn Header="Дата окончания" Binding="{Binding Path=DateEnd, StringFormat=dd/MM/yyyy}" Width="0.5*"/>
-                <DataGridTextColumn Header="Студент" Binding="{Binding Path=Name}" Width="1*"/>
+                <DataGridTextColumn Header="Студент" Binding="{Binding Path=StudentName}" Width="1*"/>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>

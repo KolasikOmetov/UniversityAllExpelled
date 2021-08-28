@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UniversityAllExpelledWorkerView"
         mc:Ignorable="d"
-        Title="Студент" Height="298.31" Width="300">
+        Title="Студент" Height="142.81" Width="300" Loaded="StudentWindow_Loaded">
     <StackPanel Margin="25,6,8,0" VerticalAlignment="Top" HorizontalAlignment="Center" Height="154" Width="259">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel HorizontalAlignment="Stretch">
@@ -26,17 +26,6 @@
             <StackPanel Margin="10,0,0,0">
                 <Border BorderBrush="Black" BorderThickness="1" Margin="4">
                     <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxGradBook" Width="107"></TextBox>
-                </Border>
-            </StackPanel>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="221" Margin="0,0,38,0">
-            <StackPanel HorizontalAlignment="Stretch">
-                <Label Content="             Группа" Width="95"/>
-            </StackPanel>
-            <StackPanel Margin="10,0,0,0">
-                <Border BorderBrush="Black" BorderThickness="1" Margin="4">
-                    <TextBox HorizontalAlignment="Stretch" MinWidth="100" Name="TextBoxGroup" Width="107"></TextBox>
                 </Border>
             </StackPanel>
         </StackPanel>

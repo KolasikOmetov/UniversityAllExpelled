@@ -34,6 +34,8 @@ namespace UniversityAllExpelledWorkerView
 
         private readonly StudentLogic _logicStudent;
 
+        public bool isUpdating;
+
         public StudentWindow(StudentLogic logic)
         {
             InitializeComponent();
@@ -42,13 +44,18 @@ namespace UniversityAllExpelledWorkerView
 
         private void StudentWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(gbn))
+            if (!string.IsNullOrEmpty(gbn))
             {
                 try
                 {
                     var view = _logicStudent.Read(new StudentBindingModel { GradebookNumber = gbn })?[0];
                     if (view != null)
                     {
+                        if (isUpdating)
+                        {
+                            TextBoxGradBook.IsEnabled = false;
+                        }
+                        TextBoxGradBook.Text = view.GradebookNumber;
                         TextBoxName.Text = view.Name;
                     }
                 }
@@ -73,7 +80,7 @@ namespace UniversityAllExpelledWorkerView
                     GradebookNumber = TextBoxGradBook.Text,
                     Name = TextBoxName.Text,
                     DenearyLogin = login
-                });
+                }, isUpdating);
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
                 Close();

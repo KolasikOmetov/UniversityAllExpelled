@@ -94,5 +94,11 @@ namespace UniversityAllExpelledWorkerView
             var window = Container.Resolve<RegistrationWindow>();
             window.ShowDialog();
         }
+
+        private void MenuItemStats_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Container.Resolve<WindowStats>();
+            window.ShowDialog();
+        }
     }
 }

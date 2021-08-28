@@ -7,7 +7,7 @@ namespace UniversityBusinessLogic.ViewModels
 	{
 		[DisplayName("Номер зачётной книжки")]
 		public string GradebookNumber { get; set; }
-		[DisplayName("Имя")]
+		[DisplayName("ФИО")]
 		public string Name { get; set; }
 		[DisplayName("Деканат")]
 		public string DenearyName { get; set; }

@@ -74,7 +74,7 @@ namespace UniversityDatabaseImplement.Implements
                   .ThenInclude(rec => rec.Subject)
                   .Include(rec => rec.EducationPlanStudents)
                   .ThenInclude(rec => rec.EducationPlan)
-                  .FirstOrDefault(rec => rec.Name == model.Name || rec.GradebookNumber == model.GradebookNumber);
+                  .FirstOrDefault(rec => rec.GradebookNumber == model.GradebookNumber || rec.Name == model.Name);
                 return student != null ?
                   new StudentViewModel
                   {
@@ -93,21 +93,8 @@ namespace UniversityDatabaseImplement.Implements
         {
             using (var context = new UniversityDatabase())
             {
-
-                using (var transaction = context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        CreateModel(model, new Student(), context);
-                        context.SaveChanges();
-                        transaction.Commit();
-                    }
-                    catch
-                    {
-                        transaction.Rollback();
-                        throw;
-                    }
-                }
+                context.Students.Add(CreateModel(model, new Student(), context));
+                context.SaveChanges();
             }
         }
         public void Update(StudentBindingModel model)
@@ -154,27 +141,9 @@ namespace UniversityDatabaseImplement.Implements
         }
         private Student CreateModel(StudentBindingModel model, Student student, UniversityDatabase context)
         {
-            // нужно передавать student уже с заполнеными полями и добавленным таблицу Students  
             student.GradebookNumber = model.GradebookNumber;
             student.Name = model.Name;
             student.DenearyLogin = model.DenearyLogin;
-            context.Students.Add(student);
-            context.SaveChanges();
-
-            if(!string.IsNullOrEmpty(model.GradebookNumber))
-            {
-                var StudentComponents = context.EducationPlanStudents.Where(rec => rec.StudentGradebookNumber == model.GradebookNumber).ToList(); //?
-                context.EducationPlanStudents.RemoveRange(StudentComponents.Where(rec =>
-                !model.EducationPlanStudents.ContainsKey(rec.EducationPlanId)).ToList());
-
-                foreach (var update in StudentComponents)
-                {
-
-                    model.EducationPlanStudents.Remove(update.EducationPlanId);
-                }
-
-                context.SaveChanges();
-            }
 
             return student;
         }

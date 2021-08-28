@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -96,16 +98,69 @@ namespace UniversityAllExpelledWorkerView
 
         private void LoadData()
         {
-
-            //var list = logic.Read(new EducationPlanBindingModel
-            //{
-            //    Id = id
-            //});
             var list = logic.Read(null);
             if (list != null)
             {
                 DataGridPlans.ItemsSource = list;
+                DataGridPlans.Columns[0].Visibility = Visibility.Hidden;
+                DataGridPlans.Columns[5].Visibility = Visibility.Hidden;
+                DataGridPlans.Columns[6].Visibility = Visibility.Hidden;
             }
+        }
+
+        private void EditingPlansWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+        }
+
+        /// <summary>
+        /// Данные для привязки DisplayName к названиям столбцов
+        /// </summary>
+        private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            string displayName = GetPropertyDisplayName(e.PropertyDescriptor);
+            if (!string.IsNullOrEmpty(displayName))
+            {
+                e.Column.Header = displayName;
+            }
+            new DataGridLength(1, DataGridLengthUnitType.Star);
+
+        }
+        /// <summary>
+        /// метод привязки DisplayName к названию столбца
+        /// </summary>
+        public static string GetPropertyDisplayName(object descriptor)
+        {
+
+            PropertyDescriptor pd = descriptor as PropertyDescriptor;
+            if (pd != null)
+            {
+                // Check for DisplayName attribute and set the column header accordingly
+                DisplayNameAttribute displayName = pd.Attributes[typeof(DisplayNameAttribute)] as DisplayNameAttribute;
+                if (displayName != null && displayName != DisplayNameAttribute.Default)
+                {
+                    return displayName.DisplayName;
+                }
+
+            }
+            else
+            {
+                PropertyInfo pi = descriptor as PropertyInfo;
+                if (pi != null)
+                {
+                    // Check for DisplayName attribute and set the column header accordingly
+                    Object[] attributes = pi.GetCustomAttributes(typeof(DisplayNameAttribute), true);
+                    for (int i = 0; i < attributes.Length; ++i)
+                    {
+                        DisplayNameAttribute displayName = attributes[i] as DisplayNameAttribute;
+                        if (displayName != null && displayName != DisplayNameAttribute.Default)
+                        {
+                            return displayName.DisplayName;
+                        }
+                    }
+                }
+            }
+            return null;
         }
     }
 }
