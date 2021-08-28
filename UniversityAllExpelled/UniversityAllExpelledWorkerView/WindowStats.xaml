@@ -17,8 +17,6 @@
             <DatePicker Margin="10" Name="datePickerFrom"/>
             <Label Margin="10">по</Label>
             <DatePicker Margin="10" Name="datePickerTo"/>
-            <CheckBox Margin="10" x:Name="CheckSubject" Content="По дисциплинам"/>
-            <CheckBox Margin="10" x:Name="CheckStudent" Content="По студентам"/>
             <Button Margin="10" Click="ButtonShow_Click">Показать</Button>
         </StackPanel>
         <lvc:CartesianChart Grid.Column="0" Grid.Row="1" Series="{Binding SeriesCollection}" LegendLocation="Top">

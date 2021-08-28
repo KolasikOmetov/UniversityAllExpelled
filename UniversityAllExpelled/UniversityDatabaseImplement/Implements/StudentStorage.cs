@@ -24,7 +24,7 @@ namespace UniversityDatabaseImplement.Implements
                   {
                       GradebookNumber = rec.GradebookNumber,
                       Name = rec.Name,
-                      DenearyName = context.Denearies.FirstOrDefault(x => x.Login == rec.DenearyLogin).Name,
+                      DenearyLogin = context.Denearies.FirstOrDefault(x => x.Login == rec.DenearyLogin).Login
                       //Subjects = rec.StudentSubjects
                       //.ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
                       //EducationPlans = rec.EducationPlanStudents
@@ -51,12 +51,11 @@ namespace UniversityDatabaseImplement.Implements
                   {
                       GradebookNumber = rec.GradebookNumber,
                       Name = rec.Name,
-                      DenearyName = context.Denearies.FirstOrDefault(x => x.Login == model.DenearyLogin).Name,
-                      //Subjects = rec.StudentSubjects
-                      //.ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
+                      DenearyLogin = context.Denearies.FirstOrDefault(x => x.Login == model.DenearyLogin).Login,
+                      Subjects = rec.StudentSubjects
+                      .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
                       EducationPlans = rec.EducationPlanStudents
                       .ToDictionary(recES => recES.EducationPlanId, recES => recES.EducationPlan.Name),
-                      Subjects = new Dictionary<int, string>(),
                   })
                   .ToList();
             }
@@ -80,7 +79,7 @@ namespace UniversityDatabaseImplement.Implements
                   {
                       GradebookNumber = student.GradebookNumber,
                       Name = student.Name,
-                      DenearyName = context.Denearies.FirstOrDefault(x => x.Login == student.DenearyLogin).Name,
+                      DenearyLogin = context.Denearies.FirstOrDefault(x => x.Login == student.DenearyLogin).Login,
                       Subjects = student.StudentSubjects
                       .ToDictionary(recSS => recSS.SubjectId, recSS => recSS.Subject.Name),
                       EducationPlans = student.EducationPlanStudents

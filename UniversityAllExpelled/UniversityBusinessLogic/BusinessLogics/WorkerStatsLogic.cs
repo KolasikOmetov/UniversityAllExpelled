@@ -32,14 +32,5 @@ namespace UniversityBusinessLogic.BusinessLogics
                 }
                 ).ToList();
         }
-
-        public List<WorkerStatsViewModel> GetCertificationsWithSubjects(StatsBindingModel model)
-        {
-            return _certificationStorage.GetByDateRangeWithSubjects(new CheckListBindingModel
-            {
-                DateFrom = model.DateFrom,
-                DateTo = model.DateTo
-            });
-        }
     }
 }

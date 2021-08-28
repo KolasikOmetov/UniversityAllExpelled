@@ -10,7 +10,7 @@ namespace UniversityBusinessLogic.ViewModels
 		[DisplayName("ФИО")]
 		public string Name { get; set; }
 		[DisplayName("Деканат")]
-		public string DenearyName { get; set; }
+		public string DenearyLogin { get; set; }
 		public Dictionary<int, string> Subjects { get; set; }
 		public Dictionary<int, string> EducationPlans { get; set; }
 	}

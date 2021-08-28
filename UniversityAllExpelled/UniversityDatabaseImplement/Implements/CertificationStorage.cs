@@ -15,7 +15,7 @@ namespace UniversityDatabaseImplement.Implements
         {
             using (var context = new UniversityDatabase())
             {
-                return context.Certifications
+                return context.Certifications.Where(rec ).ToList()
                 .Select(rec => new CertificationViewModel
                 {
                     Id = rec.Id,
@@ -131,23 +131,6 @@ namespace UniversityDatabaseImplement.Implements
                     Date = rec.Date,
                     StudentName = context.Students.FirstOrDefault(recStudent => recStudent.GradebookNumber == rec.StudentGradebookNumber).Name,
                     StudentGradebookNumber = rec.StudentGradebookNumber,
-                })
-                .ToList();
-            }
-        }
-
-        public List<WorkerStatsViewModel> GetByDateRangeWithSubjects(CheckListBindingModel model)
-        {
-            using (var context = new UniversityDatabase())
-            {
-                return context.Certifications
-                .Where(rec => rec.Date >= model.DateFrom && rec.Date <= model.DateTo)
-                .ToList()
-                .Select(rec => new WorkerStatsViewModel
-                {
-                    CertificationId = rec.Id,
-                    CertificationDate = rec.Date,
-                    ItemName = context.Subjects.FirstOrDefault(recS => recS.Id == context.StudentSubjects.FirstOrDefault(recSS => recSS.StudentGradebookNumber == rec.StudentGradebookNumber).SubjectId).Name,
                 })
                 .ToList();
             }

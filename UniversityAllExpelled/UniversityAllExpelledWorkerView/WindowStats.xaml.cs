@@ -53,35 +53,16 @@ namespace UniversityAllExpelledWorkerView
                 MessageBox.Show("Дата начала должна быть меньше даты окончания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (CheckStudent.IsChecked != true && CheckSubject.IsChecked != true)
-            {
-                MessageBox.Show("Выберите параметр, по которому будет показана статистика", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (CheckStudent.IsChecked == true && CheckSubject.IsChecked == true)
-            {
-                MessageBox.Show("Выберите только 1 параметр, по которому будет показана статистика", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
             try
             {
                 List<WorkerStatsViewModel> dataSource;
-                if (CheckStudent.IsChecked == true)
+
+                dataSource = _logic.GetCertificationsWithStudents(new StatsBindingModel
                 {
-                    dataSource = _logic.GetCertificationsWithStudents(new StatsBindingModel
-                    {
-                        DateFrom = datePickerFrom.SelectedDate,
-                        DateTo = datePickerTo.SelectedDate,
-                    });
-                }
-                else
-                {
-                    dataSource = _logic.GetCertificationsWithSubjects(new StatsBindingModel
-                    {
-                        DateFrom = datePickerFrom.SelectedDate,
-                        DateTo = datePickerTo.SelectedDate,
-                    });
-                }
+                    DateFrom = datePickerFrom.SelectedDate,
+                    DateTo = datePickerTo.SelectedDate,
+                });
+                
                 string[] barLabels = new string[dataSource.Count];
 
                 ChartValues<int> values = new ChartValues<int>();
@@ -115,7 +96,7 @@ namespace UniversityAllExpelledWorkerView
                 {
                     SeriesCollection.Add(new ColumnSeries
                     {
-                        Title = CheckStudent.IsChecked == true ? "Студент" : "Дисциплины",
+                        Title = "Студент",
                         Values = values,
                         Fill = new SolidColorBrush(Color.FromRgb(0, 255, 0))
                     });
