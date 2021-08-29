@@ -29,10 +29,12 @@
                 </Border>
                 <DatePicker x:Name="DatePickerStart" SelectedDateFormat="Short"/>
                 <DatePicker x:Name="DatePickerEnd" SelectedDateFormat="Short"/>
-                <Button x:Name="buttonAdd" Content="Добавить" Click="buttonAdd_Click"/>
-                <Button x:Name="buttonUpd" Content="Изменить" Click="buttonUpd_Click"/>
-                <Button x:Name="buttonDel" Content="Удалить" Click="buttonDel_Click"/>
-                <Button x:Name="buttonRef" Content="Обновить" Click="buttonRef_Click"/>
+                <StackPanel Margin="0,75,0,0">
+                    <Button x:Name="buttonAdd" Margin="10" Padding="5" Content="Добавить" Click="buttonAdd_Click"/>
+                    <Button x:Name="buttonUpd" Margin="10" Padding="5" Content="Изменить" Click="buttonUpd_Click"/>
+                    <Button x:Name="buttonDel" Margin="10" Padding="5" Content="Удалить" Click="buttonDel_Click"/>
+                    <Button x:Name="buttonRef" Margin="10" Padding="5" Content="Обновить" Click="buttonRef_Click"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
