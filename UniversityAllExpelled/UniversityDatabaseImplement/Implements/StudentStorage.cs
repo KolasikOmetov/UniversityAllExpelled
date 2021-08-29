@@ -69,7 +69,7 @@ namespace UniversityDatabaseImplement.Implements
                   .ThenInclude(rec => rec.Subject)
                   .Include(rec => rec.EducationPlanStudents)
                   .ThenInclude(rec => rec.EducationPlan)
-                  .FirstOrDefault(rec => rec.GradebookNumber == model.GradebookNumber || rec.Name == model.Name);
+                  .FirstOrDefault(rec => rec.GradebookNumber == model.GradebookNumber);
                 return student != null ?
                   new StudentViewModel
                   {
